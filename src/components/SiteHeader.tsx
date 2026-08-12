@@ -183,13 +183,13 @@ export function SiteHeader() {
               const isActive = pathname === link.href;
               return (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className={navLinkClassName(isActive, scrolled)}
-                  >
-                    {link.label}
-                  </a>
+                  <Link
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className={navLinkClassName(isActive, scrolled)}
+                >
+                  {link.label}
+                </Link>
                 </li>
               );
             })}
