@@ -108,7 +108,7 @@ export function SiteHeader() {
       <div className="dc-container flex items-center justify-between">
         <Link href="/" className="relative z-10 flex items-center">
           <Image
-            src={`${BASE_PATH}/logo-03.svg"
+            src={`${BASE_PATH}/logo-03.svg`}
             alt="Designcentura"
             width={200}
             height={40}
@@ -116,7 +116,7 @@ export function SiteHeader() {
             className={cn("h-auto w-full max-w-[200px]", scrolled ? "hidden" : "block")}
           />
           <Image
-            src={`${BASE_PATH}/logo-01.svg"
+            src={`${BASE_PATH}/logo-01.svg`}
             alt="Designcentura"
             width={200}
             height={40}
@@ -168,7 +168,11 @@ export function SiteHeader() {
              * 768–991.98px band once scrolled, where the drawer turns white.
              */
             <Image
-              src={scrolled ? "/images/logo-01.svg" : "/images/logo-02.svg"}
+              src={
+                scrolled
+                  ? `${BASE_PATH}/images/logo-01.svg`
+                  : `${BASE_PATH}/images/logo-02.svg`
+              }
               alt="Designcentura"
               width={200}
               height={40}
@@ -182,16 +186,17 @@ export function SiteHeader() {
           )}
           <ul className="flex items-center gap-1 max-[991.98px]:w-full max-[991.98px]:flex-col max-[991.98px]:items-start max-[991.98px]:gap-1">
             {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
+              const normalizedPathname = pathname.replace(BASE_PATH, "") || "/";
+              const isActive = normalizedPathname === link.href;
               return (
                 <li key={link.href}>
                   <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className={navLinkClassName(isActive, scrolled)}
-                >
-                  {link.label}
-                </Link>
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={navLinkClassName(isActive, scrolled)}
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               );
             })}
