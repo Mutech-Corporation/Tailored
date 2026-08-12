@@ -12,6 +12,8 @@ import {
 
 import Link from "next/link";
 
+import { assetPath } from "@/lib/asset-path";
+
 export const metadata: Metadata = {
   title: "Custom Video Animation Services for Brands & Startups",
   description:
@@ -33,7 +35,7 @@ export default function AnimatedVideosPage() {
               loop
               playsInline
             >
-              <source src="/videos/banner-video2.mp4" type="video/mp4" />
+              <source src={assetPath("/videos/banner-video2.mp4")} type="video/mp4" />
             </video>
           </div>
           <div className="absolute inset-0 z-[2] bg-black/55" />
@@ -118,7 +120,7 @@ export default function AnimatedVideosPage() {
                     {service.image.endsWith(".gif") ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
-                        src={service.image}
+                        src={assetPath(service.image)}
                         alt={service.title}
                         loading="lazy"
                         decoding="async"

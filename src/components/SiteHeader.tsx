@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CloseIcon, MenuIcon } from "@/components/icons";
+import { assetPath } from "@/lib/asset-path";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/types";
 
@@ -108,7 +109,7 @@ export function SiteHeader() {
       <div className="dc-container flex items-center justify-between">
         <Link href="/" className="relative z-10 flex items-center">
           <Image
-            src={`${BASE_PATH}/logo-03.svg`}
+            src="/images/logo-03.svg"
             alt="Designcentura"
             width={200}
             height={40}
@@ -116,7 +117,7 @@ export function SiteHeader() {
             className={cn("h-auto w-full max-w-[200px]", scrolled ? "hidden" : "block")}
           />
           <Image
-            src={`${BASE_PATH}/logo-01.svg`}
+            src="/images/logo-01.svg"
             alt="Designcentura"
             width={200}
             height={40}
@@ -170,8 +171,8 @@ export function SiteHeader() {
             <Image
               src={
                 scrolled
-                  ? `${BASE_PATH}/images/logo-01.svg`
-                  : `${BASE_PATH}/images/logo-02.svg`
+                  ? "/images/logo-01.svg"
+                  : "/images/logo-02.svg"
               }
               alt="Designcentura"
               width={200}

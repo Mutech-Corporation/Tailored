@@ -7,6 +7,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useMemo, useState } from "react";
 import { CloseIcon } from "@/components/icons";
+import { assetPath } from "@/lib/asset-path";
 import { PORTFOLIO_FILTERS, PORTFOLIO_ITEMS } from "@/data/portfolio";
 import type { PortfolioCategory, PortfolioItem } from "@/types";
 
@@ -87,7 +88,7 @@ export function PortfolioSection({
               onClick={() => setActiveItem(item)}
             >
               <img
-                src={item.src}
+                src={assetPath(item.src)}
                 alt={item.alt}
                 loading="lazy"
                 decoding="async"
@@ -118,7 +119,7 @@ export function PortfolioSection({
               <CloseIcon className="h-6 w-6" />
             </button>
             <img
-              src={activeItem.src}
+              src={assetPath(activeItem.src)}
               alt={activeItem.alt}
               className="max-h-[85vh] w-full rounded-[10px] object-contain"
             />

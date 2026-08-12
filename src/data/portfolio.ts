@@ -121,7 +121,7 @@ export const PORTFOLIO_ITEMS_FULL: PortfolioItem[] = [
   { category: "branding", src: "/images/branding/5.webp", alt: "Branding 01" },
   { category: "branding", src: "/images/branding/6.webp", alt: "Branding 01" },
   { category: "branding", src: "/images/branding/7.webp", alt: "Branding 01" },
-  { category: "branding", src: "/iimg/br4.webp", alt: "Branding 01" },
+  { category: "branding", src: "/images/br4.webp", alt: "Branding 01" },
   { category: "branding", src: "/images/br5.webp", alt: "Branding 01" },
   { category: "branding", src: "/images/branding/9.webp", alt: "Branding 01" },
   { category: "branding", src: "/images/branding/13.webp", alt: "Branding 01" },

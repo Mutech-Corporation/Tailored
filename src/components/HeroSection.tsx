@@ -1,3 +1,5 @@
+import { assetPath } from "@/lib/asset-path";
+
 /**
  * #home — full-viewport hero over a looping background video.
  *
@@ -19,7 +21,7 @@ export function HeroSection() {
           loop
           playsInline
         >
-          <source src="/videos/banner-video.mp4" type="video/mp4" />
+          <source src={assetPath("/videos/banner-video.mp4")} type="video/mp4" />
         </video>
       </div>
 
@@ -54,7 +56,8 @@ export function HeroSection() {
             >
               <span
                 aria-hidden
-                className="pointer-events-none absolute top-[1.8rem] left-6 z-[1] h-[23px] w-[23px] max-w-[1.325rem] -translate-y-1/2 bg-[url('/images/pencil.svg')] bg-contain bg-center bg-no-repeat max-[576px]:top-[1.4rem] max-[576px]:left-[1.3rem] max-[576px]:h-4 max-[576px]:w-4"
+                className="pointer-events-none absolute top-[1.8rem] left-6 z-[1] h-[23px] w-[23px] max-w-[1.325rem] -translate-y-1/2 bg-contain bg-center bg-no-repeat max-[576px]:top-[1.4rem] max-[576px]:left-[1.3rem] max-[576px]:h-4 max-[576px]:w-4"
+                style={{ backgroundImage: `url('${assetPath("/images/pencil.svg")}')` }}
               />
               <label htmlFor="business_name" className="sr-only">
                 Business name

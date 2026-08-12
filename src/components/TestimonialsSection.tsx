@@ -2,28 +2,29 @@
 
 import { useRef, useState } from "react";
 import { VolumeMuteIcon, VolumeUpIcon } from "@/components/icons";
+import { assetPath } from "@/lib/asset-path";
 import type { VideoTestimonial } from "@/types";
 
 const TESTIMONIALS: VideoTestimonial[] = [
   {
     name: "Brian Kenzo",
-    src: "/videos/videoplayback1.mp4",
-    poster: "/images/video-thumbnail01.webp",
+    src: assetPath("/videos/videoplayback1.mp4"),
+    poster: assetPath("/images/video-thumbnail01.webp"),
   },
   {
     name: "Kim",
-    src: "/videos/videoplayback2.mp4",
-    poster: "/images/video-thumbnail02.webp",
+    src: assetPath("/videos/videoplayback2.mp4"),
+    poster: assetPath("/images/video-thumbnail02.webp"),
   },
   {
     name: "Ben Grinder",
-    src: "/videos/videoplayback3.mp4",
-    poster: "/images/video-thumbnail03.webp",
+    src: assetPath("/videos/videoplayback3.mp4"),
+    poster: assetPath("/images/video-thumbnail03.webp"),
   },
   {
     name: "Elizabeth",
-    src: "/videos/videoplayback4.mp4",
-    poster: "/images/video-thumbnail04.webp",
+    src: assetPath("/videos/videoplayback4.mp4"),
+    poster: assetPath("/images/video-thumbnail04.webp"),
   },
 ];
 
