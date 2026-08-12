@@ -28,9 +28,9 @@ export function AboutSection() {
               <li>Packages for logos, branding, websites &amp; social media.</li>
               <li>Fast turnarounds with structured revision cycles.</li>
             </ul>
-            <a href="#contact" className="dc-submit-btn">
+            <Link href="#contact" className="dc-submit-btn">
               Discuss a project
-            </a>
+            </Link>
           </div>
 
           <div className="text-center lg:text-right">

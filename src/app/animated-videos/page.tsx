@@ -52,12 +52,12 @@ export default function AnimatedVideosPage() {
                 visuals that communicate powerfully across digital platforms.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
-                <a href="#pricing" className="dc-submit-btn">
+                <Link href="#pricing" className="dc-submit-btn">
                   View Packages
-                </a>
-                <a href="#portfolio" className="dc-submit-btn">
+                </Link>
+                <Link href="#portfolio" className="dc-submit-btn">
                   Explore Work
-                </a>
+                </Link>
               </div>
             </div>
           </div>

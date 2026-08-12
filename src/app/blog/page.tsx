@@ -80,9 +80,9 @@ export default function BlogPage() {
                       {post.category}
                     </div>
                     <h3 className="mb-2 text-base font-semibold">
-                      <a href={post.href} className="no-underline">
+                      <Link href={post.href} className="no-underline">
                         {post.title}
-                      </a>
+                      </Link>
                     </h3>
                     <div className="mb-2 text-[0.8rem] text-[#6b7280]">
                       {post.date}

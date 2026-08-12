@@ -69,12 +69,12 @@ export default function WebDesignPage() {
                   into leads, bookings and sales across every device.
                 </p>
                 <div className="mb-6 flex flex-wrap gap-3">
-                  <a href="#contact" className="dc-submit-btn">
+                  <Link href="#contact" className="dc-submit-btn">
                     Get a Custom Website Proposal
-                  </a>
-                  <a href="#web-portfolio" className="dc-submit-btn">
+                  </Link>
+                  <Link href="#web-portfolio" className="dc-submit-btn">
                     View Web Design Portfolio
-                  </a>
+                  </Link>
                 </div>
                 <ul className="space-y-1 text-[0.92rem] opacity-90">
                   {BANNER_POINTS.map((point) => (

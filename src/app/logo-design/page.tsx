@@ -64,9 +64,9 @@ export default function LogoDesignPage() {
                   that scales effortlessly across print, digital platforms, and
                   social media.
                 </p>
-                <a href="#portfolio" className="dc-submit-btn">
+                <Link href="#portfolio" className="dc-submit-btn">
                   View Logo Portfolio
-                </a>
+                </Link>
               </div>
               <div className="text-center lg:text-right">
                 <Image
