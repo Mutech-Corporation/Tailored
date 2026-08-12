@@ -8,6 +8,8 @@ import { CloseIcon, MenuIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/types";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "AI Agent", href: "/ai-agent" },
@@ -106,7 +108,7 @@ export function SiteHeader() {
       <div className="dc-container flex items-center justify-between">
         <Link href="/" className="relative z-10 flex items-center">
           <Image
-            src="/images/logo-03.svg"
+            src={`${BASE_PATH}/logo-03.svg"
             alt="Designcentura"
             width={200}
             height={40}
@@ -114,7 +116,7 @@ export function SiteHeader() {
             className={cn("h-auto w-full max-w-[200px]", scrolled ? "hidden" : "block")}
           />
           <Image
-            src="/images/logo-01.svg"
+            src={`${BASE_PATH}/logo-01.svg"
             alt="Designcentura"
             width={200}
             height={40}
