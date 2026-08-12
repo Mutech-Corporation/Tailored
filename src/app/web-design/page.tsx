@@ -9,6 +9,8 @@ import { FaqSection } from "@/components/FaqSection";
 import { ContactSection } from "@/components/ContactSection";
 import { WEB_FAQS, WEB_PORTFOLIO, WEB_PRICING } from "@/data/web-design";
 
+import Link from "next/link";
+
 export const metadata: Metadata = {
   title: "Top Website Design Company for Modern Brands",
   description:

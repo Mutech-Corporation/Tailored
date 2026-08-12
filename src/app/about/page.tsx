@@ -61,6 +61,8 @@ export default function AboutPage() {
                   <li>Fast turnarounds with structured revision cycles.</li>
                 </ul>
                 <Link href="/contact" className="dc-submit-btn">
+                  Discuss a project
+                </Link>
               </div>
 
               <div className="text-center lg:text-right">

@@ -4,6 +4,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { InnerHero } from "@/components/InnerHero";
 
+import Link from "next/link";
+
 export const metadata: Metadata = {
   title: "Home - Design Centura Blog",
   description:

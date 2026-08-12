@@ -10,6 +10,8 @@ import {
   ANIM_SERVICES,
 } from "@/data/animated-videos";
 
+import Link from "next/link";
+
 export const metadata: Metadata = {
   title: "Custom Video Animation Services for Brands & Startups",
   description:

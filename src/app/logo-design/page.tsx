@@ -10,6 +10,8 @@ import { ContactSection } from "@/components/ContactSection";
 import { PORTFOLIO_ITEMS_FULL } from "@/data/portfolio";
 import { LOGO_FAQS, LOGO_PRICING_TABS } from "@/data/logo-design";
 
+import Link from "next/link";
+
 export const metadata: Metadata = {
   title: "Professional Logo Design Services for Startups & Enterprises",
   description:
