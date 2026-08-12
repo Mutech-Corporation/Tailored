@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Link from "next/link";
 /** #about — two-column intro; text left, mockup right. */
 export function AboutSection() {
   return (

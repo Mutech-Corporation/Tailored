@@ -6,6 +6,8 @@ import { InnerHero } from "@/components/InnerHero";
 import { ServicesSection } from "@/components/ServicesSection";
 import { ReviewsMasonry } from "@/components/ReviewsMasonry";
 
+import Link from "next/link";
+
 export const metadata: Metadata = {
   title: "Design Centura – Logo, Branding & Web",
   description:
@@ -59,8 +61,6 @@ export default function AboutPage() {
                   <li>Fast turnarounds with structured revision cycles.</li>
                 </ul>
                 <Link href="/contact" className="dc-submit-btn">
-                  Discuss a project
-                </Link>
               </div>
 
               <div className="text-center lg:text-right">
