@@ -1,0 +1,116 @@
+import type { FaqItem, PortfolioItem } from "@/types";
+
+/** web-design.php portfolio strip: eight site shots. */
+export const WEB_PORTFOLIO: PortfolioItem[] = [
+  { category: "web", src: "/images/web/1.webp", alt: "Website design" },
+  { category: "web", src: "/images/web/2.webp", alt: "Website design" },
+  { category: "web", src: "/images/web/3.webp", alt: "Website design" },
+  { category: "web", src: "/images/web/4.webp", alt: "Website design" },
+  { category: "web", src: "/images/web/5.webp", alt: "Website design" },
+  { category: "web", src: "/images/web/6.webp", alt: "Website design" },
+  { category: "web", src: "/images/web/7.webp", alt: "Website design" },
+  { category: "web", src: "/images/web/8.webp", alt: "Website design" },
+];
+
+/** web-design.php FAQ. */
+export const WEB_FAQS: FaqItem[] = [
+  { id: "one", question: "How long does a website design and development project take?", answer: "Timelines vary based on scope, but a focused landing page typically takes 1–2 weeks, while a full marketing site with multiple pages usually ranges from 3–6 weeks including revisions and testing." },
+  { id: "two", question: "Do you build websites on WordPress or custom platforms?", answer: "Yes. Most marketing sites are built on WordPress with a clean, custom front-end, while landing pages and apps can use other frameworks. We recommend a stack based on your goals, budget and internal team." },
+  { id: "three", question: "Will the website be responsive and SEO-friendly?", answer: "Absolutely. All websites are designed mobile-first and tested across major devices. We implement SEO fundamentals such as clean code, semantic headings, meta tags, optimized images and fast loading times." },
+  { id: "four", question: "Can you help with copywriting and content for the site?", answer: "Yes. We can refine your existing copy or create conversion-focused content from scratch that explains your offer clearly and supports your SEO keywords and brand voice." },
+  { id: "five", question: "Do you provide maintenance or support after launch?", answer: "Yes. We offer optional care plans that cover updates, backups, performance monitoring and small design or content tweaks, so your website stays secure and up to date as your business grows." },
+];
+
+/** web-design.php pricing: four plans. */
+export const WEB_PRICING = {
+  eyebrow: "Web Design Packages",
+  title: "Brilliant Website Design",
+  plans: [
+    {
+      name: "Static",
+      price: "$699",
+      featured: false,
+      packageId: "Website-Static-USD-699-0",
+      features: [
+        { text: "5 Page Static Website", heading: false, noCheck: false },
+        { text: "Jquery Slider Banner", heading: false, noCheck: false },
+        { text: "W3C Certified HTML", heading: false, noCheck: false },
+        { text: "UI Design", heading: false, noCheck: false },
+        { text: "3 Banner Design", heading: false, noCheck: false },
+        { text: "Favicon", heading: false, noCheck: false },
+        { text: "SEO Friendly Design", heading: false, noCheck: false },
+      ],
+    },
+    {
+      name: "Dynamic",
+      price: "$1199",
+      featured: false,
+      packageId: "Website-Dynamic-USD-1199-0",
+      features: [
+        { text: "Web Development", heading: false, noCheck: false },
+        { text: "W3C Certified HTML", heading: false, noCheck: false },
+        { text: "Web Design UI", heading: false, noCheck: false },
+        { text: "10 Stock Images", heading: false, noCheck: false },
+        { text: "5 Banner Designs", heading: false, noCheck: false },
+        { text: "Advance UI Effects", heading: false, noCheck: false },
+        { text: "SEO Friendly Design", heading: false, noCheck: false },
+        { text: "SEO Friendly Sitemap", heading: false, noCheck: false },
+        { text: "Social Media Integration", heading: false, noCheck: false },
+        { text: "4 Social Platforms", heading: false, noCheck: false },
+      ],
+    },
+    {
+      name: "E-Commerce",
+      price: "$1699",
+      featured: true,
+      packageId: "Website-ECom-USD-1699-0",
+      features: [
+        { text: "Web Development", heading: false, noCheck: false },
+        { text: "W3C Certified HTML", heading: false, noCheck: false },
+        { text: "Admin Panel Support", heading: false, noCheck: false },
+        { text: "Mobile Responsive Layout", heading: false, noCheck: false },
+        { text: "Customers Login Area", heading: false, noCheck: false },
+        { text: "Cart Integration", heading: false, noCheck: false },
+        { text: "Pay. Module Integration", heading: false, noCheck: false },
+        { text: "Inventory Management", heading: false, noCheck: false },
+        { text: "Unltd. Products & Categories", heading: false, noCheck: false },
+        { text: "Easy Product Search", heading: false, noCheck: false },
+        { text: "Product Reviews", heading: false, noCheck: false },
+        { text: "Web Design & UI", heading: false, noCheck: false },
+        { text: "15 Stock Images", heading: false, noCheck: false },
+        { text: "8 Banner Designs", heading: false, noCheck: false },
+        { text: "Favicon", heading: false, noCheck: false },
+        { text: "Advance UI Effects", heading: false, noCheck: false },
+        { text: "Basic Search Engine Submission", heading: false, noCheck: false },
+        { text: "SEO Friendly Design", heading: false, noCheck: false },
+        { text: "SEO Friendly Sitemap", heading: false, noCheck: false },
+        { text: "Analytics Integration", heading: false, noCheck: false },
+        { text: "Social Media Integration", heading: false, noCheck: false },
+        { text: "4 Social Platforms", heading: false, noCheck: false },
+      ],
+    },
+    {
+      name: "Portal",
+      price: "$2999",
+      featured: false,
+      packageId: "Website-Portal-USD-2999-0",
+      features: [
+        { text: "Web Development", heading: false, noCheck: false },
+        { text: "Any One:", heading: true, noCheck: false },
+        { text: "Job Portal", heading: false, noCheck: false },
+        { text: "Professional Network", heading: false, noCheck: false },
+        { text: "Social Network", heading: false, noCheck: false },
+        { text: "Media Portal", heading: false, noCheck: false },
+        { text: "Real Estate Portal", heading: false, noCheck: false },
+        { text: "Medical Portal", heading: false, noCheck: false },
+        { text: "News Portal", heading: false, noCheck: false },
+        { text: "Enterprise Portal", heading: false, noCheck: false },
+        { text: "Client/User Dashboard", heading: false, noCheck: false },
+        { text: "Custom Coding", heading: false, noCheck: false },
+        { text: "Module-wise Architecture", heading: false, noCheck: false },
+        { text: "Extensive Admin Panel", heading: false, noCheck: false },
+        { text: "Complete Deployment", heading: false, noCheck: false },
+      ],
+    },
+  ],
+};

@@ -1,0 +1,151 @@
+import type { FaqItem, PricingTab } from "@/types";
+
+/** logo-design.php pricing: two tabs, four cards each. */
+export const LOGO_PRICING_TABS: PricingTab[] = [
+  {
+    id: "logo",
+    label: "Logo",
+    plans: [
+      {
+        name: "Bronze",
+        price: "$49",
+        featured: false,
+        packageId: "Logo Design-Bronze Plan-USD-49-0",
+        features: [
+          { text: "2 Logo Concepts", heading: false, noCheck: false },
+          { text: "3 Revisions", heading: false, noCheck: false },
+          { text: "No High Res. files", heading: false, noCheck: false },
+          { text: "48 hours Delivery", heading: false, noCheck: false },
+          { text: "100% Ownership", heading: false, noCheck: false },
+          { text: "1 Finalized Logo", heading: false, noCheck: false },
+        ],
+      },
+      {
+        name: "Silver",
+        price: "$99",
+        featured: false,
+        packageId: "Logo Design-Silver Plan-USD-99-0",
+        features: [
+          { text: "4 Logo Concepts", heading: false, noCheck: false },
+          { text: "6 Revisions", heading: false, noCheck: false },
+          { text: "Custom Logo", heading: false, noCheck: false },
+          { text: "Vector PDF File", heading: false, noCheck: false },
+          { text: "48 hours Delivery", heading: false, noCheck: false },
+          { text: "HQ PNG + JPEG", heading: false, noCheck: false },
+          { text: "100% Ownership", heading: false, noCheck: false },
+          { text: "1 Finalized Logo", heading: false, noCheck: false },
+        ],
+      },
+      {
+        name: "Gold",
+        price: "$139",
+        featured: true,
+        packageId: "Logo Design-Gold Plan-USD-139-0",
+        features: [
+          { text: "6 Logo Concepts", heading: false, noCheck: false },
+          { text: "Unlimited Revision", heading: false, noCheck: false },
+          { text: "Custom Logo", heading: false, noCheck: false },
+          { text: "Vector EPS , PDF file", heading: false, noCheck: false },
+          { text: "24-48 H Delivery", heading: false, noCheck: false },
+          { text: "HQ PNG + JPEG", heading: false, noCheck: false },
+          { text: "100% Ownership", heading: false, noCheck: false },
+          { text: "1 Finalized Logo", heading: false, noCheck: false },
+        ],
+      },
+      {
+        name: "Platinum",
+        price: "$189",
+        featured: false,
+        packageId: "Logo Design-Platinum Plan-USD-189-0",
+        features: [
+          { text: "Unlimited Logo Concepts", heading: false, noCheck: false },
+          { text: "Unlimited Revision", heading: false, noCheck: false },
+          { text: "Custom Logo", heading: false, noCheck: false },
+          { text: "Editable Vector Ai", heading: false, noCheck: false },
+          { text: "24-48 H Delivery", heading: false, noCheck: false },
+          { text: "Vector EPS, PDF", heading: false, noCheck: false },
+          { text: "HQ PNG + JPEG", heading: false, noCheck: false },
+          { text: "100% Ownership", heading: false, noCheck: false },
+          { text: "Business Card Design", heading: false, noCheck: false },
+          { text: "1 Finalized Logo", heading: false, noCheck: false },
+        ],
+      },
+    ],
+  },
+  {
+    id: "branding",
+    label: "Branding",
+    plans: [
+      {
+        name: "Basic Plan",
+        price: "$59",
+        featured: false,
+        packageId: "Branding-Basic Plan-USD-59-0",
+        features: [
+          { text: "Business Card Design", heading: false, noCheck: false },
+          { text: "Letterhead Design", heading: false, noCheck: false },
+          { text: "Envelope Design", heading: false, noCheck: false },
+          { text: "100% Ownership", heading: false, noCheck: false },
+          { text: "1 Finalized Logo", heading: false, noCheck: false },
+        ],
+      },
+      {
+        name: "Pro Plan",
+        price: "$99",
+        featured: false,
+        packageId: "Branding-Pro Plan-USD-99-0",
+        features: [
+          { text: "Business Card Design", heading: false, noCheck: false },
+          { text: "Letterhead Design", heading: false, noCheck: false },
+          { text: "Envelope Design", heading: false, noCheck: false },
+          { text: "Email Signature", heading: false, noCheck: false },
+          { text: "2 Social Covers", heading: false, noCheck: false },
+          { text: "1 Finalized Logo", heading: false, noCheck: false },
+        ],
+      },
+      {
+        name: "Premium plan",
+        price: "$149",
+        featured: true,
+        packageId: "Branding-Premium plan-USD-149-0",
+        features: [
+          { text: "Business Card Design", heading: false, noCheck: false },
+          { text: "Letterhead Design", heading: false, noCheck: false },
+          { text: "Envelope Design", heading: false, noCheck: false },
+          { text: "Email Signature", heading: false, noCheck: false },
+          { text: "4 Social Covers", heading: false, noCheck: false },
+          { text: "T-Shirt Design", heading: false, noCheck: false },
+          { text: "Web Banner Design", heading: false, noCheck: false },
+          { text: "1 Finalized Logo", heading: false, noCheck: false },
+        ],
+      },
+      {
+        name: "Deluxe Plan",
+        price: "$199",
+        featured: false,
+        packageId: "Branding-Deluxe Plan-USD-199-0",
+        features: [
+          { text: "Business Card Design", heading: false, noCheck: false },
+          { text: "Letterhead Design", heading: false, noCheck: false },
+          { text: "Envelope Design", heading: false, noCheck: false },
+          { text: "Email Signature", heading: false, noCheck: false },
+          { text: "4 Social Covers", heading: false, noCheck: false },
+          { text: "T-Shirt Design", heading: false, noCheck: false },
+          { text: "Web Banner Design", heading: false, noCheck: false },
+          { text: "Signage Design", heading: false, noCheck: false },
+          { text: "Car Stickers Design", heading: false, noCheck: false },
+          { text: "1 Finalized Logo", heading: false, noCheck: false },
+        ],
+      },
+    ],
+  },
+];
+
+/** logo-design.php FAQ. */
+export const LOGO_FAQS: FaqItem[] = [
+  { id: "one", question: "How long does a logo design project take?", answer: "Most logo concepts are delivered within 3–5 business days, and revisions depend on your feedback speed. A complete brand identity usually takes 7–10 days." },
+  { id: "two", question: "Do you provide multiple logo concepts?", answer: "Yes. Every package includes multiple unique concepts created from scratch. You choose the one you like, and we refine it until it’s perfect." },
+  { id: "three", question: "Will I receive all final files after the project?", answer: "Absolutely. You will receive all essential formats — AI, EPS, PDF, PNG, JPG, and SVG — so you can use your design for web, print, and branding." },
+  { id: "four", question: "Do you also design websites?", answer: "Yes. We provide complete website design services including UI/UX, landing pages, and WordPress development, fully responsive on all devices." },
+  { id: "five", question: "Can you work with my existing brand or improve it?", answer: "Of course. We can enhance your existing brand, update your colors/typography, or create a fresh modern identity while keeping your core style intact." },
+];

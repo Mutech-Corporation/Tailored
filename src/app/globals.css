@@ -1,0 +1,333 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /*
+   * Bootstrap's breakpoints, not Tailwind's defaults. The target is a Bootstrap
+   * 5 site, so `md:` / `lg:` here mean exactly what `col-md-*` / `col-lg-*` mean
+   * upstream (768 / 992), and the container widths below line up with them.
+   *
+   * This also removes a real bug: arbitrary variants like `min-[992px]:` are
+   * emitted BEFORE the named breakpoints, so at ≥992px a later `md:grid-cols-2`
+   * would override `min-[992px]:grid-cols-3` at equal specificity and silently
+   * collapse three-column grids to two.
+   */
+  --breakpoint-sm: 36rem; /* 576px */
+  --breakpoint-md: 48rem; /* 768px */
+  --breakpoint-lg: 62rem; /* 992px */
+  --breakpoint-xl: 75rem; /* 1200px */
+  --breakpoint-2xl: 87.5rem; /* 1400px */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --font-heading: var(--font-sans);
+
+  /* designcentura palette, exposed as Tailwind colors */
+  --color-dc-blue: var(--dc-blue);
+  --color-dc-blue-deep: var(--dc-blue-deep);
+  --color-dc-blue-hover: var(--dc-blue-hover);
+  --color-dc-accent: var(--dc-accent);
+  --color-dc-text: var(--dc-text);
+  --color-dc-muted: var(--dc-muted);
+  --color-dc-section: var(--dc-section);
+  --color-dc-pill-track: var(--dc-pill-track);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* ---- designcentura tokens (verbatim from the target's style.css) ---- */
+  --dc-blue: #196bff;
+  --dc-blue-deep: #1d4ed8;
+  --dc-blue-hover: #2563eb;
+  --dc-blue-var: #1769ff;
+  --dc-accent: #ffb400;
+  --dc-text: #1b1b1b;
+  --dc-muted: #6b7280;
+  --dc-section: #f7f8fc;
+  --dc-section-alt: #f5f6fb;
+  --dc-pill-track: #e4e7f5;
+  --dc-footer-link-hover: #2f6bff;
+  --dc-radius-card: 1.4rem;
+
+  --dc-gradient-deep: radial-gradient(
+    circle at top left,
+    #3a8dff 0,
+    #0340b3 45%,
+    #02142e 100%
+  );
+  --dc-gradient-card: radial-gradient(
+    circle at top left,
+    #3a8dff 0,
+    #0340b3 45%,
+    #2e83ff 100%
+  );
+  --dc-gradient-contact: radial-gradient(
+    circle at top left,
+    #1e40af 0,
+    #020617 55%,
+    #000 100%
+  );
+  --dc-gradient-shell: radial-gradient(
+    circle at top left,
+    rgba(37, 99, 235, 0.25),
+    rgba(15, 23, 42, 0.96)
+  );
+  --dc-gradient-submit: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  --dc-gradient-submit-hover: linear-gradient(135deg, #60a5fa, #2563eb);
+
+  /* ---- shadcn tokens, remapped onto the brand ---- */
+  --background: #ffffff;
+  --foreground: var(--dc-text);
+  --card: #ffffff;
+  --card-foreground: var(--dc-text);
+  --popover: #ffffff;
+  --popover-foreground: var(--dc-text);
+  --primary: var(--dc-blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--dc-section);
+  --secondary-foreground: var(--dc-text);
+  --muted: var(--dc-section);
+  --muted-foreground: var(--dc-muted);
+  --accent: var(--dc-accent);
+  --accent-foreground: #111111;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(15, 23, 42, 0.08);
+  --input: #e5e7eb;
+  --ring: #3b82f6;
+  --chart-1: #3a8dff;
+  --chart-2: #196bff;
+  --chart-3: #1d4ed8;
+  --chart-4: #0340b3;
+  --chart-5: #02142e;
+  --radius: 0.625rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: var(--dc-text);
+  --sidebar-primary: var(--dc-blue);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--dc-section);
+  --sidebar-accent-foreground: var(--dc-text);
+  --sidebar-border: rgba(15, 23, 42, 0.08);
+  --sidebar-ring: #3b82f6;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  /* The target sets this globally in style.css; several layouts depend on it. */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+@layer components {
+  /*
+   * Bootstrap 5 `.container` replica. Every section on the target wraps its
+   * content in one, so the breakpoints must match exactly or nothing lines up.
+   */
+  .dc-container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 0.75rem;
+  }
+  @media (min-width: 576px) {
+    .dc-container {
+      max-width: 540px;
+    }
+  }
+  @media (min-width: 768px) {
+    .dc-container {
+      max-width: 720px;
+    }
+  }
+  @media (min-width: 992px) {
+    .dc-container {
+      max-width: 960px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .dc-container {
+      max-width: 1140px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .dc-container {
+      max-width: 1320px;
+    }
+  }
+
+  /* Shared section header trio — repeated in 6 sections. */
+  .dc-eyebrow {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--dc-blue-var);
+    font-weight: 600;
+    background: #a7c6ff36;
+    width: fit-content;
+    margin: 0 auto 0.725rem;
+    padding: 0.32rem 0.825rem 0.22rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 3px 0 #8f8f8f;
+  }
+  .dc-eyebrow-left {
+    margin-right: auto;
+    margin-left: 0;
+  }
+  .dc-section-title {
+    font-weight: 600;
+    font-size: 2.8rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.15;
+  }
+  @media (max-width: 767.98px) {
+    .dc-section-title {
+      font-size: 1.7rem;
+    }
+  }
+  .dc-section-subtitle {
+    margin-inline: auto;
+    font-size: 0.96rem;
+    color: #555;
+  }
+
+  /* About-section bullet list, uses the downloaded check.svg. */
+  .dc-check-list {
+    list-style-type: none;
+  }
+  .dc-check-list > li {
+    position: relative;
+  }
+  .dc-check-list > li::before {
+    content: "";
+    background: url("/images/check.svg") center / contain no-repeat;
+    position: absolute;
+    top: 0;
+    left: -1.5rem;
+    height: 1.225rem;
+    width: 1.225rem;
+  }
+
+  /* Pill toggle shared by the portfolio filter and the pricing tabs. */
+  .dc-pill-bar {
+    display: inline-flex;
+    border-radius: 999px;
+    padding: 0.25rem;
+    background: var(--dc-pill-track);
+  }
+  .dc-pill {
+    border: none !important;
+    border-radius: 2rem !important;
+    padding: 0.45rem 1.3rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    background: transparent;
+    color: #4b4f68;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background 0.15s ease,
+      box-shadow 0.15s ease,
+      color 0.15s ease,
+      transform 0.15s ease;
+  }
+  .dc-pill:hover {
+    color: var(--dc-blue-deep);
+  }
+  .dc-pill[data-active="true"] {
+    background: #fff;
+    color: #111827;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.25);
+  }
+  @media (max-width: 650px) {
+    .dc-pill-bar {
+      background: transparent;
+      display: grid;
+    }
+    .dc-pill {
+      font-size: 1rem;
+    }
+    .dc-pill[data-active="true"] {
+      background: var(--dc-blue);
+      color: #fff;
+    }
+  }
+
+  /* Gradient CTA used by both the About and Contact sections. */
+  .dc-submit-btn {
+    display: inline-block;
+    border-radius: 999px;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    background: var(--dc-gradient-submit);
+    color: #f9fafb;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .dc-submit-btn:hover {
+    background: var(--dc-gradient-submit-hover);
+    color: #ffffff;
+  }
+  .dc-submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+}
