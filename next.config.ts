@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
   // If your repository is https://github.com/USERNAME/REPO_NAME
   // change REPO_NAME to your actual repository name.
   basePath: isProd ? "/Tailored" : "",
+  assetPrefix: isProd ? "/Tailored" : "",
 };
 
 export default nextConfig;
