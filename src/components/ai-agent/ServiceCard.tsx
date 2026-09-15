@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import Link from "next/link";
 import { ArrowRight, Bot } from "lucide-react";
 
 export type ServiceVariant = "green" | "purple" | "yellow" | "blue";
@@ -64,13 +65,13 @@ export function ServiceCard({ variant, icon: Icon, phoneLabel, title, messages, 
       <h3 className="mt-2 mb-1 font-bold text-[#1b1b1b]">{title}</h3>
       <p className="flex-1 text-[0.9rem] leading-[1.6] text-[rgba(33,37,41,0.75)]">{description}</p>
 
-      <a
+      <Link
         href="/contact"
         className="mt-2 flex w-full items-center justify-center rounded-full bg-[#2563eb] px-[1.6rem] py-[0.65rem] text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px"
       >
         Request Access
         <ArrowRight className="ml-2 size-[0.85em]" />
-      </a>
+      </Link>
     </div>
   );
 }

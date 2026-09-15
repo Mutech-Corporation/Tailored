@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Link from "next/link";
 import {
   ArrowRight,
   Bot,
@@ -244,13 +245,13 @@ export default function AiAgentPage() {
                 measurable results around the clock.
               </p>
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
-                <a
+                <Link
                   href="/contact"
                   className="flex w-full max-w-[300px] items-center justify-center rounded-full bg-[#2563eb] px-6 py-3 text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"
                 >
                   Get Started with AI Services
                   <ArrowRight className="ml-2 size-4" />
-                </a>
+                </Link>
                 <a
                   href="#ai-features"
                   className="flex w-full max-w-[300px] items-center justify-center rounded-full border border-[#2563eb] px-6 py-3 text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px hover:bg-[#2563eb] sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"

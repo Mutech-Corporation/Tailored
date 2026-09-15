@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "@/components/Image";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -82,12 +83,12 @@ export default function ThankYouPage() {
                   <p className="mb-[25px] flex-grow text-[0.95rem] leading-[1.6] text-[#6b7280]">
                     {card.description}
                   </p>
-                  <a
+                  <Link
                     href={card.href}
                     className="block w-full rounded-full border-none bg-[linear-gradient(135deg,#2563eb_0%,#7c3aed_100%)] px-[30px] py-[15px] text-center text-base font-semibold text-white no-underline transition-all duration-300"
                   >
                     {card.cta}
-                  </a>
+                  </Link>
                 </div>
               </article>
             ))}
