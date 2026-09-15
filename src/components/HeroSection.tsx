@@ -10,7 +10,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] pt-24 pb-16 text-white max-[767.98px]:pt-[7.2rem] max-[767.98px]:pb-8"
+      className="relative flex min-h-screen items-center overflow-hidden bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] pt-24 pb-16 text-white max-[767.98px]:pt-[7.2rem] max-[767.98px]:pb-8"
     >
       {/* Layer 1 — background video */}
       <div className="absolute inset-0 z-[1] h-full w-full overflow-hidden">
@@ -37,8 +37,8 @@ export function HeroSection() {
             </p>
 
             <h1 className="mb-4 text-[clamp(2.4rem,3.2vw,2.8rem)] leading-[1.1] font-semibold max-[767.98px]:text-[2.1rem]">
-              Online <span className="text-[#ffb400]">Logo Maker</span> &amp;{" "}
-              <span className="text-[#ffb400]">Custom Design Services</span>.
+              Online <span className="text-[#c4b5fd]">Logo Maker</span> &amp;{" "}
+              <span className="text-[#c4b5fd]">Custom Design Services</span>.
             </h1>
 
             <p className="mb-4 text-[0.98rem] opacity-90 max-[576px]:text-[1.2rem]">
@@ -76,7 +76,7 @@ export function HeroSection() {
               />
               <button
                 type="submit"
-                className="absolute right-2 rounded-[2.5rem] border-none bg-[#196BFF] px-6 py-3 font-semibold text-white transition-colors duration-200 hover:bg-[#ffb400] hover:text-black max-[576px]:relative max-[576px]:right-0 max-[576px]:mx-auto max-[576px]:block max-[576px]:w-full"
+                className="absolute right-2 rounded-[2.5rem] border-none bg-[#2563eb] px-6 py-3 font-semibold text-white transition-colors duration-200 hover:bg-[#7c3aed] hover:text-white max-[576px]:relative max-[576px]:right-0 max-[576px]:mx-auto max-[576px]:block max-[576px]:w-full"
               >
                 Get&apos;s started
               </button>

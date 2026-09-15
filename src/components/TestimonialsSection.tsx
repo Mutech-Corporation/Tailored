@@ -77,7 +77,7 @@ export function TestimonialsSection() {
           <div className="w-full text-center lg:w-3/4">
             <p className="dc-eyebrow">Testimonial</p>
             <h2 className="dc-section-title">
-              Client <span className="text-[#196bff]">Feedback</span>
+              Client <span className="text-[#2563eb]">Feedback</span>
             </h2>
           </div>
         </div>

@@ -54,7 +54,7 @@ export default function WebDesignPage() {
       <main className="flex-1">
         <section
           id="web-banner"
-          className="bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] pt-32 pb-20 text-white max-[767.98px]:pt-[7.2rem] max-[767.98px]:pb-12"
+          className="bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] pt-32 pb-20 text-white max-[767.98px]:pt-[7.2rem] max-[767.98px]:pb-12"
         >
           <div className="dc-container">
             <div className="grid items-center gap-8 lg:grid-cols-2">

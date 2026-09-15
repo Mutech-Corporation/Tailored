@@ -221,7 +221,7 @@ export default function AiAgentPage() {
       <main className="flex-1">
         <section
           id="ai-hero"
-          className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] pt-[6.2rem] pb-8 text-white md:pt-[100px] md:pb-20 lg:pt-[120px] lg:pb-[100px]"
+          className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] pt-[6.2rem] pb-8 text-white md:pt-[100px] md:pb-20 lg:pt-[120px] lg:pb-[100px]"
         >
           <div
             aria-hidden
@@ -246,14 +246,14 @@ export default function AiAgentPage() {
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
                 <a
                   href="/contact"
-                  className="flex w-full max-w-[300px] items-center justify-center rounded-full bg-[#196bff] px-6 py-3 text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"
+                  className="flex w-full max-w-[300px] items-center justify-center rounded-full bg-[#2563eb] px-6 py-3 text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"
                 >
                   Get Started with AI Services
                   <ArrowRight className="ml-2 size-4" />
                 </a>
                 <a
                   href="#ai-features"
-                  className="flex w-full max-w-[300px] items-center justify-center rounded-full border border-[#196bff] px-6 py-3 text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px hover:bg-[#196bff] sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"
+                  className="flex w-full max-w-[300px] items-center justify-center rounded-full border border-[#2563eb] px-6 py-3 text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px hover:bg-[#2563eb] sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"
                 >
                   Explore Our Solutions
                 </a>

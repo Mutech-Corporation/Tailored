@@ -133,16 +133,16 @@ export function NetworkDiagram() {
             viewBox="0 0 1000 600"
             preserveAspectRatio="xMidYMid meet"
           >
-            <line x1="500" y1="275" x2="160" y2="50" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
-            <line x1="500" y1="275" x2="50" y2="300" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
-            <line x1="500" y1="275" x2="230" y2="510" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
-            <line x1="500" y1="275" x2="840" y2="50" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
-            <line x1="500" y1="275" x2="950" y2="300" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
-            <line x1="500" y1="275" x2="765" y2="510" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
-            <line x1="160" y1="50" x2="50" y2="300" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.25" />
-            <line x1="50" y1="300" x2="230" y2="510" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.25" />
-            <line x1="840" y1="50" x2="950" y2="300" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.25" />
-            <line x1="950" y1="300" x2="765" y2="510" stroke="#196bff" strokeWidth="2" strokeDasharray="6,4" opacity="0.25" />
+            <line x1="500" y1="275" x2="160" y2="50" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
+            <line x1="500" y1="275" x2="50" y2="300" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
+            <line x1="500" y1="275" x2="230" y2="510" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
+            <line x1="500" y1="275" x2="840" y2="50" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
+            <line x1="500" y1="275" x2="950" y2="300" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
+            <line x1="500" y1="275" x2="765" y2="510" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.4" />
+            <line x1="160" y1="50" x2="50" y2="300" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.25" />
+            <line x1="50" y1="300" x2="230" y2="510" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.25" />
+            <line x1="840" y1="50" x2="950" y2="300" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.25" />
+            <line x1="950" y1="300" x2="765" y2="510" stroke="#2563eb" strokeWidth="2" strokeDasharray="6,4" opacity="0.25" />
           </svg>
 
           {DESKTOP_NODES.map(({ key, position, border, gradient, iconColor, icon: Icon, label }) => (
@@ -157,7 +157,7 @@ export function NetworkDiagram() {
                   <Icon className="size-[0.85em]" />
                 </div>
               </div>
-              <div className="mt-2 rounded-3xl bg-[#196bff] px-[0.8rem] py-[0.4rem] text-center text-[0.75rem] font-semibold whitespace-nowrap text-white shadow-[0_4px_12px_rgba(255,42,64,0.25)] lg:px-[1.2rem] lg:py-[0.6rem] lg:text-[0.9rem]">
+              <div className="mt-2 rounded-3xl bg-[#2563eb] px-[0.8rem] py-[0.4rem] text-center text-[0.75rem] font-semibold whitespace-nowrap text-white shadow-[0_4px_12px_rgba(255,42,64,0.25)] lg:px-[1.2rem] lg:py-[0.6rem] lg:text-[0.9rem]">
                 {label}
               </div>
             </div>
@@ -173,9 +173,9 @@ export function NetworkDiagram() {
             viewBox="0 0 100 100"
             preserveAspectRatio="xMidYMid meet"
           >
-            <line x1="50" y1="15" x2="20" y2="85" stroke="#196bff" strokeWidth="1" strokeDasharray="4,3" opacity="0.5" />
-            <line x1="50" y1="15" x2="80" y2="85" stroke="#196bff" strokeWidth="1" strokeDasharray="4,3" opacity="0.5" />
-            <line x1="20" y1="85" x2="80" y2="85" stroke="#196bff" strokeWidth="1" strokeDasharray="4,3" opacity="0.5" />
+            <line x1="50" y1="15" x2="20" y2="85" stroke="#2563eb" strokeWidth="1" strokeDasharray="4,3" opacity="0.5" />
+            <line x1="50" y1="15" x2="80" y2="85" stroke="#2563eb" strokeWidth="1" strokeDasharray="4,3" opacity="0.5" />
+            <line x1="20" y1="85" x2="80" y2="85" stroke="#2563eb" strokeWidth="1" strokeDasharray="4,3" opacity="0.5" />
           </svg>
 
           {MOBILE_NODES.map(({ key, position, border, gradient, initials, label }) => (
@@ -187,7 +187,7 @@ export function NetworkDiagram() {
                   {initials}
                 </div>
               </div>
-              <div className="max-w-[100px] rounded-[20px] bg-[#196bff] px-[0.8rem] py-[0.4rem] text-center text-[0.75rem] font-semibold whitespace-normal text-white shadow-[0_4px_12px_rgba(255,42,64,0.25)] sm:max-w-none sm:px-4 sm:py-2 sm:text-[0.85rem] sm:whitespace-nowrap">
+              <div className="max-w-[100px] rounded-[20px] bg-[#2563eb] px-[0.8rem] py-[0.4rem] text-center text-[0.75rem] font-semibold whitespace-normal text-white shadow-[0_4px_12px_rgba(255,42,64,0.25)] sm:max-w-none sm:px-4 sm:py-2 sm:text-[0.85rem] sm:whitespace-nowrap">
                 {label}
               </div>
             </div>

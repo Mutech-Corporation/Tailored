@@ -86,7 +86,7 @@ export function FaqSection({ items = FAQS }: FaqSectionProps = {}) {
           <div className="w-full text-center lg:w-3/4">
             <p className="dc-eyebrow">FAQs</p>
             <h2 className="dc-section-title">
-              Frequently Asked <span className="text-[#196bff]">Questions</span>
+              Frequently Asked <span className="text-[#2563eb]">Questions</span>
             </h2>
             <p className="dc-section-subtitle">
               Here are some common questions clients ask before starting their
@@ -115,7 +115,7 @@ export function FaqSection({ items = FAQS }: FaqSectionProps = {}) {
                         onClick={() => setOpenId(isOpen ? null : faq.id)}
                         className={`flex w-full items-center justify-between gap-3 px-5 py-4 text-left text-base transition-colors ${
                           isOpen
-                            ? "bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] text-white"
+                            ? "bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] text-white"
                             : "bg-white text-[#212529]"
                         }`}
                       >

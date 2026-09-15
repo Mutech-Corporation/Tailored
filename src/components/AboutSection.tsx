@@ -9,8 +9,8 @@ export function AboutSection() {
           <div>
             <p className="dc-eyebrow dc-eyebrow-left">About the Brand</p>
             <h2 className="dc-section-title">
-              We Bring <span className="text-[#196bff]">Brands</span> into the{" "}
-              <span className="text-[#196bff]">Digital World</span>.
+              We Bring <span className="text-[#2563eb]">Brands</span> into the{" "}
+              <span className="text-[#2563eb]">Digital World</span>.
             </h2>
             <p className="mb-3">
               Tailored Web Designers brings branding, websites, AI automation, video,

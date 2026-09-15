@@ -74,10 +74,10 @@ export function ContactSection({
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#1e40af_0,#020617_55%,#000_100%)] pt-20 pb-16 text-white max-[767.98px]:pt-16 max-[767.98px]:pb-[3.4rem]"
+      className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#312e81_0,#0b1033_55%,#05071a_100%)] pt-20 pb-16 text-white max-[767.98px]:pt-16 max-[767.98px]:pb-[3.4rem]"
     >
       <div className="dc-container relative z-[1]">
-        <div className="rounded-[28px] border border-[rgba(148,163,184,0.5)] bg-[radial-gradient(circle_at_top_left,rgba(37,99,235,0.25),rgba(15,23,42,0.96))] px-[2.4rem] py-[2.6rem] shadow-[0_26px_80px_rgba(0,0,0,0.75)] backdrop-blur-[16px] max-[991.98px]:px-[1.7rem] max-[991.98px]:py-[2.2rem] max-[767.98px]:px-[1.4rem] max-[767.98px]:py-8">
+        <div className="rounded-[28px] border border-[rgba(148,163,184,0.5)] bg-[radial-gradient(circle_at_top_left,rgba(124,58,237,0.22),rgba(11,16,51,0.96))] px-[2.4rem] py-[2.6rem] shadow-[0_26px_80px_rgba(0,0,0,0.75)] backdrop-blur-[16px] max-[991.98px]:px-[1.7rem] max-[991.98px]:py-[2.2rem] max-[767.98px]:px-[1.4rem] max-[767.98px]:py-8">
           <div className="grid items-start gap-6 lg:grid-cols-3">
             {/* Left — details */}
             <div>

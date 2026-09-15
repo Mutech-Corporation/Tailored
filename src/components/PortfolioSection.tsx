@@ -55,7 +55,7 @@ export function PortfolioSection({
         <div className="mb-6 text-center">
           <div className="dc-eyebrow">Our work</div>
           <h2 className="dc-section-title">
-            Featured <span className="text-[#196bff]">Portfolio</span>
+            Featured <span className="text-[#2563eb]">Portfolio</span>
           </h2>
           <p className="dc-section-subtitle">
             A curated selection of logos, branding and website projects

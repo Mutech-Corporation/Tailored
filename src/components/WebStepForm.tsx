@@ -106,13 +106,13 @@ export function WebStepForm() {
       id="multiStepForm"
       onSubmit={handleSubmit}
       noValidate
-      className="relative flex min-h-screen flex-col bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] text-white"
+      className="relative flex min-h-screen flex-col bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] text-white"
     >
       {/* .header-section */}
       <div className="flex items-center justify-between px-[30px] py-5 max-[768px]:px-5 max-[768px]:py-[15px] max-[576px]:px-[15px] max-[576px]:py-3">
         <Link href="/">
           <Image
-            src="/images/logo-02.svg"
+            src="/brand/logo-horizontal-light.png"
             alt="Tailored Web Designers logo"
             width={200}
             height={40}
@@ -161,7 +161,7 @@ export function WebStepForm() {
           )}
 
           {error && (
-            <p role="alert" className="mt-4 text-sm text-[#ffb400]">
+            <p role="alert" className="mt-4 text-sm text-[#c4b5fd]">
               {error}
             </p>
           )}

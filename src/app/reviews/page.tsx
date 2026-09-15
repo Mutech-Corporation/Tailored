@@ -17,7 +17,7 @@ export default function ReviewsPage() {
     <>
       <SiteHeader />
       <main className="flex-1">
-        <section className="bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] pt-32 pb-14 text-white">
+        <section className="bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] pt-32 pb-14 text-white">
           <div className="dc-container">
             <div className="mx-auto max-w-3xl text-center">
               <p className="dc-eyebrow">Reviews</p>

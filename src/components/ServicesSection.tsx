@@ -43,8 +43,8 @@ export function ServicesSection() {
         <div className="mx-auto mb-12 w-3/4 text-center max-[767.98px]:w-full">
           <p className="dc-eyebrow">What we offer</p>
           <h2 className="dc-section-title">
-            Services <span className="text-[#196bff]">Tailored</span> For Your{" "}
-            <span className="text-[#196bff]">Brand</span>.
+            Services <span className="text-[#2563eb]">Tailored</span> For Your{" "}
+            <span className="text-[#2563eb]">Brand</span>.
           </h2>
           <p className="dc-section-subtitle">
             From brand identity to AI automation, we cover everything your
@@ -57,9 +57,9 @@ export function ServicesSection() {
             <article
               key={service.number}
               data-active={service.active}
-              className="group h-full rounded-[18px] border border-[rgba(15,23,42,0.04)] bg-white p-8 px-6 shadow-[0_15px_40px_rgba(15,23,42,0.08)] transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-1 hover:border-transparent hover:bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#2e83ff_100%)] hover:text-white hover:shadow-[0_22px_60px_rgba(15,23,42,0.12)] data-[active=true]:border-transparent data-[active=true]:bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#2e83ff_100%)] data-[active=true]:text-white data-[active=true]:shadow-[0_22px_60px_rgba(15,23,42,0.12)]"
+              className="group h-full rounded-[18px] border border-[rgba(15,23,42,0.04)] bg-white p-8 px-6 shadow-[0_15px_40px_rgba(15,23,42,0.08)] transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-1 hover:border-transparent hover:bg-[linear-gradient(135deg,#2563eb_0%,#7c3aed_100%)] hover:text-white hover:shadow-[0_22px_60px_rgba(15,23,42,0.12)] data-[active=true]:border-transparent data-[active=true]:bg-[linear-gradient(135deg,#2563eb_0%,#7c3aed_100%)] data-[active=true]:text-white data-[active=true]:shadow-[0_22px_60px_rgba(15,23,42,0.12)]"
             >
-              <div className="mb-[0.4rem] text-[0.78rem] font-bold tracking-[0.16em] text-[#1769ff] uppercase group-hover:text-white group-data-[active=true]:text-white">
+              <div className="mb-[0.4rem] text-[0.78rem] font-bold tracking-[0.16em] text-[#2563eb] uppercase group-hover:text-white group-data-[active=true]:text-white">
                 {service.number}
               </div>
               <h3 className="mb-[0.4rem] font-bold">{service.title}</h3>

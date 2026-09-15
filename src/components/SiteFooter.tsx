@@ -43,10 +43,10 @@ export function SiteFooter() {
               <div className="mb-3">
                 <Link href="/">
                   <Image
-                    src="/images/logo-02.svg"
+                    src="/brand/logo-horizontal-light.png"
                     alt="Tailored Web Designers"
-                    width={220}
-                    height={44}
+                    width={258}
+                    height={40}
                     className="h-auto w-3/5"
                   />
                 </Link>
@@ -68,7 +68,7 @@ export function SiteFooter() {
                     <li key={link.label} className="[&+li]:mt-[0.35rem]">
                       <a
                         href={link.href}
-                        className="text-[0.9rem] text-[#d4d4d4] no-underline hover:text-[#2f6bff]"
+                        className="text-[0.9rem] text-[#d4d4d4] no-underline hover:text-[#8b5cf6]"
                       >
                         {link.label}
                       </a>
@@ -89,7 +89,7 @@ export function SiteFooter() {
                   </span>
                   <a
                     href={phoneHref()}
-                    className="text-[#d4d4d4] no-underline hover:text-[#2f6bff]"
+                    className="text-[#d4d4d4] no-underline hover:text-[#8b5cf6]"
                   >
                     {SITE.contact.phone}
                   </a>
@@ -100,7 +100,7 @@ export function SiteFooter() {
                   </span>
                   <a
                     href={mailHref()}
-                    className="text-[#d4d4d4] no-underline hover:text-[#2f6bff]"
+                    className="text-[#d4d4d4] no-underline hover:text-[#8b5cf6]"
                   >
                     {SITE.contact.email}
                   </a>
@@ -125,14 +125,14 @@ export function SiteFooter() {
             <div>
               <a
                 href="/terms-and-condition"
-                className="text-[#e5e5e5] no-underline hover:text-[#2f6bff]"
+                className="text-[#e5e5e5] no-underline hover:text-[#8b5cf6]"
               >
                 Terms and Condition
               </a>
               <span className="mx-2">|</span>
               <a
                 href="/privacy-policy"
-                className="text-[#e5e5e5] no-underline hover:text-[#2f6bff]"
+                className="text-[#e5e5e5] no-underline hover:text-[#8b5cf6]"
               >
                 Privacy Policy
               </a>

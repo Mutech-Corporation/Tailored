@@ -32,7 +32,7 @@ export function PricingCard({ plan }: PricingCardProps) {
         </span>
       )}
 
-      <p className="mb-[0.1rem] text-[0.92rem] font-bold tracking-[0.16em] text-[#ffb400] uppercase">
+      <p className="mb-[0.1rem] text-[0.92rem] font-bold tracking-[0.16em] text-[#7c3aed] uppercase">
         {plan.name}
       </p>
       <p className="mb-[0.8rem] text-[1.7rem] font-semibold text-[#1d4ed8]">

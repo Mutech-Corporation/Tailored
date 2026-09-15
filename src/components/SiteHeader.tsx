@@ -5,7 +5,6 @@ import Image from "@/components/Image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CloseIcon, MenuIcon } from "@/components/icons";
-import { assetPath } from "@/lib/asset-path";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/types";
 
@@ -44,23 +43,23 @@ function navLinkClassName(isActive: boolean, scrolled: boolean): string {
     // Desktop (>=992px): color depends on scroll + active state.
     scrolled
       ? isActive
-        ? "lg:text-[#196bff]"
+        ? "lg:text-[#2563eb]"
         : "lg:text-black"
       : isActive
-        ? "lg:text-[#ffb400]"
+        ? "lg:text-[#c4b5fd]"
         : "lg:text-white",
     // Phone drawer (<768px): the target forces white links / amber active with
     // `!important` once scrolled, and the drawer stays blue — so colors are
     // constant here regardless of scroll state.
-    isActive ? "max-[767.98px]:text-[#ffb400]" : "max-[767.98px]:text-white",
+    isActive ? "max-[767.98px]:text-[#c4b5fd]" : "max-[767.98px]:text-white",
     // Tablet drawer (768–991.98px): `.scrolled1` turns the drawer white, so the
     // links follow the same scroll logic as desktop.
     scrolled
       ? isActive
-        ? "min-[768px]:max-[991.98px]:text-[#196bff]"
+        ? "min-[768px]:max-[991.98px]:text-[#2563eb]"
         : "min-[768px]:max-[991.98px]:text-black"
       : isActive
-        ? "min-[768px]:max-[991.98px]:text-[#ffb400]"
+        ? "min-[768px]:max-[991.98px]:text-[#c4b5fd]"
         : "min-[768px]:max-[991.98px]:text-white",
   );
 }
@@ -109,18 +108,18 @@ export function SiteHeader() {
       <div className="dc-container flex items-center justify-between">
         <Link href="/" className="relative z-10 flex items-center">
           <Image
-            src="/images/logo-03.svg"
+            src="/brand/logo-horizontal-light.png"
             alt="Tailored Web Designers"
-            width={200}
-            height={40}
+            width={232}
+            height={36}
             priority
             className={cn("h-auto w-full max-w-[200px]", scrolled ? "hidden" : "block")}
           />
           <Image
-            src="/images/logo-01.svg"
+            src="/brand/logo-horizontal.png"
             alt="Tailored Web Designers"
-            width={200}
-            height={40}
+            width={232}
+            height={36}
             priority
             className={cn(
               "h-auto w-full max-w-[200px] max-[1024px]:max-w-[169px]",
@@ -137,7 +136,7 @@ export function SiteHeader() {
           onClick={() => setOpen((prev) => !prev)}
           className={cn(
             "relative z-[1060] flex h-10 w-10 items-center justify-center rounded-md text-white lg:hidden",
-            scrolled && "bg-[#196bff]",
+            scrolled && "bg-[#2563eb]",
           )}
         >
           {open ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
@@ -155,7 +154,7 @@ export function SiteHeader() {
           id="navbarNav"
           className={cn(
             "flex items-center gap-1",
-            "max-[991.98px]:fixed max-[991.98px]:top-0 max-[991.98px]:left-0 max-[991.98px]:z-[1040] max-[991.98px]:h-[100vh] max-[991.98px]:w-[260px] max-[991.98px]:flex-col max-[991.98px]:items-start max-[991.98px]:justify-start max-[991.98px]:gap-0 max-[991.98px]:bg-[#196bff] max-[991.98px]:px-6 max-[991.98px]:pt-[70px] max-[991.98px]:transition-transform max-[991.98px]:duration-300 max-[991.98px]:ease-in-out",
+            "max-[991.98px]:fixed max-[991.98px]:top-0 max-[991.98px]:left-0 max-[991.98px]:z-[1040] max-[991.98px]:h-[100vh] max-[991.98px]:w-[260px] max-[991.98px]:flex-col max-[991.98px]:items-start max-[991.98px]:justify-start max-[991.98px]:gap-0 max-[991.98px]:bg-[#2563eb] max-[991.98px]:px-6 max-[991.98px]:pt-[70px] max-[991.98px]:transition-transform max-[991.98px]:duration-300 max-[991.98px]:ease-in-out",
             // `.scrolled1` — the drawer goes white once scrolled, but only above
             // the 767.98px phone breakpoint, where a later rule forces it blue again.
             scrolled && "min-[768px]:max-[991.98px]:bg-white",
@@ -171,8 +170,8 @@ export function SiteHeader() {
             <Image
               src={
                 scrolled
-                  ? "/images/logo-01.svg"
-                  : "/images/logo-02.svg"
+                  ? "/brand/logo-horizontal.png"
+                  : "/brand/logo-horizontal-light.png"
               }
               alt="Tailored Web Designers"
               width={200}
