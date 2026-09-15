@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SITE } from "@/config/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,27 +10,31 @@ const inter = Inter({
   display: "swap",
 });
 
+const HOME_TITLE = `${SITE.name} | Branding, Websites, AI & Digital Growth`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.designcentura.com"),
-  title: "Custom Logo Maker | Online Logo Maker | Design Centura",
-  description:
-    "Need a custom logo maker that converts? Get a powerful, memorable logo built for growth and brand authority, start designing now with Design Centura!",
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: HOME_TITLE,
+    template: `%s | ${SITE.name}`,
+  },
+  description: SITE.description,
   keywords: [
-    "home designcentura",
     "creative agency",
     "branding",
-    "web development",
+    "logo design",
+    "website design",
+    "AI automation",
+    "SEO",
+    "digital marketing",
   ],
-  authors: [{ name: "Design Centura Team" }],
-  alternates: { canonical: "https://www.designcentura.com/" },
+  authors: [{ name: SITE.name }],
   robots: { index: true, follow: true },
-  icons: { icon: "/seo/favicon.png" },
   openGraph: {
     type: "website",
-    title: "DesignCentura Reviews - 1000+ Verified Client Testimonials",
-    description:
-      "See thousands of verified DesignCentura reviews from Google, Trustpilot, and Facebook. Real client experiences, 4.9★ average rating.",
-    url: "https://www.DesignCentura.com/reviews.php/",
+    siteName: SITE.name,
+    title: HOME_TITLE,
+    description: SITE.description,
   },
 };
 

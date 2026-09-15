@@ -5,6 +5,7 @@ import {
   LocationDotIcon,
   PhoneIcon,
 } from "@/components/icons";
+import { SITE, mailHref, phoneHref } from "@/config/site";
 import type { FooterColumn } from "@/types";
 
 const COLUMNS: FooterColumn[] = [
@@ -43,7 +44,7 @@ export function SiteFooter() {
                 <Link href="/">
                   <Image
                     src="/images/logo-02.svg"
-                    alt="Design Centura"
+                    alt="Tailored Web Designers"
                     width={220}
                     height={44}
                     className="h-auto w-3/5"
@@ -87,10 +88,10 @@ export function SiteFooter() {
                     <PhoneIcon />
                   </span>
                   <a
-                    href="tel:323-283-8729"
+                    href={phoneHref()}
                     className="text-[#d4d4d4] no-underline hover:text-[#2f6bff]"
                   >
-                    323-283-8729
+                    {SITE.contact.phone}
                   </a>
                 </li>
                 <li className="mb-[0.55rem] flex items-start gap-[0.55rem] text-[#d4d4d4]">
@@ -98,10 +99,10 @@ export function SiteFooter() {
                     <EnvelopeIcon />
                   </span>
                   <a
-                    href="mailto:info@designcentura.com"
+                    href={mailHref()}
                     className="text-[#d4d4d4] no-underline hover:text-[#2f6bff]"
                   >
-                    info@designcentura.com
+                    {SITE.contact.email}
                   </a>
                 </li>
                 <li className="mb-[0.55rem] flex items-start gap-[0.55rem] text-[#d4d4d4]">
@@ -109,8 +110,7 @@ export function SiteFooter() {
                     <LocationDotIcon />
                   </span>
                   <span>
-                    Mailing Address &ndash; 95 Third Street, San Francisco, CA
-                    94103
+                    {SITE.contact.address}
                   </span>
                 </li>
               </ul>
@@ -138,7 +138,7 @@ export function SiteFooter() {
               </a>
             </div>
             <div className="text-[#a3a3a3]">
-              Design Centura. &copy; 2025 All Rights Reserved
+              {SITE.name} &copy; {new Date().getFullYear()} All Rights Reserved
             </div>
           </div>
         </div>

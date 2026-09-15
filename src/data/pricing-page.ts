@@ -365,7 +365,7 @@ export const PRICING_GROUPS: PricingGroup[] = [
     id: "budget-friendly",
     eyebrow: "Video Packages",
     title: "Budget-Friendly Packages",
-    subtitle: "At Design Centura, we deliver exceptional services at rates that fit your budget. The costs may be minimal, but the standards are consistently premium.",
+    subtitle: "We deliver exceptional services at rates that fit your budget. The costs may be minimal, but the standards are consistently premium.",
     plans: [
       {
         name: "Bronze Plan",
@@ -608,7 +608,7 @@ export const PRICING_GROUPS: PricingGroup[] = [
     id: "logo-animation",
     eyebrow: "Logo",
     title: "Animated Logo",
-    subtitle: "At Design Centura, we deliver exceptional services at rates that fit your budget. The costs may be minimal, but the standards are consistently premium.",
+    subtitle: "We deliver exceptional services at rates that fit your budget. The costs may be minimal, but the standards are consistently premium.",
     plans: [
       {
         name: "Bronze",

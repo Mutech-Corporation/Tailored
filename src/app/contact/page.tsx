@@ -6,7 +6,7 @@ import { FaqSection } from "@/components/FaqSection";
 import type { FaqItem } from "@/types";
 
 export const metadata: Metadata = {
-  title: "Design Centura – Logo, Branding & Web",
+  title: "Contact",
   description:
     "Tell us if you need a logo, brand identity, website or a full bundle. We’ll reply with packages, timelines and simple next steps.",
 };

@@ -15,9 +15,9 @@ import Link from "next/link";
 import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
-  title: "Custom Video Animation Services for Brands & Startups",
+  title: "Motion & Animation",
   description:
-    "At DesignCentura, we create animations that simplify complex ideas, highlight your brand message, and keep your audience engaged from start to finish.",
+    "At Tailored Web Designers, we create animations that simplify complex ideas, highlight your brand message, and keep your audience engaged from start to finish.",
 };
 
 export default function AnimatedVideosPage() {
@@ -49,7 +49,7 @@ export default function AnimatedVideosPage() {
                 Animated Videos That Bring Your Story to Life
               </h1>
               <p className="mb-6 text-[0.98rem] opacity-90">
-                At DesignCentura, we create animations that simplify complex
+                At Tailored Web Designers, we create animations that simplify complex
                 ideas, highlight your brand message, and keep your audience
                 engaged from start to finish. Our animation team blends
                 creativity, clarity, and industry-level precision to produce
@@ -167,7 +167,7 @@ export default function AnimatedVideosPage() {
                 Ready to Create Your Animated Video?
               </h2>
               <p className="dc-section-subtitle mb-6">
-                Bring your ideas to the screen with DesignCentura&rsquo;s expert
+                Bring your ideas to the screen with our expert
                 animation team. We deliver visual content that engages, explains,
                 and elevates your brand.
               </p>

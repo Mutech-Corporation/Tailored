@@ -59,7 +59,7 @@ export function PortfolioSection({
           </h2>
           <p className="dc-section-subtitle">
             A curated selection of logos, branding and website projects
-            created by DesignCentura.
+            created by our team.
           </p>
         </div>
 

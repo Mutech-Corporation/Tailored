@@ -113,7 +113,7 @@ export function WebStepForm() {
         <Link href="/">
           <Image
             src="/images/logo-02.svg"
-            alt="Design Centura logo"
+            alt="Tailored Web Designers logo"
             width={200}
             height={40}
             priority

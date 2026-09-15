@@ -13,9 +13,9 @@ export function AboutSection() {
               <span className="text-[#196bff]">Digital World</span>.
             </h2>
             <p className="mb-3">
-              DesignCentura builds strong visual identities&mdash;combining logo
-              design, brand systems and digital experiences&mdash;so you can show
-              up online with clarity and consistency.
+              Tailored Web Designers brings branding, websites, AI automation, video,
+              SEO and digital marketing together under one creative team&mdash;so
+              your business shows up with clarity and consistency everywhere.
             </p>
             <p className="mb-3">
               We help startups and established businesses build unique brand

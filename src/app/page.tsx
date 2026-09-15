@@ -6,7 +6,6 @@ import { PortfolioSection } from "@/components/PortfolioSection";
 import { StatsSection } from "@/components/StatsSection";
 import { FaqSection } from "@/components/FaqSection";
 import { PricingSection } from "@/components/PricingSection";
-import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { ContactSection } from "@/components/ContactSection";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -26,7 +25,6 @@ export default function Home() {
         <StatsSection />
         <FaqSection />
         <PricingSection />
-        <TestimonialsSection />
         <ContactSection />
       </main>
       <SiteFooter />

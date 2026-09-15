@@ -29,7 +29,7 @@
   --font-mono: ui-monospace, monospace;
   --font-heading: var(--font-sans);
 
-  /* designcentura palette, exposed as Tailwind colors */
+  /* legacy palette, exposed as Tailwind colors */
   --color-dc-blue: var(--dc-blue);
   --color-dc-blue-deep: var(--dc-blue-deep);
   --color-dc-blue-hover: var(--dc-blue-hover);
@@ -78,7 +78,7 @@
 }
 
 :root {
-  /* ---- designcentura tokens (verbatim from the target's style.css) ---- */
+  /* ---- base design tokens ---- */
   --dc-blue: #196bff;
   --dc-blue-deep: #1d4ed8;
   --dc-blue-hover: #2563eb;

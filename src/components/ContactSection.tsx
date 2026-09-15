@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
+import { SITE, mailHref, phoneHref } from "@/config/site";
 import type { SelectOption } from "@/types";
 
 const PROJECT_TYPES: SelectOption[] = [
@@ -96,10 +97,10 @@ export function ContactSection({
                     Email
                   </span>
                   <a
-                    href="mailto:info@designcentura.com"
+                    href={mailHref()}
                     className="text-[0.95rem] text-[#e5e7eb] no-underline"
                   >
-                    info@designcentura.com
+                    {SITE.contact.email}
                   </a>
                 </div>
                 <div>
@@ -107,10 +108,10 @@ export function ContactSection({
                     Phone
                   </span>
                   <a
-                    href="tel:323-283-8729"
+                    href={phoneHref()}
                     className="text-[0.95rem] text-[#e5e7eb] no-underline"
                   >
-                    323-283-8729
+                    {SITE.contact.phone}
                   </a>
                 </div>
                 <div>
@@ -118,7 +119,7 @@ export function ContactSection({
                     Mailing Address
                   </span>
                   <span className="text-[0.95rem] text-[#e5e7eb]">
-                    560 Montgomery Street, San Francisco, CA 94111
+                    {SITE.contact.address}
                   </span>
                 </div>
               </div>

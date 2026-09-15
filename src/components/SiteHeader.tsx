@@ -110,7 +110,7 @@ export function SiteHeader() {
         <Link href="/" className="relative z-10 flex items-center">
           <Image
             src="/images/logo-03.svg"
-            alt="Designcentura"
+            alt="Tailored Web Designers"
             width={200}
             height={40}
             priority
@@ -118,7 +118,7 @@ export function SiteHeader() {
           />
           <Image
             src="/images/logo-01.svg"
-            alt="Designcentura"
+            alt="Tailored Web Designers"
             width={200}
             height={40}
             priority
@@ -174,7 +174,7 @@ export function SiteHeader() {
                   ? "/images/logo-01.svg"
                   : "/images/logo-02.svg"
               }
-              alt="Designcentura"
+              alt="Tailored Web Designers"
               width={200}
               height={40}
               className={cn(

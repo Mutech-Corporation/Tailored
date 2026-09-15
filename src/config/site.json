@@ -1,0 +1,22 @@
+{
+  "name": "Tailored Web Designers",
+  "shortName": "Tailored",
+  "tagline": "Design · Develop · Grow",
+  "description": "Tailored Web Designers is a creative and digital agency for branding, websites, AI automation, video, SEO and digital marketing, all under one team.",
+  "url": "https://mutech-corporation.github.io/Tailored/",
+
+  "contact": {
+    "phone": "+1 (000) 000-0000",
+    "email": "hello@example.com",
+    "supportEmail": "support@example.com",
+    "privacyEmail": "privacy@example.com",
+    "address": "Your Street Address, City, State ZIP"
+  },
+
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "x": ""
+  }
+}

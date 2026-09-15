@@ -1,7 +1,7 @@
 import type { PricingTab } from "@/types";
 
 /**
- * Verbatim plan content from https://www.designcentura.com/ #pricing.
+ * Package pricing (logo, branding, web and bundles).
  * `packageId` mirrors the target's data-package attribute exactly, including
  * its "Sliver Plan" typo, so the values stay traceable to the source.
  */

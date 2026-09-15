@@ -4,14 +4,13 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { InnerHero } from "@/components/InnerHero";
 import { ServicesSection } from "@/components/ServicesSection";
-import { ReviewsMasonry } from "@/components/ReviewsMasonry";
 
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Design Centura – Logo, Branding & Web",
+  title: "About Us",
   description:
-    "Read real customer reviews of Design Centura. Explore testimonials from Trustpilot, Google, Facebook and more.",
+    "Tailored Web Designers is one creative team for branding, websites, AI automation, video, SEO and digital marketing.",
 };
 
 export default function AboutPage() {
@@ -23,10 +22,10 @@ export default function AboutPage() {
           eyebrow="About Us"
           title={
             <>
-              Custom Logo Design, <span>Branding &amp; Website</span> Solutions.
+              One Creative Team. <span>Every Part</span> of Your Brand.
             </>
           }
-          lead="Design Centura is essentially an institution where simple ideas are converted into brilliant and passionate products."
+          lead="Branding, websites, AI automation, video, SEO and digital marketing, designed and built together so everything works as one."
         />
 
         {/*
@@ -79,22 +78,6 @@ export default function AboutPage() {
         </section>
 
         <ServicesSection />
-
-        <section className="mt-12 py-12">
-          <div className="dc-container">
-            <div className="mb-6 text-center">
-              <p className="dc-eyebrow">What we offer</p>
-              {/* "Testimonails" is the target's own typo — preserved. */}
-              <h2 className="dc-section-title">Client Testimonails</h2>
-              <p className="dc-section-subtitle">
-                Inspired by agencies like DesignCentura, we cover everything from
-                concept sketches to launch-ready digital assets, keeping your
-                brand design under one roof.
-              </p>
-            </div>
-            <ReviewsMasonry />
-          </div>
-        </section>
       </main>
       <SiteFooter />
     </>

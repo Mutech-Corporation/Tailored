@@ -21,7 +21,7 @@ import { FaqAccordion } from "@/components/ai-agent/FaqAccordion";
 import { AI_FAQS } from "@/data/ai-agent";
 
 export const metadata: Metadata = {
-  title: "Top AI Agent Development Company | Design Centura",
+  title: "AI Solutions",
   description:
     "Transform your business with cutting-edge AI solutions that automate workflows, enhance customer experiences, and drive measurable results around the clock.",
 };

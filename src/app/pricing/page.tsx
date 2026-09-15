@@ -6,7 +6,7 @@ import { PricingCard } from "@/components/PricingCard";
 import { PRICING_GROUPS } from "@/data/pricing-page";
 
 export const metadata: Metadata = {
-  title: "Design Centura – Logo, Branding & Web",
+  title: "Pricing",
   description:
     "Get high-quality design and development services at fair prices, built to increase your business value.",
 };
@@ -31,7 +31,7 @@ export default function PricingPage() {
               Custom Logo Design, <span>Branding &amp; Website</span> Solutions.
             </>
           }
-          lead="Design Centura is essentially an institution where simple ideas are converted into brilliant and passionate products."
+          lead="Clear packages for branding, websites, growth and AI, plus add-ons when you need something specific."
         />
 
         {PRICING_GROUPS.map((group, index) => (

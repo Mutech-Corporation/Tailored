@@ -13,9 +13,9 @@ import { LOGO_FAQS, LOGO_PRICING_TABS } from "@/data/logo-design";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Professional Logo Design Services for Startups & Enterprises",
+  title: "Logo Design & Brand Identity",
   description:
-    "Work with Design Centura to build a strategic, memorable logo that scales effortlessly across print, digital platforms, and social media.",
+    "Work with Tailored Web Designers to build a strategic, memorable logo that scales effortlessly across print, digital platforms, and social media.",
 };
 
 const STEPS: HowStep[] = [
@@ -56,13 +56,13 @@ export default function LogoDesignPage() {
             <div className="grid items-center gap-8 lg:grid-cols-2">
               <div>
                 <p className="mb-3 flex w-fit items-center gap-2 rounded-full border border-[rgba(148,163,184,0.6)] bg-white/12 px-[0.9rem] py-[0.3rem] text-[0.75rem] font-medium text-[#e5e7eb]">
-                  Design Centura · Logo Design Studio
+                  Tailored · Logo &amp; Brand Identity
                 </p>
                 <h1 className="mb-4 text-[clamp(2.4rem,3.2vw,2.8rem)] leading-[1.1] font-semibold max-[767.98px]:text-[2.1rem]">
                   Custom Logo Design &amp; Brand-Ready Visual Identity Systems
                 </h1>
                 <p className="mb-6 text-[0.98rem] opacity-90">
-                  Work with Design Centura to build a strategic, memorable logo
+                  Work with us to build a strategic, memorable logo
                   that scales effortlessly across print, digital platforms, and
                   social media.
                 </p>
@@ -106,7 +106,7 @@ export default function LogoDesignPage() {
                 </h2>
                 <p className="mb-3">
                   Your logo is the first impression people form about your
-                  business. At Design Centura, we develop signature logo systems
+                  business. We develop signature logo systems
                   that clearly express your purpose, personality, and
                   positioning&mdash;captured in one distinct visual mark.
                 </p>
@@ -140,10 +140,9 @@ export default function LogoDesignPage() {
         <section id="pricing" className="py-12">
           <div className="dc-container">
             <div className="mx-auto mb-8 w-full text-center lg:max-w-[66%]">
-              {/* "Pakages" is the target's own spelling — preserved. */}
-              <p className="dc-eyebrow">Logo Pakages</p>
+                            <p className="dc-eyebrow">Logo Packages</p>
               <h2 className="dc-section-title">
-                Logo Design And Branding Pakages
+                Logo Design &amp; Branding Packages
               </h2>
               <p className="dc-section-subtitle">
                 We craft logos infused with bold creativity, crisp lines, and
@@ -157,7 +156,7 @@ export default function LogoDesignPage() {
         <HowItWorks
           eyebrow="How It Works"
           title="A Clear, Collaborative Logo Design Process."
-          lead="Design Centura follows a structured workflow so every stage of your logo project is transparent. You always know what we are designing, why we are designing it and when you will see each round."
+          lead="We follow a structured workflow so every stage of your logo project is transparent. You always know what we are designing, why we are designing it and when you will see each round."
           steps={STEPS}
         />
 

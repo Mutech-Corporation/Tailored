@@ -47,9 +47,8 @@ export function ServicesSection() {
             <span className="text-[#196bff]">Brand</span>.
           </h2>
           <p className="dc-section-subtitle">
-            Inspired by agencies like DesignCentura, we cover everything from
-            concept sketches to launch-ready digital assets, keeping your brand
-            design under one roof.
+            From brand identity to AI automation, we cover everything your
+            business needs to look sharp, get found and grow&mdash;under one roof.
           </p>
         </div>
 

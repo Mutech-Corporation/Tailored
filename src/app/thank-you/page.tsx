@@ -4,9 +4,9 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Design Centura – Logo, Branding & Web",
+  title: "Thank You",
   description:
-    "Thank you — choose how you'd like to proceed with your Design Centura project.",
+    "Thank you — choose how you'd like to proceed with your project.",
 };
 
 interface ProceedCard {
