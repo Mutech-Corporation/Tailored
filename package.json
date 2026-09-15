@@ -4,7 +4,7 @@
   "private": true,
   "description": "Tailored Web Designers agency website",
   "engines": {
-    "node": ">=24"
+    "node": ">=20.9"
   },
   "scripts": {
     "dev": "next dev",

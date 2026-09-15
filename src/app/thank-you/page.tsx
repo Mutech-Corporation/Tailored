@@ -56,7 +56,7 @@ export default function ThankYouPage() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-1 bg-[linear-gradient(135deg,#1e3a8a_0%,#3b82f6_50%,#1e40af_100%)] px-20 py-28 max-[768px]:px-0 max-[768px]:pt-24 max-[768px]:pb-16">
+      <main className="flex-1 bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] px-20 py-28 max-[768px]:px-0 max-[768px]:pt-24 max-[768px]:pb-16">
         <div className="dc-container">
           <h1 className="mb-[50px] text-center text-[2.5rem] font-bold text-white max-[768px]:mb-[30px] max-[768px]:p-5 max-[768px]:text-[1.5rem]">
             Thank You, How Would You Like To Proceed?
@@ -84,7 +84,7 @@ export default function ThankYouPage() {
                   </p>
                   <a
                     href={card.href}
-                    className="block w-full rounded-full border-none bg-[linear-gradient(135deg,#3b82f6_0%,#1e40af_100%)] px-[30px] py-[15px] text-center text-base font-semibold text-white no-underline transition-all duration-300"
+                    className="block w-full rounded-full border-none bg-[linear-gradient(135deg,#2563eb_0%,#7c3aed_100%)] px-[30px] py-[15px] text-center text-base font-semibold text-white no-underline transition-all duration-300"
                   >
                     {card.cta}
                   </a>

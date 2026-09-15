@@ -52,26 +52,6 @@ export interface PricingTab {
   plans: PricingPlan[];
 }
 
-export interface VideoTestimonial {
-  name: string;
-  src: string;
-  poster: string;
-}
-
-export interface Review {
-  name: string;
-  /** Monogram shown in the 48px avatar circle. */
-  initials: string;
-  /** "Trustpilot · Sep 16, 2025" — source and date as one string, as authored. */
-  meta: string;
-  /** The card's `data-source` attribute: "trustpilot" | "google". */
-  source: string;
-  stars: number;
-  /** Footer label, e.g. "Verified review" or "Google Reviews · Verified". */
-  tail: string;
-  text: string;
-}
-
 export interface ContactInfo {
   label: string;
   value: string;
