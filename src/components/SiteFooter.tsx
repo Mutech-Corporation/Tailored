@@ -10,32 +10,30 @@ import type { FooterColumn } from "@/types";
 
 const COLUMNS: FooterColumn[] = [
   {
-    title: "Quick Links",
+    title: "Services",
     links: [
-      { label: "Home", href: "/" },
-      { label: "Portfolio", href: "/portfolio" },
-      { label: "AI Agent", href: "/ai-agent" },
-      { label: "Web Design", href: "/web-design" },
-      { label: "Logo Design", href: "/logo-design" },
-      { label: "Reviews", href: "/reviews" },
+      { label: "Brand Identity", href: "/logo-design" },
+      { label: "Website Design", href: "/web-design" },
+      { label: "Motion & Animation", href: "/animated-videos" },
+      { label: "AI Solutions", href: "/ai-agent" },
+      { label: "All Services", href: "/services" },
     ],
   },
   {
-    title: "Links",
+    title: "Company",
     links: [
-      { label: "Animation", href: "/animated-videos" },
-      { label: "About us", href: "/about" },
-      { label: "Contact us", href: "/contact" },
+      { label: "Work", href: "/portfolio" },
+      { label: "About", href: "/about" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Terms and Condition", href: "/terms-and-condition" },
-      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Blog", href: "/blog" },
+      { label: "Contact", href: "/contact" },
     ],
   },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="bg-black text-[0.9rem] text-[#f5f5f5]">
+    <footer className="bg-[#0b1033] text-[0.9rem] text-[#f5f5f5]">
       <div className="pt-14 pb-10 max-[767.98px]:pt-[2.7rem] max-[767.98px]:pb-[2.1rem]">
         <div className="dc-container">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-12">
@@ -47,14 +45,16 @@ export function SiteFooter() {
                     alt="Tailored Web Designers"
                     width={258}
                     height={40}
-                    className="h-auto w-3/5"
+                    className="h-10 w-auto"
                   />
                 </Link>
               </div>
               <p className="m-0 leading-[1.7] text-[#d4d4d4]">
-                Our creative force is motivated by the goal of achieving digital
-                excellence for your brand. Our design services are optimized to
-                give your brand dominance in the digital fraternity.
+                Branding, websites, AI automation, video, SEO and digital
+                marketing, all under one creative team.
+              </p>
+              <p className="mt-3 text-[0.72rem] font-semibold tracking-[0.3em] text-[#c4b5fd] uppercase">
+                {SITE.tagline}
               </p>
             </div>
 
@@ -66,12 +66,12 @@ export function SiteFooter() {
                 <ul className="m-0 list-none p-0">
                   {column.links.map((link) => (
                     <li key={link.label} className="[&+li]:mt-[0.35rem]">
-                      <a
+                      <Link
                         href={link.href}
                         className="text-[0.9rem] text-[#d4d4d4] no-underline hover:text-[#8b5cf6]"
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -84,7 +84,7 @@ export function SiteFooter() {
               </h4>
               <ul className="m-0 list-none p-0">
                 <li className="mb-[0.55rem] flex items-start gap-[0.55rem] text-[#d4d4d4]">
-                  <span className="inline-flex size-[26px] shrink-0 items-center justify-center rounded-full bg-[#111111] text-[0.9rem]">
+                  <span className="inline-flex size-[26px] shrink-0 items-center justify-center rounded-full bg-white/10 text-[0.9rem]">
                     <PhoneIcon />
                   </span>
                   <a
@@ -95,7 +95,7 @@ export function SiteFooter() {
                   </a>
                 </li>
                 <li className="mb-[0.55rem] flex items-start gap-[0.55rem] text-[#d4d4d4]">
-                  <span className="inline-flex size-[26px] shrink-0 items-center justify-center rounded-full bg-[#111111] text-[0.9rem]">
+                  <span className="inline-flex size-[26px] shrink-0 items-center justify-center rounded-full bg-white/10 text-[0.9rem]">
                     <EnvelopeIcon />
                   </span>
                   <a
@@ -106,7 +106,7 @@ export function SiteFooter() {
                   </a>
                 </li>
                 <li className="mb-[0.55rem] flex items-start gap-[0.55rem] text-[#d4d4d4]">
-                  <span className="inline-flex size-[26px] shrink-0 items-center justify-center rounded-full bg-[#111111] text-[0.9rem]">
+                  <span className="inline-flex size-[26px] shrink-0 items-center justify-center rounded-full bg-white/10 text-[0.9rem]">
                     <LocationDotIcon />
                   </span>
                   <span>
@@ -119,23 +119,23 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-[#181818] bg-[#050505] py-[0.7rem] text-[0.85rem] text-[#c0c0c0] max-[767.98px]:text-center">
+      <div className="border-t border-white/10 bg-[#070a24] py-[0.7rem] text-[0.85rem] text-[#c0c0c0] max-[767.98px]:text-center">
         <div className="dc-container">
           <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
             <div>
-              <a
+              <Link
                 href="/terms-and-condition"
                 className="text-[#e5e5e5] no-underline hover:text-[#8b5cf6]"
               >
                 Terms and Condition
-              </a>
+              </Link>
               <span className="mx-2">|</span>
-              <a
+              <Link
                 href="/privacy-policy"
                 className="text-[#e5e5e5] no-underline hover:text-[#8b5cf6]"
               >
                 Privacy Policy
-              </a>
+              </Link>
             </div>
             <div className="text-[#a3a3a3]">
               {SITE.name} &copy; {new Date().getFullYear()} All Rights Reserved
