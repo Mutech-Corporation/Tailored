@@ -1,87 +1,68 @@
+import Link from "next/link";
 import { assetPath } from "@/lib/asset-path";
 
-/**
- * #home — full-viewport hero over a looping background video.
- *
- * The target stacks three layers: the video (z-1), a 55% black scrim (z-2), and
- * a translucent content card (z-9) that is only 50% wide on desktop.
- */
+const DISCIPLINES = ["Branding", "Websites", "AI Automation", "Video", "SEO", "Digital Marketing"];
+
+/** #home — full-viewport hero: background video, navy scrim, headline and two CTAs. */
 export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] pt-24 pb-16 text-white max-[767.98px]:pt-[7.2rem] max-[767.98px]:pb-8"
+      className="relative flex min-h-screen items-center overflow-hidden bg-[#0b1033] pt-28 pb-20 text-white max-[767.98px]:pt-32 max-[767.98px]:pb-14"
     >
-      {/* Layer 1 — background video */}
       <div className="absolute inset-0 z-[1] h-full w-full overflow-hidden">
-        <video
-          className="h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
+        <video className="h-full w-full object-cover" autoPlay muted loop playsInline>
           <source src={assetPath("/videos/banner-video.mp4")} type="video/mp4" />
         </video>
       </div>
 
-      {/* Layer 2 — scrim */}
-      <div className="absolute inset-0 z-[2] bg-black/55" />
+      {/* Navy → violet scrim keeps the video on-brand and the text readable. */}
+      <div className="absolute inset-0 z-[2] bg-[linear-gradient(115deg,rgba(11,16,51,0.94)_0%,rgba(30,27,94,0.82)_50%,rgba(76,29,149,0.55)_100%)]" />
+      <div
+        aria-hidden
+        className="absolute -right-40 -bottom-40 z-[2] size-[520px] rounded-full bg-[#7c3aed] opacity-30 blur-[140px]"
+      />
 
-      {/* Layer 3 — content card */}
-      <div className="relative z-[9] mx-auto w-1/2 rounded-[2rem] bg-black/30 p-8 max-[767.98px]:px-0 max-[767.98px]:pt-16 max-[767.98px]:pb-12 max-[576px]:w-[95%]">
-        <div className="dc-container">
-          <div className="text-center">
-            <p className="mx-auto mb-3 flex w-fit items-center gap-2 rounded-full border border-[rgba(148,163,184,0.6)] bg-white/12 px-[0.9rem] py-[0.3rem] text-[0.75rem] font-medium text-[#e5e7eb]">
-              Is it logo design you&rsquo;re looking for?
-            </p>
+      <div className="dc-container relative z-[9]">
+        <div className="max-w-[820px]">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[0.75rem] font-semibold tracking-[0.2em] text-white/85 uppercase backdrop-blur">
+            <span className="size-1.5 rounded-full bg-[#a78bfa]" />
+            Design &middot; Develop &middot; Grow
+          </p>
 
-            <h1 className="mb-4 text-[clamp(2.4rem,3.2vw,2.8rem)] leading-[1.1] font-semibold max-[767.98px]:text-[2.1rem]">
-              Online <span className="text-[#c4b5fd]">Logo Maker</span> &amp;{" "}
-              <span className="text-[#c4b5fd]">Custom Design Services</span>.
-            </h1>
+          <h1 className="mb-6 text-[clamp(2.6rem,5.4vw,4.6rem)] leading-[1.04] font-extrabold tracking-[-0.02em]">
+            We Build Brands That{" "}
+            <span className="tw-gradient-text-light">Move Business Forward.</span>
+          </h1>
 
-            <p className="mb-4 text-[0.98rem] opacity-90 max-[576px]:text-[1.2rem]">
-              Get a Custom Logo Made in 03:00 minutes. Try Now
-            </p>
+          <p className="mb-9 max-w-[640px] text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-white/80">
+            Branding, websites, AI automation, video, SEO, and digital marketing
+            &mdash; all under one creative team.
+          </p>
 
-            {/*
-              The pencil glyph is a ::before background-image on the target; here it
-              is a positioned element so the input keeps its own left padding.
-            */}
-            <form
-              action="/web-step"
-              method="get"
-              className="relative mx-auto flex w-full max-w-[32.5rem] flex-wrap items-center justify-center gap-2"
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href="/contact"
+              className="dc-submit-btn px-8 py-4 text-[0.9rem] shadow-[0_14px_40px_rgba(124,58,237,0.45)]"
             >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute top-[1.8rem] left-6 z-[1] h-[23px] w-[23px] max-w-[1.325rem] -translate-y-1/2 bg-contain bg-center bg-no-repeat max-[576px]:top-[1.4rem] max-[576px]:left-[1.3rem] max-[576px]:h-4 max-[576px]:w-4"
-                style={{ backgroundImage: `url('${assetPath("/images/pencil.svg")}')` }}
-              />
-              <label htmlFor="business_name" className="sr-only">
-                Business name
-              </label>
-              {/*
-                `bg-white` is explicit: Tailwind's preflight resets form controls
-                to a transparent background, which made this field disappear into
-                the dark hero instead of reading as the white pill the target has.
-              */}
-              <input
-                type="text"
-                id="business_name"
-                name="business_name"
-                placeholder="Enter Your Business Name"
-                className="w-full rounded-[2.5rem] border-none bg-white py-[1.2rem] pr-10 pl-14 text-[#1b1b1b] outline-none max-[576px]:py-[0.8rem] max-[576px]:pr-[1.7rem] max-[576px]:pl-[3.255rem]"
-              />
-              <button
-                type="submit"
-                className="absolute right-2 rounded-[2.5rem] border-none bg-[#2563eb] px-6 py-3 font-semibold text-white transition-colors duration-200 hover:bg-[#7c3aed] hover:text-white max-[576px]:relative max-[576px]:right-0 max-[576px]:mx-auto max-[576px]:block max-[576px]:w-full"
-              >
-                Get&apos;s started
-              </button>
-            </form>
+              Start a Project
+            </Link>
+            <Link
+              href="/#work"
+              className="inline-block rounded-full border border-white/35 bg-white/5 px-8 py-4 text-[0.9rem] font-semibold tracking-[0.1em] text-white uppercase backdrop-blur transition-colors hover:border-white hover:bg-white/15"
+            >
+              View Our Work
+            </Link>
           </div>
+
+          <ul className="mt-12 flex flex-wrap gap-x-6 gap-y-2 text-[0.85rem] text-white/60">
+            {DISCIPLINES.map((item) => (
+              <li key={item} className="flex items-center gap-2">
+                <span className="size-1 rounded-full bg-white/40" />
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

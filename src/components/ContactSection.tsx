@@ -1,22 +1,34 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { SITE, mailHref, phoneHref } from "@/config/site";
 import type { SelectOption } from "@/types";
 
 const PROJECT_TYPES: SelectOption[] = [
-  { value: "Logo design", label: "Logo Design" },
-  { value: "Logo + branding kit", label: "Logo + Branding Kit" },
-  { value: "Website design", label: "Website Design" },
-  { value: "Logo + website bundle", label: "Logo + Website Bundle" },
-  { value: "Social media creatives", label: "Social Media Creatives" },
+  { value: "Starter — Brand Essentials", label: "Starter — Brand Essentials" },
+  { value: "Growth — Digital Launch", label: "Growth — Digital Launch" },
+  { value: "Scale — Business Growth", label: "Scale — Business Growth" },
+  { value: "Creative (branding, logo, motion, social)", label: "Creative — Branding, Logo, Motion" },
+  { value: "Digital (website, e-commerce, UI/UX)", label: "Digital — Website, E-commerce, UI/UX" },
+  { value: "Growth (SEO, PPC, social media)", label: "Growth — SEO, PPC, Social Media" },
+  { value: "AI (chatbots, automation, custom tools)", label: "AI — Chatbots, Automation, Tools" },
+  { value: "Custom package", label: "Custom Package" },
 ];
 
+/** `?plan=` values used by the pricing cards → project type option. */
+const PLAN_TO_TYPE: Record<string, string> = {
+  starter: PROJECT_TYPES[0].value,
+  growth: PROJECT_TYPES[1].value,
+  scale: PROJECT_TYPES[2].value,
+  custom: "Custom package",
+};
+
 const BUDGETS: SelectOption[] = [
-  { value: "$100 – $200", label: "$100 – $200" },
-  { value: "$200 – $500", label: "$200 – $500" },
-  { value: "$500 – $1,000", label: "$500 – $1,000" },
-  { value: "$1,000+", label: "$1,000+" },
+  { value: "Under $500", label: "Under $500" },
+  { value: "$500 – $1,500", label: "$500 – $1,500" },
+  { value: "$1,500 – $5,000", label: "$1,500 – $5,000" },
+  { value: "$5,000+", label: "$5,000+" },
+  { value: "Not sure yet", label: "Not sure yet" },
 ];
 
 const FIELD_CLASS =
@@ -45,7 +57,7 @@ const DEFAULT_TITLE = (
 );
 
 const DEFAULT_LEAD =
-  "Tell us if you need a logo, brand identity, website or full creative package. You’ll receive a tailored proposal within 24 hours.";
+  "Tell us what you need, from branding and websites to growth and AI. You’ll receive a tailored proposal within 24 hours.";
 
 export function ContactSection({
   title = DEFAULT_TITLE,
@@ -54,6 +66,16 @@ export function ContactSection({
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
   );
+  const projectTypeRef = useRef<HTMLSelectElement>(null);
+
+  // Preselect the project type when arriving from a pricing card (?plan=growth).
+  // The page is statically exported, so the query is only readable client-side.
+  useEffect(() => {
+    const plan = new URLSearchParams(window.location.search).get("plan");
+    if (plan && PLAN_TO_TYPE[plan] && projectTypeRef.current) {
+      projectTypeRef.current.value = PLAN_TO_TYPE[plan];
+    }
+  }, []);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -182,6 +204,7 @@ export function ContactSection({
                         id="project_type"
                         name="project_type"
                         required
+                        ref={projectTypeRef}
                         defaultValue=""
                         className={`${FIELD_CLASS} pr-9`}
                       >

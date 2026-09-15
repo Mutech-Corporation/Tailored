@@ -5,15 +5,6 @@ export interface NavLink {
   href: string;
 }
 
-export interface Service {
-  number: string;
-  title: string;
-  description: string;
-  /** Cards 02 and 04 ship pre-activated on the target — they render in the
-   *  gradient state at rest rather than only on hover. */
-  active: boolean;
-}
-
 export type PortfolioCategory = "logo" | "branding" | "web" | "animated logo";
 
 export interface PortfolioItem {
@@ -26,11 +17,6 @@ export interface PortfolioFilter {
   label: string;
   /** "all" is the pseudo-category that clears the filter. */
   category: PortfolioCategory | "all";
-}
-
-export interface Stat {
-  value: string;
-  label: string;
 }
 
 export interface FaqItem {
