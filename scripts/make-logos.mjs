@@ -26,14 +26,64 @@ const REGIONS = {
   stacked: { left: 186, top: 258, width: 882, height: 573 },
 };
 
+/** Background "ink" below this (0–1) is treated as fully transparent. */
+const NOISE_FLOOR = 0.14;
+/** Visible islands smaller than this many pixels are specks, not logo. */
+const MIN_ISLAND = 60;
+/** An island whose strongest pixel is fainter than this is a smudge, not logo. */
+const MIN_ISLAND_PEAK = 140;
+
+/**
+ * Removes stray specks: clears any connected group of visible pixels that is
+ * tiny or never becomes solid. Real logo parts (letters, pixel squares) are
+ * both large and opaque, so they survive.
+ */
+function despeckle(rgba, width, height) {
+  const seen = new Uint8Array(width * height);
+  const stack = new Int32Array(width * height);
+  const island = [];
+  for (let start = 0; start < width * height; start++) {
+    if (seen[start] || rgba[start * 4 + 3] === 0) continue;
+    let top = 0;
+    let peak = 0;
+    island.length = 0;
+    stack[top++] = start;
+    seen[start] = 1;
+    while (top > 0) {
+      const i = stack[--top];
+      island.push(i);
+      peak = Math.max(peak, rgba[i * 4 + 3]);
+      const x = i % width;
+      const y = (i - x) / width;
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          const nx = x + dx;
+          const ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
+          const n = ny * width + nx;
+          if (!seen[n] && rgba[n * 4 + 3] > 0) {
+            seen[n] = 1;
+            stack[top++] = n;
+          }
+        }
+      }
+    }
+    if (island.length < MIN_ISLAND || peak < MIN_ISLAND_PEAK) {
+      for (const i of island) rgba.fill(0, i * 4, i * 4 + 4);
+    }
+  }
+  return rgba;
+}
+
 /** White background → alpha ("colour to alpha" against white), un-premultiplied. */
 function colorToAlpha(data, channels) {
   const out = Buffer.alloc((data.length / channels) * 4);
   for (let i = 0, o = 0; i < data.length; i += channels, o += 4) {
     const r = data[i], g = data[i + 1], b = data[i + 2];
     const a = Math.max(255 - r, 255 - g, 255 - b) / 255;
-    // Treat the sheet's faint off-white noise as fully transparent.
-    const alpha = a < 0.03 ? 0 : Math.min(1, (a - 0.03) / 0.97);
+    // The sheet has light-grey compression noise around every shape; anything
+    // this faint is background, and the ramp above it keeps edges anti-aliased.
+    const alpha = a < NOISE_FLOOR ? 0 : Math.min(1, (a - NOISE_FLOOR) / (1 - NOISE_FLOOR));
     const unmix = (c) => (alpha === 0 ? 0 : Math.max(0, Math.min(255, 255 - (255 - c) / a)));
     out[o] = unmix(r);
     out[o + 1] = unmix(g);
@@ -54,7 +104,10 @@ function navyToWhite(rgba) {
     const b = out[o + 2];
     // navy ≈ (11,16,51); brand blue ≈ (37,99,235); violet ≈ (139,61,245).
     // The blue channel separates them far more robustly than chroma on noisy edges.
-    const t = Math.max(0, Math.min(1, (150 - b) / 50));
+    // Faint edge pixels have unreliable colour after un-mixing; only recolour
+    // pixels solid enough to trust, or corners of blue shapes flash white.
+    const trust = Math.max(0, Math.min(1, (out[o + 3] - 90) / 110));
+    const t = Math.max(0, Math.min(1, (150 - b) / 50)) * trust;
     for (let c = 0; c < 3; c++) {
       const lifted = out[o + c] + (255 - out[o + c]) * 0.28;
       out[o + c] = Math.round(lifted * (1 - t) + 255 * t);
@@ -69,7 +122,8 @@ async function extract(region) {
     .removeAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
-  return { rgba: colorToAlpha(data, info.channels), width: info.width, height: info.height };
+  const rgba = despeckle(colorToAlpha(data, info.channels), info.width, info.height);
+  return { rgba, width: info.width, height: info.height };
 }
 
 const toPng = ({ rgba, width, height }) =>
