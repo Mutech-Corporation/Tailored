@@ -8,13 +8,16 @@ export interface PricingGroup {
   plans: PricingPlan[];
 }
 
-/** The nine plan groups on pricing.php, 30 cards total, verbatim. */
+/**
+ * Add-on packages shown under "Custom Work" on /pricing. Prices are unchanged
+ * from the original packages; edit them here.
+ */
 export const PRICING_GROUPS: PricingGroup[] = [
   {
     id: "logo-design",
     eyebrow: "Logo Design",
-    title: "Logo Design",
-    subtitle: "We craft logos infused with bold creativity, crisp lines, and colors harmonized to elevate your brand effortlessly.",
+    title: "Logo Design Packages",
+    subtitle: "Custom logo concepts with revisions and final files in every format you need.",
     plans: [
       {
         name: "Bronze",
@@ -84,9 +87,9 @@ export const PRICING_GROUPS: PricingGroup[] = [
   },
   {
     id: "three-in-one",
-    eyebrow: "3 In 1 Bundles",
-    title: "LOGO + WEBSITE + BRANDING KIT",
-    subtitle: "We craft logos infused with bold creativity, crisp lines, and colors harmonized to elevate your brand effortlessly.",
+    eyebrow: "Bundles",
+    title: "Logo + Website + Branding Kit",
+    subtitle: "Your logo, website and core brand collateral in one bundle.",
     plans: [
       {
         name: "Basic",
@@ -136,9 +139,9 @@ export const PRICING_GROUPS: PricingGroup[] = [
   },
   {
     id: "award-winning",
-    eyebrow: "Logo Packages",
-    title: "Award Winning Design Team Logo",
-    subtitle: "We craft logos infused with bold creativity, crisp lines, and colors harmonized to elevate your brand effortlessly.",
+    eyebrow: "Signature Logo",
+    title: "Signature Logo Package",
+    subtitle: "A senior-led logo package for brands that want extra creative depth.",
     plans: [
       {
         name: "Award Winning Package",
@@ -167,8 +170,8 @@ export const PRICING_GROUPS: PricingGroup[] = [
   {
     id: "extensive",
     eyebrow: "Premium",
-    title: "Extensive Premium ART Director's Plan",
-    subtitle: "We craft logos infused with bold creativity, crisp lines, and colors harmonized to elevate your brand effortlessly.",
+    title: "Premium Art Director Plan",
+    subtitle: "Art-director-led identity work with extended concepts and deliverables.",
     plans: [
       {
         name: "Extensive Premium Plan",
@@ -204,9 +207,9 @@ export const PRICING_GROUPS: PricingGroup[] = [
   },
   {
     id: "elite-branding",
-    eyebrow: "Branding Packages",
-    title: "Elite Branding",
-    subtitle: "Brand transformation is simple when guided with expert hands — and that’s the level of mastery we deliver.",
+    eyebrow: "Branding",
+    title: "Branding Packages",
+    subtitle: "Stationery, collateral and brand assets that keep every touchpoint consistent.",
     plans: [
       {
         name: "Basic Plan",
@@ -269,9 +272,9 @@ export const PRICING_GROUPS: PricingGroup[] = [
   },
   {
     id: "website-design",
-    eyebrow: "Web Design Packages",
-    title: "Brilliant Website Design",
-    subtitle: "Through visually stunning layouts and engaging website interactions, we bring your business the excellence it deserves.",
+    eyebrow: "Website",
+    title: "Website Design Packages",
+    subtitle: "From static sites to e-commerce and portals, built responsive and SEO-ready.",
     plans: [
       {
         name: "Static",
@@ -363,9 +366,9 @@ export const PRICING_GROUPS: PricingGroup[] = [
   },
   {
     id: "budget-friendly",
-    eyebrow: "Video Packages",
-    title: "Budget-Friendly Packages",
-    subtitle: "We deliver exceptional services at rates that fit your budget. The costs may be minimal, but the standards are consistently premium.",
+    eyebrow: "Video",
+    title: "Animated Video Packages",
+    subtitle: "Scripted, storyboarded and voiced explainer videos for your brand.",
     plans: [
       {
         name: "Bronze Plan",
@@ -461,9 +464,9 @@ export const PRICING_GROUPS: PricingGroup[] = [
   },
   {
     id: "threeinone",
-    eyebrow: "3 in 1",
-    title: "3 in 1 Combo",
-    subtitle: "--> <!--",
+    eyebrow: "Web + Logo",
+    title: "Website + Logo Combo Packs",
+    subtitle: "A complete website and custom logo together in one package.",
     plans: [
       {
         name: "Pack 1",
@@ -606,9 +609,9 @@ export const PRICING_GROUPS: PricingGroup[] = [
   },
   {
     id: "logo-animation",
-    eyebrow: "Logo",
-    title: "Animated Logo",
-    subtitle: "We deliver exceptional services at rates that fit your budget. The costs may be minimal, but the standards are consistently premium.",
+    eyebrow: "Animation",
+    title: "Animated Logo Packages",
+    subtitle: "Bring your logo to life with motion for video, social and web.",
     plans: [
       {
         name: "Bronze",

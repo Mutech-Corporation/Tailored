@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import type { PricingPlan } from "@/types";
 
@@ -62,14 +63,13 @@ export function PricingCard({ plan }: PricingCardProps) {
         ))}
       </ul>
 
-      {/* The target POSTs to a CRM checkout endpoint — out of scope, so inert. */}
-      <button
-        type="button"
+      <Link
+        href="/contact?plan=custom"
         data-package={plan.packageId}
-        className="mt-auto w-full rounded-full border border-[#1d4ed8] bg-[#1d4ed8] px-[1.3rem] py-[0.7rem] text-[0.82rem] font-semibold tracking-[0.12em] text-white uppercase transition-colors duration-150 ease-in-out hover:border-[#2563eb] hover:bg-[#2563eb]"
+        className="mt-auto block w-full rounded-full border border-[#1d4ed8] bg-[#1d4ed8] px-[1.3rem] py-[0.7rem] text-center text-[0.82rem] font-semibold tracking-[0.12em] text-white uppercase transition-colors duration-150 ease-in-out hover:border-[#7c3aed] hover:bg-[#7c3aed]"
       >
-        Buy Now
-      </button>
+        Get Started
+      </Link>
     </div>
   );
 }
