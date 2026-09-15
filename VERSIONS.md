@@ -35,3 +35,15 @@ git revert <commit-hash>
 | Case studies (currently placeholders) | `src/data/case-studies.ts` |
 | Services list | `src/data/services.ts` |
 | Logo files | regenerate with `node scripts/make-logos.mjs` from `docs and logos/image.png` |
+
+## Checking the site locally before pushing
+
+```bash
+# Quick editing preview (hot reload, no /Tailored prefix): http://localhost:3000
+npm run dev
+
+# Exactly how GitHub Pages will serve it: http://localhost:4173/Tailored/
+npm run preview:pages
+```
+
+Stop either one with Ctrl+C in its terminal.

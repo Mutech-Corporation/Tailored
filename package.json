@@ -10,6 +10,7 @@
     "dev": "next dev",
     "build": "next build && node scripts/fix-export.mjs",
     "start": "next start",
+    "preview:pages": "node scripts/preview-pages.mjs",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check": "npm run lint && npm run typecheck && npm run build"
