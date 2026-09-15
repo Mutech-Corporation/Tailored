@@ -38,7 +38,7 @@ const MIN_ISLAND_PEAK = 140;
  * tiny or never becomes solid. Real logo parts (letters, pixel squares) are
  * both large and opaque, so they survive.
  */
-function despeckle(rgba, width, height) {
+function despeckle(rgba, width, height, minIsland = MIN_ISLAND, minPeak = MIN_ISLAND_PEAK) {
   const seen = new Uint8Array(width * height);
   const stack = new Int32Array(width * height);
   const island = [];
@@ -68,7 +68,7 @@ function despeckle(rgba, width, height) {
         }
       }
     }
-    if (island.length < MIN_ISLAND || peak < MIN_ISLAND_PEAK) {
+    if (island.length < minIsland || peak < minPeak) {
       for (const i of island) rgba.fill(0, i * 4, i * 4 + 4);
     }
   }
@@ -107,7 +107,9 @@ function navyToWhite(rgba) {
     // Faint edge pixels have unreliable colour after un-mixing; only recolour
     // pixels solid enough to trust, or corners of blue shapes flash white.
     const trust = Math.max(0, Math.min(1, (out[o + 3] - 90) / 110));
-    const t = Math.max(0, Math.min(1, (150 - b) / 50)) * trust;
+    // Only dark ink qualifies; bright pinks/violets (high red) keep their colour.
+    const dark = Math.max(0, Math.min(1, (150 - Math.max(out[o], out[o + 1])) / 50));
+    const t = Math.max(0, Math.min(1, (150 - b) / 50)) * trust * dark;
     for (let c = 0; c < 3; c++) {
       const lifted = out[o + c] + (255 - out[o + c]) * 0.28;
       out[o + c] = Math.round(lifted * (1 - t) + 255 * t);
@@ -165,6 +167,73 @@ await writeTrimmed(stacked, path.join(OUT, "logo-stacked.png"));
 await writeTrimmed(light(stacked), path.join(OUT, "logo-stacked-light.png"));
 await horizontal(mark, wordmark, path.join(OUT, "logo-horizontal.png"));
 await horizontal(light(mark), light(wordmark), path.join(OUT, "logo-horizontal-light.png"));
+
+// Service icons (Websites / Logos / Marketing / Animation) from the transparent
+// sheet. Labels are rendered as real text on the site, so only the glyphs are cut.
+const ICON_SOURCE = path.join(ROOT, "docs and logos", "image-nobg.png");
+const ICON_ROW = { top: 878, height: 86 };
+const ICONS = {
+  websites: [290, 383],
+  logos: [472, 566],
+  marketing: [674, 756],
+  animation: [859, 955],
+};
+const ICON_OUT = path.join(OUT, "icons");
+await mkdir(ICON_OUT, { recursive: true });
+
+/** Lifts colours toward white (for dark backgrounds) while keeping alpha. */
+function lighten(rgba, amount) {
+  const out = Buffer.from(rgba);
+  for (let o = 0; o < out.length; o += 4) {
+    for (let c = 0; c < 3; c++) out[o + c] = Math.round(out[o + c] + (255 - out[o + c]) * amount);
+  }
+  return out;
+}
+
+for (const [name, [x0, x1]] of Object.entries(ICONS)) {
+  const { data, info } = await sharp(ICON_SOURCE)
+    .extract({ left: x0, top: ICON_ROW.top, width: x1 - x0, height: ICON_ROW.height })
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  // The sheet is already transparent; just drop its faint noise and specks.
+  for (let o = 3; o < data.length; o += 4) if (data[o] < 36) data[o] = 0;
+  // Icons have tiny real details (sound lines, window dots), so only drop
+  // islands that are both very small and faint.
+  const rgba = despeckle(data, info.width, info.height, 4, 110);
+  const img = { rgba, width: info.width, height: info.height };
+  await writeTrimmed(img, path.join(ICON_OUT, `${name}.png`));
+  await writeTrimmed({ ...img, rgba: lighten(rgba, 0.5) }, path.join(ICON_OUT, `${name}-light.png`));
+}
+
+// Full logo: mark, wordmark, icon row with labels and tagline, from the
+// transparent sheet. The light variant turns the navy ink white for dark panels.
+{
+  const { data, info } = await sharp(ICON_SOURCE)
+    .extract({ left: 180, top: 252, width: 894, height: 806 })
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  for (let o = 3; o < data.length; o += 4) {
+    if (data[o] < 36) data[o] = 0;
+    // The logo has no white; near-white pixels are background the removal tool
+    // left behind (e.g. inside the "G" of GROW).
+    if (Math.min(data[o - 3], data[o - 2], data[o - 1]) > 200) data[o] = 0;
+  }
+  // The sheet's thin grey dividers between icons are inconsistent (some faded
+  // out), so remove all three. Source x positions, icon row y 878–964.
+  for (const dividerX of [426, 612, 813]) {
+    for (let y = 878 - 252; y <= 964 - 252; y++) {
+      for (let x = dividerX - 180 - 3; x <= dividerX - 180 + 3; x++) data.fill(0, (y * info.width + x) * 4, (y * info.width + x) * 4 + 4);
+    }
+  }
+  const full = { rgba: despeckle(data, info.width, info.height, 4, 110), width: info.width, height: info.height };
+  await writeTrimmed(full, path.join(OUT, "logo-full.png"));
+  // Small label and tagline text reads faint on navy, so firm up its alpha.
+  const fullLight = light(full);
+  for (let o = 3; o < fullLight.rgba.length; o += 4) fullLight.rgba[o] = Math.min(255, Math.round(fullLight.rgba[o] * 1.35));
+  await writeTrimmed(fullLight, path.join(OUT, "logo-full-light.png"));
+}
 
 // App icon: the mark centred on a square navy tile (Next's `app/icon.png` convention).
 const markTile = await toPng(light(mark)).trim({ threshold: 1 }).resize({ width: 400, height: 400, fit: "inside" }).toBuffer();

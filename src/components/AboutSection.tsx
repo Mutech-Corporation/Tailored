@@ -1,8 +1,6 @@
 import Image from "@/components/Image";
 import Link from "next/link";
 
-const PANEL_ITEMS = ["Websites", "Logos", "Marketing", "Animation"];
-
 /** #about — intro copy on the left, brand panel on the right. */
 export function AboutSection() {
   return (
@@ -45,26 +43,14 @@ export function AboutSection() {
                 aria-hidden
                 className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:36px_36px]"
               />
+              {/* Full brand logo: mark, name, service icons and tagline in one image. */}
               <Image
-                src="/brand/logo-stacked-light.png"
-                alt="Tailored Web Designers"
-                width={440}
-                height={286}
-                className="relative mx-auto mb-10 h-auto w-full max-w-[340px]"
+                src="/brand/logo-full-light.png"
+                alt="Tailored Web Designers — Websites, Logos, Marketing, Animation. Design, Develop, Grow."
+                width={870}
+                height={784}
+                className="relative mx-auto h-auto w-full max-w-[460px]"
               />
-              <ul className="relative grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {PANEL_ITEMS.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-xl border border-white/10 bg-white/5 px-2 py-3 text-center text-[0.72rem] font-semibold tracking-[0.14em] uppercase"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <p className="relative mt-8 text-center text-[0.72rem] font-semibold tracking-[0.35em] text-[#c4b5fd] uppercase">
-                Design &middot; Develop &middot; Grow
-              </p>
             </div>
           </div>
         </div>
