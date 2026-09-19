@@ -118,29 +118,35 @@ export function PortfolioSection({
       </div>
 
       {activeItem && (
+        // Above the fixed header (z-1050) and the back-to-top button.
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          className="fixed inset-0 z-[1100] flex items-center justify-center bg-[#0b1033]/70 p-4 backdrop-blur-sm animate-in fade-in-0 duration-300"
           onClick={() => setActiveItem(null)}
         >
+          {/*
+            The dialog shrink-wraps the image, so the rounded corners belong to
+            the picture itself rather than to a letterboxed black frame.
+          */}
           <div
             role="dialog"
             aria-modal="true"
-            className="relative w-full max-w-[1140px] bg-black"
+            aria-label={activeItem.alt}
+            className="relative max-w-[1140px] overflow-hidden rounded-[20px] shadow-[0_30px_80px_rgba(0,0,0,0.5)] animate-in fade-in-0 zoom-in-95 duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] max-[576px]:rounded-[14px]"
             onClick={(event) => event.stopPropagation()}
           >
-            <button
-              type="button"
-              aria-label="Close"
-              className="absolute right-0 top-0 m-4 text-white"
-              onClick={() => setActiveItem(null)}
-            >
-              <CloseIcon className="h-6 w-6" />
-            </button>
             <img
               src={assetPath(activeItem.src)}
               alt={activeItem.alt}
-              className="max-h-[85vh] w-full rounded-[10px] object-contain"
+              className="block h-auto max-h-[85vh] w-auto max-w-full object-contain"
             />
+            <button
+              type="button"
+              aria-label="Close"
+              className="absolute top-3 right-3 flex size-10 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-black/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              onClick={() => setActiveItem(null)}
+            >
+              <CloseIcon className="h-5 w-5" />
+            </button>
           </div>
         </div>
       )}
