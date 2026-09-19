@@ -81,6 +81,14 @@
   /* ---- Tailored brand tokens (from the TW logo) ---- */
   /* Soft "expo-out" deceleration used by every hover animation. */
   --tw-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /*
+   * Floating buttons, bottom-right. The corner slot (bottom = --tw-fab-edge)
+   * is kept free for a future chat widget; back-to-top sits one slot above it.
+   */
+  --tw-fab-edge: 24px;
+  --tw-fab-size: 48px;
+  --tw-fab-gap: 14px;
   --tw-navy: #0b1033;
   --tw-blue: #2563eb;
   --tw-violet: #7c3aed;
@@ -437,6 +445,38 @@
       border-color 0.4s var(--tw-ease-out);
   }
 
+
+  /* Back-to-top button (see <ScrollToTop/>): fades/slides in, opacity + transform only. */
+  .tw-fab {
+    right: var(--tw-fab-edge);
+    bottom: calc(var(--tw-fab-edge) + var(--tw-fab-size) + var(--tw-fab-gap));
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.9);
+    transition:
+      opacity 0.4s var(--tw-ease-out),
+      transform 0.45s var(--tw-ease-out);
+  }
+  .tw-fab.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .tw-fab.is-visible:hover {
+      transform: translate3d(0, -3px, 0);
+    }
+  }
+  .tw-fab.is-visible:active {
+    transform: scale(0.94);
+    transition-duration: 0.1s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tw-fab,
+    .tw-fab.is-visible:hover {
+      transition-duration: 0.01ms;
+      transform: none;
+    }
+  }
+
 }
 
 @layer utilities {
@@ -453,5 +493,14 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+}
+
+/* Floating-button spacing on phones (unlayered so it overrides the :root tokens). */
+@media (max-width: 576px) {
+  :root {
+    --tw-fab-edge: 16px;
+    --tw-fab-size: 44px;
+    --tw-fab-gap: 12px;
   }
 }

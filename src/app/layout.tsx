@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { SITE } from "@/config/site";
 import "./globals.css";
 
@@ -60,6 +61,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {children}
         <ScrollReveal />
+        <ScrollToTop />
       </body>
     </html>
   );
