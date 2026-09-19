@@ -411,6 +411,32 @@
     }
   }
 
+
+  /*
+   * Scroll reveal (added by <ScrollReveal/> to below-the-fold blocks only).
+   * Opacity + transform only; --tw-reveal-delay staggers cards in a grid.
+   */
+  .tw-reveal {
+    /* `translate` (not `transform`) so it composes with the .tw-lift hover. */
+    opacity: 0;
+    translate: 0 24px;
+    transition:
+      opacity 0.8s var(--tw-ease-out) var(--tw-reveal-delay, 0ms),
+      translate 0.8s var(--tw-ease-out) var(--tw-reveal-delay, 0ms);
+  }
+  .tw-reveal.is-visible {
+    opacity: 1;
+    translate: none;
+  }
+  /* Cards that both reveal and lift need both sets of transitions. */
+  .tw-reveal.tw-lift {
+    transition:
+      opacity 0.8s var(--tw-ease-out) var(--tw-reveal-delay, 0ms),
+      translate 0.8s var(--tw-ease-out) var(--tw-reveal-delay, 0ms),
+      transform 0.55s var(--tw-ease-out),
+      border-color 0.4s var(--tw-ease-out);
+  }
+
 }
 
 @layer utilities {
