@@ -4,8 +4,8 @@ Every step of the rebrand is a git tag, so any version can be viewed or restored
 
 | Tag | What it contains |
 | --- | --- |
-| `designcentura-clone-v1` | Original site before the rebrand |
-| `v2-phase-1` | DesignCentura references removed, editable site config |
+| `original-clone-v1` | Original site before the rebrand |
+| `v2-phase-1` | Competitor references removed, editable site config |
 | `v2-phase-2` | New visual identity (TW logo, navy/blue/violet palette, fonts) |
 | `v2-phase-3` | New navigation and `/services` page |
 | `v2-phase-4` | New homepage (hero, services, case studies, pricing) |

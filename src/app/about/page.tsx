@@ -64,13 +64,18 @@ export default function AboutPage() {
                 </Link>
               </div>
 
-              <div className="text-center lg:text-right">
+              {/* Brand panel — same full logo as the homepage About section. */}
+              <div className="relative overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] p-10 shadow-[0_30px_80px_rgba(11,16,51,0.35)] max-[576px]:p-7">
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:36px_36px]"
+                />
                 <Image
-                  src="/images/about-side-2.webp"
-                  alt="Brand identity mockup"
-                  width={720}
-                  height={540}
-                  className="inline-block h-auto max-w-full"
+                  src="/brand/logo-full-light.png"
+                  alt="Tailored Web Designers — Websites, Logos, Marketing, Animation. Design, Develop, Grow."
+                  width={870}
+                  height={784}
+                  className="relative mx-auto h-auto w-full max-w-[460px]"
                 />
               </div>
             </div>
