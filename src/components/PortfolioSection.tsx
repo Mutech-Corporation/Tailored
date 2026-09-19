@@ -84,16 +84,34 @@ export function PortfolioSection({
             <button
               key={`${item.src}-${index}`}
               type="button"
-              className="group cursor-pointer overflow-hidden rounded-[18px] bg-black shadow-[0_15px_40px_rgba(15,23,42,0.12)]"
+              aria-label={`View ${item.alt}`}
+              // The card lifts (tw-lift); the inner frame clips the image zoom so
+              // the lift shadow on ::after isn't clipped with it.
+              className="tw-lift group cursor-pointer rounded-[18px] text-left shadow-[0_15px_40px_rgba(15,23,42,0.12)] [--tw-lift-shadow:0_30px_60px_-18px_rgba(76,29,149,0.45)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7c3aed]"
               onClick={() => setActiveItem(item)}
             >
-              <img
-                src={assetPath(item.src)}
-                alt={item.alt}
-                loading="lazy"
-                decoding="async"
-                className="h-[280px] w-full object-cover transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05] group-hover:opacity-90 max-[767.98px]:h-full"
-              />
+              <span className="relative block overflow-hidden rounded-[18px] bg-black">
+                <img
+                  src={assetPath(item.src)}
+                  alt={item.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-[280px] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.08] group-focus-visible:scale-[1.08] max-[767.98px]:h-full motion-reduce:transition-none"
+                />
+                <span
+                  aria-hidden
+                  className="absolute inset-0 flex items-end justify-between bg-[linear-gradient(to_top,rgba(11,16,51,0.78),rgba(11,16,51,0.1)_55%,transparent)] p-5 opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-focus-visible:opacity-100"
+                >
+                  <span className="translate-y-2 text-[0.8rem] font-semibold tracking-[0.18em] text-white uppercase transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0">
+                    View
+                  </span>
+                  <span className="flex size-10 translate-y-2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </span>
+                </span>
+              </span>
             </button>
           ))}
         </div>
