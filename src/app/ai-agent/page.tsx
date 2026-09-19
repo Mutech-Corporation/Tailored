@@ -247,14 +247,14 @@ export default function AiAgentPage() {
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
                 <Link
                   href="/contact"
-                  className="flex w-full max-w-[300px] items-center justify-center rounded-full bg-[#2563eb] px-6 py-3 text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"
+                  className="flex w-full max-w-[300px] items-center justify-center rounded-full bg-[#2563eb] px-6 py-3 text-[0.95rem] font-semibold text-white transition-[transform,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"
                 >
                   Get Started with AI Services
                   <ArrowRight className="ml-2 size-4" />
                 </Link>
                 <a
                   href="#ai-features"
-                  className="flex w-full max-w-[300px] items-center justify-center rounded-full border border-[#2563eb] px-6 py-3 text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px hover:bg-[#2563eb] sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"
+                  className="flex w-full max-w-[300px] items-center justify-center rounded-full border border-[#2563eb] px-6 py-3 text-[0.95rem] font-semibold text-white transition-[transform,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#2563eb] sm:w-auto sm:max-w-none sm:px-[1.6rem] sm:py-[0.65rem] sm:text-base"
                 >
                   Explore Our Solutions
                 </a>

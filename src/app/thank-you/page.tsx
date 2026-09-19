@@ -67,15 +67,15 @@ export default function ThankYouPage() {
             {CARDS.map((card) => (
               <article
                 key={card.title}
-                className="group flex h-full flex-col overflow-hidden rounded-[15px] border-none bg-white shadow-[0_10px_30px_rgba(0,0,0,0.15)] transition-[transform,box-shadow] duration-300 hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
+                className="tw-lift group flex h-full flex-col rounded-[15px] border-none bg-white shadow-[0_10px_30px_rgba(0,0,0,0.15)] [--tw-lift-shadow:0_30px_60px_-15px_rgba(0,0,0,0.35)] [--tw-lift-y:-8px]"
               >
-                <div className="w-full overflow-hidden">
+                <div className="w-full overflow-hidden rounded-t-[15px]">
                   <Image
                     src={card.image}
                     alt={card.title}
                     width={600}
                     height={400}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                   />
                 </div>
                 <div className="flex flex-grow flex-col p-[25px]">

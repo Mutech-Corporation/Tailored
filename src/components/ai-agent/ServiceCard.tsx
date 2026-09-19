@@ -30,7 +30,7 @@ const GRADIENT: Record<ServiceVariant, string> = {
 /** `.ai-service-card` — one of four AI-services cards, each with a phone mockup. */
 export function ServiceCard({ variant, icon: Icon, phoneLabel, title, messages, description }: ServiceCardData) {
   return (
-    <div className="flex h-full flex-col gap-3 rounded-2xl border border-[#dfe3e8] bg-white p-5 px-[1.25rem] shadow-[0_4px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-2 hover:border-[#2563eb] hover:shadow-[0_12px_30px_rgba(255,42,64,0.15)]">
+    <div className="tw-lift flex h-full flex-col gap-3 rounded-2xl border border-[#dfe3e8] bg-white p-5 px-[1.25rem] shadow-[0_4px_12px_rgba(0,0,0,0.04)] hover:border-[#2563eb]">
       <div
         className={`mx-auto mb-3 flex h-[50px] w-[50px] items-center justify-center rounded-xl text-[1.5rem] text-white max-[575.98px]:h-[45px] max-[575.98px]:w-[45px] max-[575.98px]:text-[1.25rem] ${GRADIENT[variant]}`}
       >
@@ -67,7 +67,7 @@ export function ServiceCard({ variant, icon: Icon, phoneLabel, title, messages, 
 
       <Link
         href="/contact"
-        className="mt-2 flex w-full items-center justify-center rounded-full bg-[#2563eb] px-[1.6rem] py-[0.65rem] text-[0.95rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px"
+        className="mt-2 flex w-full items-center justify-center rounded-full bg-[#2563eb] px-[1.6rem] py-[0.65rem] text-[0.95rem] font-semibold text-white transition-[transform,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5"
       >
         Request Access
         <ArrowRight className="ml-2 size-[0.85em]" />

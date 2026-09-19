@@ -79,6 +79,8 @@
 
 :root {
   /* ---- Tailored brand tokens (from the TW logo) ---- */
+  /* Soft "expo-out" deceleration used by every hover animation. */
+  --tw-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --tw-navy: #0b1033;
   --tw-blue: #2563eb;
   --tw-violet: #7c3aed;
@@ -319,6 +321,8 @@
 
   /* Gradient CTA used by both the About and Contact sections. */
   .dc-submit-btn {
+    position: relative;
+    isolation: isolate;
     display: inline-block;
     border-radius: 999px;
     border: none;
@@ -330,16 +334,83 @@
     background: var(--dc-gradient-submit);
     color: #f9fafb;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: transform 0.45s var(--tw-ease-out);
+  }
+  /* Gradients can't be transitioned, so the hover gradient fades in on a layer. */
+  .dc-submit-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--dc-gradient-submit-hover);
+    opacity: 0;
+    transition: opacity 0.45s var(--tw-ease-out);
   }
   .dc-submit-btn:hover {
-    background: var(--dc-gradient-submit-hover);
     color: #ffffff;
+  }
+  .dc-submit-btn:hover::before {
+    opacity: 1;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .dc-submit-btn:hover {
+      transform: translate3d(0, -2px, 0);
+    }
+  }
+  .dc-submit-btn:active {
+    transform: translate3d(0, 0, 0);
+    transition-duration: 0.1s;
   }
   .dc-submit-btn:disabled {
     opacity: 0.65;
     cursor: not-allowed;
   }
+
+  /*
+   * Card hover: a slow, decelerating lift. Only transform and opacity animate
+   * (GPU-composited, no repaint per frame) — the hover shadow lives on ::after
+   * and fades in instead of animating box-shadow. Cards set their own shadow
+   * with --tw-lift-shadow and lift distance with --tw-lift-y.
+   */
+  .tw-lift {
+    position: relative;
+    transition:
+      transform 0.55s var(--tw-ease-out),
+      border-color 0.4s var(--tw-ease-out);
+  }
+  .tw-lift::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: var(--tw-lift-shadow, 0 30px 60px -18px rgba(37, 99, 235, 0.3));
+    opacity: 0;
+    transition: opacity 0.55s var(--tw-ease-out);
+  }
+  /* Only on real pointers — avoids "stuck" hover states after a tap. */
+  @media (hover: hover) and (pointer: fine) {
+    .tw-lift:hover {
+      transform: translate3d(0, var(--tw-lift-y, -6px), 0);
+    }
+    .tw-lift:hover::after {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tw-lift,
+    .tw-lift::after,
+    .dc-submit-btn,
+    .dc-submit-btn::before {
+      transition-duration: 0.01ms;
+    }
+    .tw-lift:hover,
+    .dc-submit-btn:hover {
+      transform: none;
+    }
+  }
+
 }
 
 @layer utilities {

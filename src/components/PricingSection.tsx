@@ -36,9 +36,9 @@ export function PricingSection({
             <article
               key={plan.id}
               className={cn(
-                "relative flex flex-col rounded-[24px] p-8 transition-[transform,box-shadow] duration-200 hover:-translate-y-1.5",
+                "tw-lift flex flex-col rounded-[24px] p-8",
                 plan.featured
-                  ? "bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] text-white shadow-[0_28px_70px_rgba(67,56,202,0.35)] lg:-my-3 lg:py-11"
+                  ? "bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] text-white shadow-[0_28px_70px_rgba(67,56,202,0.35)] [--tw-lift-shadow:0_40px_80px_-20px_rgba(67,56,202,0.55)] lg:-my-3 lg:py-11"
                   : "border border-[rgba(11,16,51,0.08)] bg-white shadow-[0_16px_40px_rgba(11,16,51,0.07)]",
               )}
             >
@@ -97,7 +97,7 @@ export function PricingSection({
               <Link
                 href={`/contact?plan=${plan.id}`}
                 className={cn(
-                  "mt-auto block rounded-full px-6 py-3.5 text-center text-[0.85rem] font-semibold tracking-[0.1em] uppercase transition-colors",
+                  "mt-auto block rounded-full px-6 py-3.5 text-center text-[0.85rem] font-semibold tracking-[0.1em] uppercase transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
                   plan.featured
                     ? "bg-white text-[#0b1033] hover:bg-[#ede9fe]"
                     : "border border-[#2563eb] text-[#2563eb] hover:bg-[#2563eb] hover:text-white",

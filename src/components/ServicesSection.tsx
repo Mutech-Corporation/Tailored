@@ -55,11 +55,13 @@ export function ServicesSection({ showHeading = true, className }: ServicesSecti
             <article
               key={group.id}
               id={group.id}
-              className="group relative flex h-full scroll-mt-28 flex-col overflow-hidden rounded-[22px] border border-[rgba(11,16,51,0.06)] bg-white p-8 shadow-[0_15px_40px_rgba(11,16,51,0.06)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(37,99,235,0.14)] max-[576px]:p-6"
+              className="tw-lift group flex h-full scroll-mt-28 flex-col rounded-[22px] border border-[rgba(11,16,51,0.06)] bg-white p-8 shadow-[0_15px_40px_rgba(11,16,51,0.06)] max-[576px]:p-6"
             >
               <span
                 aria-hidden
-                className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#2563eb,#7c3aed)] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                // Slides in from the left on hover and exits to the right on
+                // leave (origin flips), so the motion always reads left → right.
+                className="absolute inset-x-6 top-0 h-1 origin-right scale-x-0 rounded-b-full bg-[linear-gradient(90deg,#2563eb,#7c3aed)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:origin-left group-hover:scale-x-100 motion-reduce:transition-none"
               />
               <div className="mb-5 flex items-center gap-4">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#2563eb,#7c3aed)] text-white shadow-[0_10px_24px_rgba(124,58,237,0.3)]">
@@ -95,7 +97,7 @@ export function ServicesSection({ showHeading = true, className }: ServicesSecti
                       <span className="flex items-center justify-between gap-2 font-semibold text-[#111633]">
                         {item.title}
                         {item.href && (
-                          <span aria-hidden className="text-[#2563eb] transition-transform group-hover/item:translate-x-0.5">
+                          <span aria-hidden className="text-[#2563eb] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/item:translate-x-1">
                             &rarr;
                           </span>
                         )}
@@ -106,7 +108,7 @@ export function ServicesSection({ showHeading = true, className }: ServicesSecti
                     </>
                   );
                   const itemClass =
-                    "group/item block h-full rounded-xl border border-[rgba(11,16,51,0.06)] bg-[#fafaff] p-3.5 transition-colors";
+                    "group/item block h-full rounded-xl border border-[rgba(11,16,51,0.06)] bg-[#fafaff] p-3.5 transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]";
                   return (
                     <li key={item.title}>
                       {item.href ? (

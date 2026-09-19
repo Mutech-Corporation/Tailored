@@ -26,9 +26,9 @@ const BG: Record<"yellow" | "green", string> = {
 /** `.industry-agent-card` — visual phone mockup on top, feature list below. */
 export function IndustryAgentCard({ bg, icon: Icon, phoneTitle, messages, cardTitle, features }: IndustryAgentCardData) {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#dfe3e8] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-[#2563eb] hover:shadow-[0_12px_30px_rgba(255,42,64,0.15)]">
+    <div className="tw-lift flex h-full flex-col rounded-2xl border border-[#dfe3e8] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.04)] hover:border-[#2563eb]">
       <div
-        className={`flex min-h-[240px] items-center justify-center px-3 py-5 sm:min-h-[260px] sm:px-4 sm:py-6 lg:min-h-[300px] lg:px-6 lg:py-8 ${BG[bg]}`}
+        className={`flex min-h-[240px] rounded-t-2xl items-center justify-center px-3 py-5 sm:min-h-[260px] sm:px-4 sm:py-6 lg:min-h-[300px] lg:px-6 lg:py-8 ${BG[bg]}`}
       >
         <div className="flex w-full justify-center">
           <div className="flex min-h-[220px] w-full flex-col rounded-[20px] bg-white p-3 shadow-[0_8px_24px_rgba(0,0,0,0.15)] sm:min-h-[240px] lg:min-h-[280px]">

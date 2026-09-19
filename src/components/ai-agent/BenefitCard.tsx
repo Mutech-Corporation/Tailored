@@ -12,7 +12,7 @@ export interface BenefitCardData {
 /** `.benefit-card` — one of three AI-benefits cards, each with a 2-up stat grid. */
 export function BenefitCard({ title, description, stats }: BenefitCardData) {
   return (
-    <div className="h-full rounded-2xl border border-[#dfe3e8] bg-white px-6 py-8 shadow-[0_4px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-[#2563eb] hover:shadow-[0_12px_30px_rgb(28_106_252/10%)]">
+    <div className="tw-lift h-full rounded-2xl border border-[#dfe3e8] bg-white px-6 py-8 shadow-[0_4px_12px_rgba(0,0,0,0.04)] [--tw-lift-shadow:0_24px_48px_-16px_rgb(28_106_252/28%)] hover:border-[#2563eb]">
       <h3 className="mb-4 text-[1.25rem] font-bold text-[#1b1b1b] max-[575.98px]:text-[1.1rem]">
         {title}
       </h3>

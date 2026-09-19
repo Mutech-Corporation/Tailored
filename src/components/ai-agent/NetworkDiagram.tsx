@@ -151,7 +151,7 @@ export function NetworkDiagram() {
               className={`absolute flex flex-col items-center gap-3 ${position} ${key === "center" ? "z-20" : "z-10"}`}
             >
               <div
-                className={`flex size-20 items-center justify-center rounded-full border-4 bg-white p-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-all duration-300 hover:scale-110 hover:shadow-[0_8px_20px_rgba(255,42,64,0.3)] lg:size-[90px] ${border}`}
+                className={`flex size-20 items-center justify-center rounded-full border-4 bg-white p-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-110 lg:size-[90px] ${border}`}
               >
                 <div className={`flex size-full items-center justify-center rounded-full text-[2rem] lg:text-[2.5rem] ${gradient} ${iconColor ?? "text-white"}`}>
                   <Icon className="size-[0.85em]" />
@@ -181,7 +181,7 @@ export function NetworkDiagram() {
           {MOBILE_NODES.map(({ key, position, border, gradient, initials, label }) => (
             <div key={key} className={`absolute z-10 flex flex-col items-center gap-3 ${position}`}>
               <div
-                className={`flex size-[70px] items-center justify-center rounded-full border-[4px] bg-white p-[5px] shadow-[0_6px_20px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-110 hover:shadow-[0_8px_25px_rgba(0,0,0,0.4)] sm:size-20 sm:border-[5px] ${border}`}
+                className={`flex size-[70px] items-center justify-center rounded-full border-[4px] bg-white p-[5px] shadow-[0_6px_20px_rgba(0,0,0,0.3)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-110 hover:shadow-[0_8px_25px_rgba(0,0,0,0.4)] sm:size-20 sm:border-[5px] ${border}`}
               >
                 <div className={`flex size-full items-center justify-center rounded-full text-[1.25rem] font-bold text-white sm:text-[1.5rem] ${gradient}`}>
                   {initials}

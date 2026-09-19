@@ -92,7 +92,7 @@ export function PortfolioSection({
                 alt={item.alt}
                 loading="lazy"
                 decoding="async"
-                className="h-[280px] w-full object-cover transition-[transform,opacity] duration-300 ease-in-out group-hover:scale-[1.06] group-hover:opacity-90 max-[767.98px]:h-full"
+                className="h-[280px] w-full object-cover transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05] group-hover:opacity-90 max-[767.98px]:h-full"
               />
             </button>
           ))}
