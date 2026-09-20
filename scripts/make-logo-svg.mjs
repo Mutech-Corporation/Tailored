@@ -395,7 +395,6 @@ const REGULARIZE = {
   straightRms: 0.8 * 3,
   minStraightRun: 12 * 3,
 };
-const EPSILON = 0.9;
 
 const SCALE = 3;
 
