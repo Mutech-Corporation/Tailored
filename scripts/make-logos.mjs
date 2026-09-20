@@ -266,8 +266,9 @@ async function horizontal(mark, wordmark, file) {
 
 const sheet = await loadSheet();
 const bands = rowBands(sheet);
-const [markBand, wordBand, subBand, iconBand, taglineBand] = bands;
-if (bands.length < 5) throw new Error(`expected 5 bands on the sheet, found ${bands.length}`);
+// Sheet rows: mark, TAILORED, WEB DESIGNERS, icon glyphs, icon labels, tagline.
+if (bands.length !== 6) throw new Error(`expected 6 bands on the sheet, found ${bands.length}`);
+const [markBand, wordBand, subBand, glyphBand, labelBand, taglineBand] = bands;
 
 await mkdir(path.join(OUT, "icons"), { recursive: true });
 
@@ -275,7 +276,7 @@ const regions = {
   "logo-mark": crop(sheet, markBand),
   "logo-wordmark": crop(sheet, span(wordBand, subBand)),
   "logo-stacked": crop(sheet, span(markBand, wordBand, subBand)),
-  "logo-full": crop(sheet, span(markBand, wordBand, subBand, iconBand, taglineBand)),
+  "logo-full": crop(sheet, span(markBand, wordBand, subBand, glyphBand, labelBand, taglineBand)),
 };
 
 for (const [name, region] of Object.entries(regions)) {
@@ -292,7 +293,7 @@ await horizontal(
 
 // Service icons: the glyph row only (labels stay as page text).
 const ICON_NAMES = ["websites", "logos", "marketing", "animation"];
-const glyphs = crop(sheet, { ...iconBand, y1: iconBand.y0 + Math.round((iconBand.y1 - iconBand.y0) * 0.62) });
+const glyphs = crop(sheet, glyphBand);
 const columns = columnGroups(glyphs);
 if (columns.length !== ICON_NAMES.length) {
   throw new Error(`expected ${ICON_NAMES.length} icons, found ${columns.length}`);
