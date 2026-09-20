@@ -86,6 +86,19 @@ function crop({ rgba, width }, box) {
 }
 
 /**
+ * Smoothly upscales a region before tracing. Working at 3× gives sub-pixel
+ * accurate outlines, which matters for the small label text and icon strokes.
+ */
+async function supersample({ rgba, width, height }, factor) {
+  const w = width * factor, h = height * factor;
+  const data = await sharp(rgba, { raw: { width, height, channels: 4 } })
+    .resize({ width: w, height: h, kernel: "lanczos3" })
+    .raw()
+    .toBuffer();
+  return { rgba: data, width: w, height: h, factor };
+}
+
+/**
  * Outline of a binary mask as closed loops, walking the boundary between
  * inside and outside pixels. Inner loops (holes) come out as their own loops
  * and are punched out by fill-rule="evenodd".
@@ -147,6 +160,110 @@ function simplify(points, epsilon) {
     }
   }
   return points.filter((_, i) => keep[i]);
+}
+
+/** Total-least-squares line through points: {px,py,dx,dy} plus RMS deviation. */
+function fitLine(points) {
+  const n = points.length;
+  let cx = 0, cy = 0;
+  for (const [x, y] of points) { cx += x / n; cy += y / n; }
+  let sxx = 0, sxy = 0, syy = 0;
+  for (const [x, y] of points) {
+    const dx = x - cx, dy = y - cy;
+    sxx += dx * dx; sxy += dx * dy; syy += dy * dy;
+  }
+  // Principal direction = eigenvector of the largest eigenvalue.
+  const t = (sxx + syy) / 2;
+  const d = Math.sqrt(Math.max(0, ((sxx - syy) / 2) ** 2 + sxy * sxy));
+  const l1 = t + d;
+  let dx = sxy, dy = l1 - sxx;
+  if (Math.hypot(dx, dy) < 1e-9) { dx = 1; dy = 0; }
+  const len = Math.hypot(dx, dy);
+  dx /= len; dy /= len;
+  let rms = 0;
+  for (const [x, y] of points) {
+    const perp = (x - cx) * -dy + (y - cy) * dx;
+    rms += perp * perp;
+  }
+  return { px: cx, py: cy, dx, dy, rms: Math.sqrt(rms / n) };
+}
+
+const intersectLines = (a, b) => {
+  const den = a.dx * b.dy - a.dy * b.dx;
+  if (Math.abs(den) < 1e-6) return null; // parallel
+  const t = ((b.px - a.px) * b.dy - (b.py - a.py) * b.dx) / den;
+  return [a.px + a.dx * t, a.py + a.dy * t];
+};
+
+const projectOnto = (line, [x, y]) => {
+  const t = (x - line.px) * line.dx + (y - line.py) * line.dy;
+  return [line.px + line.dx * t, line.py + line.dy * t];
+};
+
+/**
+ * Turns a traced pixel staircase into clean geometry: straight runs become
+ * exact lines meeting at their intersection (no wobble), while genuinely
+ * curved runs keep a fine polyline.
+ */
+function regularize(loop, { coarse = 3, fine = 0.4, straightRms = 0.8, minStraightRun = 12 } = {}) {
+  if (loop.length < 8) return loop;
+  const corners = simplify(loop, coarse);
+  const indexOf = new Map(loop.map(([x, y], i) => [`${x},${y}`, i]));
+  const cuts = corners.map(([x, y]) => indexOf.get(`${x},${y}`)).filter((i) => i !== undefined);
+  if (cuts.length < 3) return simplify(loop, fine);
+
+  // Spans between consecutive corners, wrapping around the closed loop.
+  const spans = [];
+  for (let i = 0; i < cuts.length; i++) {
+    const from = cuts[i];
+    const to = cuts[(i + 1) % cuts.length];
+    const points = [];
+    for (let k = from; ; k = (k + 1) % loop.length) {
+      points.push(loop[k]);
+      if (k === to) break;
+      if (points.length > loop.length) break;
+    }
+    if (points.length < 2) continue;
+    const line = fitLine(points);
+    // Only long, genuinely flat runs are treated as straight edges; short arcs
+    // (letters like S, G, O and the icon curves) stay as fine polylines.
+    let maxDev = 0;
+    for (const [x, y] of points) {
+      maxDev = Math.max(maxDev, Math.abs((x - line.px) * -line.dy + (y - line.py) * line.dx));
+    }
+    const straight = points.length >= minStraightRun && line.rms <= straightRms && maxDev <= 1.6;
+    spans.push({ points, line, straight });
+  }
+  if (!spans.length || spans.every((s) => !s.straight)) return simplify(loop, fine);
+
+  const out = [];
+  for (let i = 0; i < spans.length; i++) {
+    const span = spans[i];
+    const next = spans[(i + 1) % spans.length];
+    if (span.straight) {
+      if (next.straight) {
+        const end = span.points[span.points.length - 1];
+        const hit = intersectLines(span.line, next.line);
+        // Reject a corner that shoots off far away (nearly parallel edges).
+        const sane = hit && Math.hypot(hit[0] - end[0], hit[1] - end[1]) <= 12;
+        out.push(sane ? hit : projectOnto(span.line, end));
+      } else {
+        out.push(projectOnto(span.line, span.points[span.points.length - 1]));
+      }
+    } else {
+      // Curved run: keep a fine polyline, snapped onto the neighbouring line.
+      const fineRun = simplify(span.points, fine);
+      const start = spans[(i - 1 + spans.length) % spans.length].straight
+        ? projectOnto(spans[(i - 1 + spans.length) % spans.length].line, fineRun[0])
+        : fineRun[0];
+      out.push(start, ...fineRun.slice(1, -1));
+      if (!next.straight) out.push(fineRun[fineRun.length - 1]);
+    }
+  }
+  return out.filter((p, i, list) => {
+    const prev = list[(i - 1 + list.length) % list.length];
+    return Math.hypot(p[0] - prev[0], p[1] - prev[1]) > 0.05;
+  });
 }
 
 function loopArea(loop) {
@@ -268,15 +385,27 @@ function shapePaint(pixels) {
   };
 }
 
-const MIN_AREA = 40;
+// Source-pixel area below which a shape is noise. The sheet is clean, so this
+// only needs to exclude stray specks — thin letters like "I" must survive.
+const MIN_AREA = 10;
+const round = (v) => Math.round((v / SCALE) * 10) / 10;
+const REGULARIZE = {
+  coarse: 3 * 1.2,
+  fine: 0.4 * 3,
+  straightRms: 0.8 * 3,
+  minStraightRun: 12 * 3,
+};
 const EPSILON = 0.9;
 
-function buildSvg(region, { title }) {
+const SCALE = 3;
+
+async function buildSvg(source, { title }) {
+  const region = await supersample(source, SCALE);
   const { width, height } = region;
   const defs = [];
   const paths = [];
 
-  findShapes(region, MIN_AREA).forEach((pixels, index) => {
+  findShapes(region, MIN_AREA * SCALE * SCALE).forEach((pixels, index) => {
     // The sheet's thin grey dividers survive unevenly in the source; the logo
     // itself has no neutral grey, so drop near-neutral shapes.
     const avg = [0, 1, 2].map((c) => pixels.reduce((sum, p) => sum + p.c[c], 0) / pixels.length);
@@ -286,12 +415,13 @@ function buildSvg(region, { title }) {
     for (const p of pixels) mask[p.y * width + p.x] = 1;
 
     const loops = traceLoops(mask, width, height)
-      .map((loop) => simplify(loop, EPSILON))
-      .filter((loop) => loop.length > 3 && loopArea(loop) >= MIN_AREA);
+      .filter((loop) => loopArea(loop) >= MIN_AREA * SCALE * SCALE)
+      .map((loop) => regularize(loop, REGULARIZE))
+      .filter((loop) => loop.length > 2 && loopArea(loop) >= MIN_AREA * SCALE * SCALE);
     if (!loops.length) return;
 
     const d = loops
-      .map((loop) => "M" + loop.map(([x, y]) => `${x} ${y}`).join("L") + "Z")
+      .map((loop) => "M" + loop.map(([x, y]) => `${round(x)} ${round(y)}`).join("L") + "Z")
       .join("");
 
     const paint = shapePaint(pixels);
@@ -300,7 +430,7 @@ function buildSvg(region, { title }) {
       const id = `g${index}`;
       const { x1, y1, x2, y2, stops } = paint.gradient;
       defs.push(
-        `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}">` +
+        `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${round(x1)}" y1="${round(y1)}" x2="${round(x2)}" y2="${round(y2)}">` +
         stops.map((s) => `<stop offset="${s.offset}" stop-color="${s.colour}"/>`).join("") +
         "</linearGradient>",
       );
@@ -309,7 +439,7 @@ function buildSvg(region, { title }) {
     paths.push(`<path fill="${fill}" fill-rule="evenodd" d="${d}"/>`);
   });
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${title}">` +
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${round(width)} ${round(height)}" role="img" aria-label="${title}">` +
     (defs.length ? `<defs>${defs.join("")}</defs>` : "") +
     paths.join("") +
     "</svg>\n";
@@ -384,7 +514,7 @@ const REGIONS = [
 
 for (const { name, box, title } of REGIONS) {
   const region = crop(sheet, box);
-  const svg = buildSvg(region, { title });
+  const svg = await buildSvg(region, { title });
   await writeFile(path.join(OUT, `${name}.svg`), svg);
   await writeFile(path.join(OUT, `${name}-light.svg`), toLightVariant(svg));
   console.log(`${name}: ${region.width}×${region.height}, svg ${(svg.length / 1024).toFixed(0)}KB`);
@@ -401,7 +531,7 @@ await mkdir(path.join(OUT, "icons"), { recursive: true });
 for (let i = 0; i < Math.min(iconColumns.length, ICON_NAMES.length); i++) {
   const col = iconColumns[i];
   const region = crop(iconBand, { x0: col.x0, x1: col.x1, y0: 0, y1: iconBand.height - 1 });
-  const svg = buildSvg(region, { title: ICON_NAMES[i] });
+  const svg = await buildSvg(region, { title: ICON_NAMES[i] });
   await writeFile(path.join(OUT, "icons", `${ICON_NAMES[i]}.svg`), svg);
   await writeFile(path.join(OUT, "icons", `${ICON_NAMES[i]}-light.svg`), toLightVariant(svg));
   console.log(`icon ${ICON_NAMES[i]}: ${region.width}×${region.height}, svg ${(svg.length / 1024).toFixed(0)}KB`);
