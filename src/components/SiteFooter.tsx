@@ -43,7 +43,7 @@ export function SiteFooter() {
                   <Image
                     src="/brand/logo-horizontal-light.png"
                     alt="Tailored Web Designers"
-                    width={258}
+                    width={234}
                     height={40}
                     className="h-10 w-auto"
                   />

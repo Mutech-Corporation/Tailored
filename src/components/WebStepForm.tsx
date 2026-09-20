@@ -114,7 +114,7 @@ export function WebStepForm() {
           <Image
             src="/brand/logo-horizontal-light.png"
             alt="Tailored Web Designers logo"
-            width={200}
+            width={234}
             height={40}
             priority
             className="h-auto w-full max-w-[200px]"

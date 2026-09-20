@@ -34,7 +34,8 @@ git revert <commit-hash>
 | Add-on (Custom Work) packages and prices | `src/data/pricing-page.ts` |
 | Case studies (currently placeholders) | `src/data/case-studies.ts` |
 | Services list | `src/data/services.ts` |
-| Logo files | regenerate with `node scripts/make-logos.mjs` from `docs and logos/image.png` |
+| Logo SVGs | `node scripts/make-logo-svg.mjs` traces `docs and logos/AI_gen_image.png` → `public/brand/svg/` |
+| Logo PNGs | `node scripts/make-logos.mjs` renders those SVGs → `public/brand/` and `src/app/icon.png` (old set kept in `backup/brand-logos-v1/`) |
 
 ## Checking the site locally before pushing
 

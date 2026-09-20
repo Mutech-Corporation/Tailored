@@ -88,8 +88,8 @@ export function SiteHeader() {
           <Image
             src={scrolled ? "/brand/logo-horizontal.png" : "/brand/logo-horizontal-light.png"}
             alt={SITE.name}
-            width={232}
-            height={36}
+            width={234}
+            height={40}
             priority
             className="h-9 w-auto max-[400px]:h-7"
           />
@@ -164,8 +164,8 @@ export function SiteHeader() {
         <Image
           src="/brand/logo-horizontal-light.png"
           alt={SITE.name}
-          width={232}
-          height={36}
+          width={234}
+          height={40}
           className="mb-8 h-8 w-auto self-start"
         />
         <ul className="flex flex-col gap-1">
