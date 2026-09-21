@@ -20,13 +20,28 @@ const OUT = path.join(ROOT, "public", "brand");
 
 /* ------------------------------------------------------- background removal */
 
-/** Opacity 0–1: the checkerboard is neutral and light, the artwork is not. */
+/**
+ * Opacity 0–1: the checkerboard is neutral and light, the artwork is not.
+ *
+ * The sheet also carries a soft, slightly blue-tinted white glow around the
+ * icon strokes. It is "colourful" enough to look like ink, so anything this
+ * light is forced back to background — otherwise the glow survives as a white
+ * fringe on dark backgrounds.
+ */
 function inkAlpha(r, g, b) {
   const min = Math.min(r, g, b);
-  const sat = Math.max(r, g, b) - min;
+  const max = Math.max(r, g, b);
+  const sat = max - min;
   const colourful = (sat - 16) / 22;
   const dark = (150 - min) / 40;
-  return Math.max(0, Math.min(1, Math.max(colourful, dark)));
+  const ink = Math.max(colourful, dark);
+
+  // Glow = very light AND barely coloured. The artwork's brightest violet is
+  // light too, but strongly coloured, so it is kept.
+  const pale = Math.max(0, Math.min(1, (70 - sat) / 20));
+  const notLight = Math.max(0, Math.min(1, (240 - max) / 18));
+  const cap = 1 - pale * (1 - notLight);
+  return Math.max(0, Math.min(1, Math.min(ink, cap)));
 }
 
 /** Separable box blur of `value` weighted by `weight` (an inpainting average). */
@@ -69,8 +84,9 @@ function weightedBlur(value, weight, width, height, radius) {
 }
 
 /**
- * Loads the sheet with the checkerboard turned into transparency. Edge pixels
- * are un-mixed against the local background colour so no grey fringe is left.
+ * Loads the sheet with the checkerboard turned into transparency. Anti-aliased
+ * edge pixels take their colour from the nearest solid ink pixel and only their
+ * opacity is estimated, so no light halo is left around strokes.
  */
 async function loadSheet() {
   const { data, info } = await sharp(SOURCE).removeAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -93,22 +109,69 @@ async function loadSheet() {
   }
   const blurred = channels.map((channel) => weightedBlur(channel, bgWeight, width, height, 20));
 
+  // Solid ink pixels keep their colour untouched.
+  const SOLID = 0.9;
   const rgba = Buffer.alloc(count * 4);
+
+  // Nearest solid-ink pixel for every pixel within a few px (multi-source BFS).
+  // Edge pixels borrow that colour, so anti-aliased edges carry real ink colour
+  // instead of a lightened mix of ink and the grey checkerboard.
+  const source = new Int32Array(count).fill(-1);
+  let frontier = [];
   for (let p = 0; p < count; p++) {
-    const a = alpha[p];
-    rgba[p * 4 + 3] = Math.round(a * 255);
-    if (a === 0) continue;
-    for (let c = 0; c < 3; c++) {
-      const observed = data[p * 3 + c];
-      if (a >= 0.995) {
-        rgba[p * 4 + c] = observed;
-        continue;
+    if (alpha[p] >= SOLID) {
+      source[p] = p;
+      frontier.push(p);
+    }
+  }
+  for (let ring = 0; ring < 4 && frontier.length; ring++) {
+    const next = [];
+    for (const p of frontier) {
+      const x = p % width;
+      const y = (p - x) / width;
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
+        const n = ny * width + nx;
+        if (source[n] !== -1 || alpha[n] === 0) continue;
+        source[n] = source[p];
+        next.push(n);
       }
+    }
+    frontier = next;
+  }
+
+  for (let p = 0; p < count; p++) {
+    const raw = alpha[p];
+    if (raw === 0) continue;
+
+    if (raw >= SOLID) {
+      rgba[p * 4] = data[p * 3];
+      rgba[p * 4 + 1] = data[p * 3 + 1];
+      rgba[p * 4 + 2] = data[p * 3 + 2];
+      rgba[p * 4 + 3] = 255;
+      continue;
+    }
+
+    const ink = source[p];
+    if (ink === -1) continue; // isolated soft pixel: drop it
+
+    // Coverage = how far the observed colour sits along background → ink.
+    let dot = 0, lengthSq = 0;
+    for (let c = 0; c < 3; c++) {
       const w = blurred[c].weight[p];
       const bg = w > 1 ? blurred[c].value[p] / w : 224;
-      // observed = a*ink + (1-a)*bg  →  ink = (observed - (1-a)*bg) / a
-      rgba[p * 4 + c] = Math.max(0, Math.min(255, Math.round((observed - (1 - a) * bg) / a)));
+      const inkC = data[ink * 3 + c];
+      dot += (data[p * 3 + c] - bg) * (inkC - bg);
+      lengthSq += (inkC - bg) ** 2;
     }
+    const coverage = lengthSq > 0 ? Math.max(0, Math.min(1, dot / lengthSq)) : raw;
+    if (coverage < 0.04) continue;
+
+    rgba[p * 4] = data[ink * 3];
+    rgba[p * 4 + 1] = data[ink * 3 + 1];
+    rgba[p * 4 + 2] = data[ink * 3 + 2];
+    rgba[p * 4 + 3] = Math.round(coverage * 255);
   }
   return { rgba, width, height };
 }
