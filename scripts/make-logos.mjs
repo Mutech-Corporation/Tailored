@@ -3,7 +3,7 @@
  *
  *   node scripts/make-logos.mjs
  *
- * Source: "docs and logos/1.png" (2048×2048, artwork on plain white). The white
+ * Source: "../docs and logos/1.png" (kept outside the repo) (2048×2048, artwork on plain white). The white
  * is turned into transparency; every artwork pixel keeps its original colour and
  * nothing is ever redrawn — the sheet is only cropped into pieces.
  *
@@ -14,7 +14,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const SOURCE = path.join(ROOT, "docs and logos", "1.png");
+const SOURCE = path.join(ROOT, "..", "docs and logos", "1.png");
 const OUT = path.join(ROOT, "public", "brand");
 
 /* ------------------------------------------------------- background removal */

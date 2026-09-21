@@ -3,7 +3,7 @@
  *
  *   node scripts/make-logo-svg.mjs [--debug]
  *
- * Source: "docs and logos/AI_gen_image.png" (2048×2048). Its transparency is
+ * Source: "../docs and logos/AI_gen_image.png" (kept outside the repo) (2048×2048). Its transparency is
  * fake — the checkerboard is painted in — so the neutral grey checker is
  * removed first. Each connected shape is then outlined, the outline is
  * simplified into straight segments, and filled with either a flat colour or a
@@ -16,7 +16,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const SOURCE = path.join(ROOT, "docs and logos", "AI_gen_image.png");
+const SOURCE = path.join(ROOT, "..", "docs and logos", "AI_gen_image.png");
 const OUT = path.join(ROOT, "public", "brand", "svg");
 const DEBUG = process.argv.includes("--debug");
 
