@@ -5,11 +5,15 @@
  * next/image would freeze them on the first frame.
  */
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CloseIcon } from "@/components/icons";
 import { assetPath } from "@/lib/asset-path";
 import { PORTFOLIO_FILTERS, PORTFOLIO_ITEMS } from "@/data/portfolio";
+import { cn } from "@/lib/utils";
 import type { PortfolioCategory, PortfolioItem } from "@/types";
+
+/** Cards per page — three full rows on desktop. */
+const PAGE_SIZE = 9;
 
 interface PortfolioSectionProps {
   /** Defaults to the homepage's 66 items; portfolio.php passes its own 67. */
@@ -23,6 +27,10 @@ export function PortfolioSection({
     "logo"
   );
   const [activeItem, setActiveItem] = useState<PortfolioItem | null>(null);
+  const [page, setPage] = useState(0);
+  /** Which way the next page should slide in from. */
+  const [direction, setDirection] = useState<"next" | "previous">("next");
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = useMemo(
     () =>
@@ -31,6 +39,29 @@ export function PortfolioSection({
         : items.filter((item) => item.category === activeFilter),
     [activeFilter, items]
   );
+
+  const pageCount = Math.max(1, Math.ceil(filteredItems.length / PAGE_SIZE));
+  const currentPage = Math.min(page, pageCount - 1);
+  const visibleItems = filteredItems.slice(
+    currentPage * PAGE_SIZE,
+    currentPage * PAGE_SIZE + PAGE_SIZE,
+  );
+
+  const goToPage = (next: number) => {
+    if (next === currentPage || next < 0 || next >= pageCount) return;
+    setDirection(next > currentPage ? "next" : "previous");
+    setPage(next);
+    // Only scroll when the grid has moved off the top of the screen, so the
+    // page never jumps under the visitor while the cards are already in view.
+    const top = gridRef.current?.getBoundingClientRect().top ?? 0;
+    if (top < 0) gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const changeFilter = (filter: PortfolioCategory | "all") => {
+    setActiveFilter(filter);
+    setDirection("next");
+    setPage(0);
+  };
 
   useEffect(() => {
     if (!activeItem) return;
@@ -71,7 +102,7 @@ export function PortfolioSection({
                 type="button"
                 className="dc-pill"
                 data-active={activeFilter === filter.category}
-                onClick={() => setActiveFilter(filter.category)}
+                onClick={() => changeFilter(filter.category)}
               >
                 {filter.label}
               </button>
@@ -79,8 +110,18 @@ export function PortfolioSection({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredItems.map((item, index) => (
+        {/* overflow-x-clip so the cards slide in from outside without a scrollbar */}
+        <div ref={gridRef} className="scroll-mt-28 overflow-x-clip">
+          <div
+            // Remounting on page/filter change replays the slide-in animation.
+            key={`${activeFilter}-${currentPage}`}
+            className={cn(
+              "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3",
+              "animate-in fade-in duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:animate-none",
+              direction === "next" ? "slide-in-from-right-12" : "slide-in-from-left-12",
+            )}
+          >
+          {visibleItems.map((item, index) => (
             <button
               key={`${item.src}-${index}`}
               type="button"
@@ -90,7 +131,7 @@ export function PortfolioSection({
               className="tw-lift group cursor-pointer rounded-[18px] text-left shadow-[0_15px_40px_rgba(15,23,42,0.12)] [--tw-lift-shadow:0_30px_60px_-18px_rgba(76,29,149,0.45)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7c3aed]"
               onClick={() => setActiveItem(item)}
             >
-              <span className="relative block overflow-hidden rounded-[18px] bg-black">
+              <span className="relative block overflow-hidden rounded-[18px] bg-[#eceaf8]">
                 <img
                   src={assetPath(item.src)}
                   alt={item.alt}
@@ -114,7 +155,66 @@ export function PortfolioSection({
               </span>
             </button>
           ))}
+          </div>
         </div>
+
+        {pageCount > 1 && (
+          <nav
+            aria-label="Portfolio pages"
+            className="mt-10 flex items-center justify-center gap-4"
+          >
+            <button
+              type="button"
+              aria-label="Previous page"
+              disabled={currentPage === 0}
+              onClick={() => goToPage(currentPage - 1)}
+              className="flex size-10 items-center justify-center rounded-full border border-[rgba(11,16,51,0.12)] text-[#0b1033] transition-colors duration-300 hover:border-[#2563eb] hover:text-[#2563eb] disabled:pointer-events-none disabled:opacity-30"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
+
+            <ul className="flex items-center gap-2">
+              {Array.from({ length: pageCount }, (_, index) => {
+                const active = index === currentPage;
+                return (
+                  <li key={index}>
+                    <button
+                      type="button"
+                      aria-label={`Page ${index + 1} of ${pageCount}`}
+                      aria-current={active ? "true" : undefined}
+                      onClick={() => goToPage(index)}
+                      className={cn(
+                        "h-2.5 rounded-full transition-[width,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                        active
+                          ? "w-8 bg-[linear-gradient(90deg,#2563eb,#7c3aed)]"
+                          : "w-2.5 bg-[rgba(11,16,51,0.18)] hover:bg-[rgba(37,99,235,0.45)]",
+                      )}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+
+            <button
+              type="button"
+              aria-label="Next page"
+              disabled={currentPage === pageCount - 1}
+              onClick={() => goToPage(currentPage + 1)}
+              className="flex size-10 items-center justify-center rounded-full border border-[rgba(11,16,51,0.12)] text-[#0b1033] transition-colors duration-300 hover:border-[#2563eb] hover:text-[#2563eb] disabled:pointer-events-none disabled:opacity-30"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </nav>
+        )}
+
+        <p className="mt-4 text-center text-[0.85rem] text-[#6b7280]">
+          Showing {currentPage * PAGE_SIZE + 1}&ndash;
+          {currentPage * PAGE_SIZE + visibleItems.length} of {filteredItems.length}
+        </p>
       </div>
 
       {activeItem && (
