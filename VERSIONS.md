@@ -35,7 +35,8 @@ git revert <commit-hash>
 | Case studies (currently placeholders) | `src/data/case-studies.ts` |
 | Services list | `src/data/services.ts` |
 | Logo SVGs (extra, traced — not used by the site) | `node scripts/make-logo-svg.mjs` from `docs and logos/AI_gen_image.png` → `public/brand/svg/` |
-| Logo PNGs (used by the site) | `node scripts/make-logos.mjs` crops `docs and logos/AI_gen_image.png` → `public/brand/` and `src/app/icon.png` (old set kept in `backup/brand-logos-v1/`) |
+| Remove a background from any image | `node scripts/remove-bg.mjs <input> [output] --tolerance 8 --soft 12 [--shrink 1] [--trim]` |
+| Logo PNGs (used by the site) | `node scripts/make-logos.mjs` crops `docs and logos/1.png` → `public/brand/` and `src/app/icon.png` |
 
 ## Checking the site locally before pushing
 
@@ -48,3 +49,9 @@ npm run preview:pages
 ```
 
 Stop either one with Ctrl+C in its terminal.
+
+## Source images and the old logo set
+
+The logo scripts read from the `docs and logos/` folder, which is kept out of
+git (it holds the original brand sheets). The previous logo PNGs live outside
+the repository in `../backup-brand-logos-v1/`.
