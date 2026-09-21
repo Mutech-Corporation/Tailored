@@ -3,10 +3,9 @@
  *
  *   node scripts/make-logos.mjs
  *
- * Source: "docs and logos/AI_gen_image.png" (2048×2048). Its transparency is
- * painted on (a grey checkerboard), so the checker is measured and removed:
- * every pixel keeps its original colour, edge pixels get the background mixed
- * back out, and the artwork itself is never redrawn — only cropped.
+ * Source: "docs and logos/1.png" (2048×2048, artwork on plain white). The white
+ * is turned into transparency; every artwork pixel keeps its original colour and
+ * nothing is ever redrawn — the sheet is only cropped into pieces.
  *
  * Output: public/brand/*.png, public/brand/icons/*.png, src/app/icon.png.
  */
@@ -15,116 +14,64 @@ import path from "node:path";
 import sharp from "sharp";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const SOURCE = path.join(ROOT, "docs and logos", "AI_gen_image.png");
+const SOURCE = path.join(ROOT, "docs and logos", "1.png");
 const OUT = path.join(ROOT, "public", "brand");
 
 /* ------------------------------------------------------- background removal */
 
 /**
- * Opacity 0–1: the checkerboard is neutral and light, the artwork is not.
- *
- * The sheet also carries a soft, slightly blue-tinted white glow around the
- * icon strokes. It is "colourful" enough to look like ink, so anything this
- * light is forced back to background — otherwise the glow survives as a white
- * fringe on dark backgrounds.
+ * Is this pixel clearly artwork (not a blend with the white page)? Dark ink and
+ * strongly coloured ink both qualify; pale, washed-out pixels do not — those
+ * are anti-aliased edges, handled separately below.
  */
-function inkAlpha(r, g, b) {
+function isCore(r, g, b) {
   const min = Math.min(r, g, b);
-  const max = Math.max(r, g, b);
-  const sat = max - min;
-  const colourful = (sat - 16) / 22;
-  const dark = (150 - min) / 40;
-  const ink = Math.max(colourful, dark);
-
-  // Glow = very light AND barely coloured. The artwork's brightest violet is
-  // light too, but strongly coloured, so it is kept.
-  const pale = Math.max(0, Math.min(1, (70 - sat) / 20));
-  const notLight = Math.max(0, Math.min(1, (240 - max) / 18));
-  const cap = 1 - pale * (1 - notLight);
-  return Math.max(0, Math.min(1, Math.min(ink, cap)));
-}
-
-/** Separable box blur of `value` weighted by `weight` (an inpainting average). */
-function weightedBlur(value, weight, width, height, radius) {
-  const tmpV = new Float32Array(width * height);
-  const tmpW = new Float32Array(width * height);
-  for (let y = 0; y < height; y++) {
-    let sumV = 0, sumW = 0;
-    for (let x = -radius; x <= radius; x++) {
-      const i = y * width + Math.min(width - 1, Math.max(0, x));
-      sumV += value[i]; sumW += weight[i];
-    }
-    for (let x = 0; x < width; x++) {
-      tmpV[y * width + x] = sumV;
-      tmpW[y * width + x] = sumW;
-      const out = y * width + Math.min(width - 1, Math.max(0, x - radius));
-      const add = y * width + Math.min(width - 1, Math.max(0, x + radius + 1));
-      sumV += value[add] - value[out];
-      sumW += weight[add] - weight[out];
-    }
-  }
-  const outV = new Float32Array(width * height);
-  const outW = new Float32Array(width * height);
-  for (let x = 0; x < width; x++) {
-    let sumV = 0, sumW = 0;
-    for (let y = -radius; y <= radius; y++) {
-      const i = Math.min(height - 1, Math.max(0, y)) * width + x;
-      sumV += tmpV[i]; sumW += tmpW[i];
-    }
-    for (let y = 0; y < height; y++) {
-      outV[y * width + x] = sumV;
-      outW[y * width + x] = sumW;
-      const out = Math.min(height - 1, Math.max(0, y - radius)) * width + x;
-      const add = Math.min(height - 1, Math.max(0, y + radius + 1)) * width + x;
-      sumV += tmpV[add] - tmpV[out];
-      sumW += tmpW[add] - tmpW[out];
-    }
-  }
-  return { value: outV, weight: outW };
+  const sat = Math.max(r, g, b) - min;
+  return min < 120 || sat > 55;
 }
 
 /**
- * Loads the sheet with the checkerboard turned into transparency. Anti-aliased
- * edge pixels take their colour from the nearest solid ink pixel and only their
- * opacity is estimated, so no light halo is left around strokes.
+ * The artwork casts a soft grey shadow where the W crosses the T. It is
+ * near-neutral and mid-light — not ink, not paper — and is stored as
+ * semi-transparent black so it darkens whatever is behind it instead of
+ * showing up as a grey blotch on dark backgrounds.
+ */
+function isShadow(r, g, b) {
+  const max = Math.max(r, g, b);
+  // No ink in the logo is this washed out: the navy already sits around 67.
+  return max - Math.min(r, g, b) <= 30 && max < 252;
+}
+
+/**
+ * Loads the sheet with the white background turned into transparency.
+ *
+ * Core pixels keep their exact colour. Edge pixels are a mix of ink and white:
+ * each takes the colour of the nearest core pixel, and its opacity is how far
+ * it sits along white → that ink colour. This keeps edges smooth without
+ * leaving a pale fringe.
  */
 async function loadSheet() {
   const { data, info } = await sharp(SOURCE).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   const { width, height } = info;
   const count = width * height;
-
-  const alpha = new Float32Array(count);
-  for (let p = 0; p < count; p++) {
-    alpha[p] = inkAlpha(data[p * 3], data[p * 3 + 1], data[p * 3 + 2]);
-  }
-
-  // Estimate the background behind every pixel from nearby background-only
-  // pixels (the checker alternates ~41px, so a 20px radius always sees both).
-  const bgWeight = new Float32Array(count);
-  const channels = [new Float32Array(count), new Float32Array(count), new Float32Array(count)];
-  for (let p = 0; p < count; p++) {
-    const w = 1 - alpha[p];
-    bgWeight[p] = w;
-    for (let c = 0; c < 3; c++) channels[c][p] = data[p * 3 + c] * w;
-  }
-  const blurred = channels.map((channel) => weightedBlur(channel, bgWeight, width, height, 20));
-
-  // Solid ink pixels keep their colour untouched.
-  const SOLID = 0.9;
   const rgba = Buffer.alloc(count * 4);
 
-  // Nearest solid-ink pixel for every pixel within a few px (multi-source BFS).
-  // Edge pixels borrow that colour, so anti-aliased edges carry real ink colour
-  // instead of a lightened mix of ink and the grey checkerboard.
   const source = new Int32Array(count).fill(-1);
   let frontier = [];
   for (let p = 0; p < count; p++) {
-    if (alpha[p] >= SOLID) {
+    if (isCore(data[p * 3], data[p * 3 + 1], data[p * 3 + 2])) {
       source[p] = p;
       frontier.push(p);
+      rgba[p * 4] = data[p * 3];
+      rgba[p * 4 + 1] = data[p * 3 + 1];
+      rgba[p * 4 + 2] = data[p * 3 + 2];
+      rgba[p * 4 + 3] = 255;
     }
   }
-  for (let ring = 0; ring < 4 && frontier.length; ring++) {
+
+  // Grow out from the core by a few pixels; that covers the anti-aliased rim.
+  const edges = [];
+  for (let ring = 0; ring < 3 && frontier.length; ring++) {
     const next = [];
     for (const p of frontier) {
       const x = p % width;
@@ -133,46 +80,43 @@ async function loadSheet() {
         const nx = x + dx, ny = y + dy;
         if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
         const n = ny * width + nx;
-        if (source[n] !== -1 || alpha[n] === 0) continue;
+        if (source[n] !== -1) continue;
+        if (isShadow(data[n * 3], data[n * 3 + 1], data[n * 3 + 2])) continue;
         source[n] = source[p];
+        edges.push(n);
         next.push(n);
       }
     }
     frontier = next;
   }
 
-  for (let p = 0; p < count; p++) {
-    const raw = alpha[p];
-    if (raw === 0) continue;
-
-    if (raw >= SOLID) {
-      rgba[p * 4] = data[p * 3];
-      rgba[p * 4 + 1] = data[p * 3 + 1];
-      rgba[p * 4 + 2] = data[p * 3 + 2];
-      rgba[p * 4 + 3] = 255;
-      continue;
-    }
-
+  const WHITE = 255;
+  for (const p of edges) {
     const ink = source[p];
-    if (ink === -1) continue; // isolated soft pixel: drop it
-
-    // Coverage = how far the observed colour sits along background → ink.
     let dot = 0, lengthSq = 0;
     for (let c = 0; c < 3; c++) {
-      const w = blurred[c].weight[p];
-      const bg = w > 1 ? blurred[c].value[p] / w : 224;
-      const inkC = data[ink * 3 + c];
-      dot += (data[p * 3 + c] - bg) * (inkC - bg);
-      lengthSq += (inkC - bg) ** 2;
+      const inkC = data[ink * 3 + c] - WHITE;
+      dot += (data[p * 3 + c] - WHITE) * inkC;
+      lengthSq += inkC * inkC;
     }
-    const coverage = lengthSq > 0 ? Math.max(0, Math.min(1, dot / lengthSq)) : raw;
-    if (coverage < 0.04) continue;
-
+    const coverage = lengthSq > 0 ? Math.max(0, Math.min(1, dot / lengthSq)) : 0;
+    if (coverage < 0.03) continue;
     rgba[p * 4] = data[ink * 3];
     rgba[p * 4 + 1] = data[ink * 3 + 1];
     rgba[p * 4 + 2] = data[ink * 3 + 2];
     rgba[p * 4 + 3] = Math.round(coverage * 255);
   }
+
+  // Whatever is left and neutral is shadow: black, as opaque as it is dark.
+  for (let p = 0; p < count; p++) {
+    if (source[p] !== -1) continue;
+    const r = data[p * 3], g = data[p * 3 + 1], b = data[p * 3 + 2];
+    if (!isShadow(r, g, b)) continue;
+    const coverage = (255 - Math.max(r, g, b)) / 255;
+    if (coverage < 0.02) continue;
+    rgba[p * 4 + 3] = Math.round(coverage * 255);
+  }
+
   return { rgba, width, height };
 }
 
@@ -248,29 +192,37 @@ const span = (...boxes) => ({
 
 /* -------------------------------------------------------------- variants */
 
-/** Dark-background version: navy ink → white, mid blues lifted slightly. */
+/**
+ * Dark-background version.
+ *
+ * Navy ink (the T, the wordmark and the labels) becomes solid white, coloured
+ * ink (the W, icons and tagline) is kept and lifted slightly, and the artwork's
+ * soft grey drop shadow is dropped — a shadow means nothing on a dark ground,
+ * and keeping it leaves a grey smear where the W crosses the T.
+ */
 function toLight({ rgba, width, height }) {
   const out = Buffer.from(rgba);
   for (let o = 0; o < out.length; o += 4) {
     if (out[o + 3] === 0) continue;
-    const [r, g, b] = [out[o], out[o + 1], out[o + 2]];
-    const max = Math.max(r, g, b);
-    // Navy ink (dark, not strongly blue-dominant) becomes flat white so the T
-    // reads cleanly on dark; the W's vivid blue/violet facets keep their colour.
-    const navy = b - r < 115;
-    const t = navy ? Math.max(0, Math.min(1, (165 - max) / 25)) : 0;
-    for (let c = 0; c < 3; c++) {
-      const lifted = out[o + c] + (255 - out[o + c]) * 0.2;
-      out[o + c] = Math.round(lifted * (1 - t) + 255 * t);
+    const r = out[o], g = out[o + 1], b = out[o + 2];
+    const sat = Math.max(r, g, b) - Math.min(r, g, b);
+
+    // Green separates the two inks: navy stays at or below ~36, while the W's
+    // darkest blue facet starts at ~47.
+    const navy = Math.max(0, Math.min(1, (46 - g) / 14));
+    if (navy > 0.5) {
+      out[o] = out[o + 1] = out[o + 2] = 255;
+      continue;
     }
+    if (sat > 55) {
+      for (let c = 0; c < 3; c++) out[o + c] = Math.round(out[o + c] + (255 - out[o + c]) * 0.2);
+      continue;
+    }
+    out[o + 3] = 0; // shadow / washed-out pixel
   }
   return { rgba: out, width, height };
 }
 
-/**
- * The source gradients carry fine grain, which makes plain PNGs several times
- * larger for no visible gain; a 256-colour palette is visually identical here.
- */
 const PNG = { compressionLevel: 9, palette: true, colours: 256, dither: 0.5 };
 
 const toPng = ({ rgba, width, height }) =>
