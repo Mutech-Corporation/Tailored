@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SITE } from "@/config/site";
 import {
   LegalDivider,
   LegalHeading,
@@ -12,9 +13,9 @@ import {
 } from "@/components/legal/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Design Centura – Logo, Branding & Web",
+  title: "Privacy Policy",
   description:
-    "This Privacy Policy explains how Design Centura collects, uses and protects your information when you visit our website or use our services.",
+    "This Privacy Policy explains how Tailored Web Designers collects, uses and protects your information when you visit our website or use our services.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -25,7 +26,7 @@ export default function PrivacyPolicyPage() {
         <LegalPage
           eyebrow="Privacy"
           title="Privacy Policy"
-          intro="This Privacy Policy explains how Design Centura collects, uses and protects your information when you visit our website or use our services. By continuing to use our site, you agree to the practices described below."
+          intro="This Privacy Policy explains how Tailored Web Designers collects, uses and protects your information when you visit our website or use our services. By continuing to use our site, you agree to the practices described below."
         >
           <LegalHeading>Information We Collect</LegalHeading>
 
@@ -102,9 +103,9 @@ export default function PrivacyPolicyPage() {
             <li>Continuous monitoring for vulnerabilities</li>
           </LegalList>
           <LegalNote>
-            Important: Design Centura employees will never ask you to share credit
+            Important: our team will never ask you to share credit
             card details via email, phone, or chat. If someone does, do not comply
-            and report it to us immediately at security@designcentura.com.
+            and report it to us immediately at {SITE.contact.supportEmail}.
           </LegalNote>
 
           <LegalDivider />
@@ -120,7 +121,7 @@ export default function PrivacyPolicyPage() {
           </LegalList>
           <LegalNote>
             Manage your information through your account dashboard or contact us at
-            privacy@designcentura.com.
+            {SITE.contact.privacyEmail}.
           </LegalNote>
 
           <LegalDivider />
@@ -142,7 +143,7 @@ export default function PrivacyPolicyPage() {
           <LegalText>
             We feature customer testimonials with your permission. If you&apos;d
             like to modify or remove your testimonial, contact us at
-            support@designcentura.com.
+            {SITE.contact.supportEmail}.
           </LegalText>
           <LegalText>Pseudonym Policy</LegalText>
           <LegalText>
@@ -204,7 +205,6 @@ export default function PrivacyPolicyPage() {
 
           <LegalDivider />
 
-          {/* The target's list genuinely ends after this single item. */}
           <LegalSubheading>Consumer Data Protection</LegalSubheading>
           <LegalText>We comply with:</LegalText>
           <LegalList>

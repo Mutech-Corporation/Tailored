@@ -12,9 +12,9 @@ import { WEB_FAQS, WEB_PORTFOLIO, WEB_PRICING } from "@/data/web-design";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Top Website Design Company for Modern Brands",
+  title: "Website Design",
   description:
-    "Design Centura builds responsive, SEO-friendly websites that load fast, tell your brand story clearly and convert visitors into leads, bookings and sales across every device.",
+    "Tailored Web Designers builds responsive, SEO-friendly websites that load fast, tell your brand story clearly and convert visitors into leads, bookings and sales across every device.",
 };
 
 const STEPS: HowStep[] = [
@@ -54,19 +54,19 @@ export default function WebDesignPage() {
       <main className="flex-1">
         <section
           id="web-banner"
-          className="bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] pt-32 pb-20 text-white max-[767.98px]:pt-[7.2rem] max-[767.98px]:pb-12"
+          className="bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] pt-32 pb-20 text-white max-[767.98px]:pt-[7.2rem] max-[767.98px]:pb-12"
         >
           <div className="dc-container">
             <div className="grid items-center gap-8 lg:grid-cols-2">
               <div>
                 <p className="mb-3 flex w-fit items-center gap-2 rounded-full border border-[rgba(148,163,184,0.6)] bg-white/12 px-[0.9rem] py-[0.3rem] text-[0.75rem] font-medium text-[#e5e7eb]">
-                  Design Centura · Web Design Studio
+                  Tailored · Website Design
                 </p>
                 <h1 className="mb-4 text-[clamp(2.4rem,3.2vw,2.8rem)] leading-[1.1] font-semibold max-[767.98px]:text-[2.1rem]">
                   Conversion-Focused Web Design and Modern Development.
                 </h1>
                 <p className="mb-6 text-[0.98rem] opacity-90">
-                  Design Centura builds responsive, SEO-friendly websites that
+                  We build responsive, SEO-friendly websites that
                   load fast, tell your brand story clearly and convert visitors
                   into leads, bookings and sales across every device.
                 </p>
@@ -119,7 +119,7 @@ export default function WebDesignPage() {
                 </h2>
                 <p className="mb-3">
                   Your website is where prospects decide if they trust your brand.
-                  Design Centura crafts UX-led websites that look premium, explain
+                  We craft UX-led websites that look premium, explain
                   your offer clearly and guide visitors toward taking action
                   without friction.
                 </p>
@@ -170,7 +170,7 @@ export default function WebDesignPage() {
         <HowItWorks
           eyebrow="How It Works"
           title="A Clear, Collaborative Web Design Process."
-          lead="Design Centura follows a proven workflow so your website project stays on track. Each phase is transparent, collaborative and focused on launching a site that aligns with your goals and brand."
+          lead="We follow a proven workflow so your website project stays on track. Each phase is transparent, collaborative and focused on launching a site that aligns with your goals and brand."
           steps={STEPS}
         />
 

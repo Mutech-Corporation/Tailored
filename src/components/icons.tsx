@@ -49,26 +49,6 @@ export function LocationDotIcon(props: IconProps) {
   );
 }
 
-export function VolumeMuteIcon(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M11 5 6 9H2v6h4l5 4V5Z" />
-      <path d="m22 9-6 6" />
-      <path d="m16 9 6 6" />
-    </svg>
-  );
-}
-
-export function VolumeUpIcon(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M11 5 6 9H2v6h4l5 4V5Z" />
-      <path d="M15.5 8.5a5 5 0 0 1 0 7" />
-      <path d="M19 5a10 10 0 0 1 0 14" />
-    </svg>
-  );
-}
-
 export function MenuIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>

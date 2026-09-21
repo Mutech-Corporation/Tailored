@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Local temp files
 temp/
+
+# Brand source files and briefs (kept local, not published)
+docs and logos/

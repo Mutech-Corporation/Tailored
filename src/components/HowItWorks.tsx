@@ -45,7 +45,7 @@ export function HowItWorks({
                 height={56}
                 className="mb-4 h-14 w-14"
               />
-              <div className="mb-[0.4rem] text-[0.78rem] font-bold tracking-[0.16em] text-[#1769ff] uppercase">
+              <div className="mb-[0.4rem] text-[0.78rem] font-bold tracking-[0.16em] text-[#2563eb] uppercase">
                 {item.step}
               </div>
               <h3 className="mb-[0.4rem] font-bold">{item.title}</h3>

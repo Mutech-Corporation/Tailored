@@ -27,9 +27,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-montserrat), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* designcentura palette, exposed as Tailwind colors */
+  /* legacy palette, exposed as Tailwind colors */
   --color-dc-blue: var(--dc-blue);
   --color-dc-blue-deep: var(--dc-blue-deep);
   --color-dc-blue-hover: var(--dc-blue-hover);
@@ -78,45 +78,57 @@
 }
 
 :root {
-  /* ---- designcentura tokens (verbatim from the target's style.css) ---- */
-  --dc-blue: #196bff;
+  /* ---- Tailored brand tokens (from the TW logo) ---- */
+  /* Soft "expo-out" deceleration used by every hover animation. */
+  --tw-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /*
+   * Floating buttons, bottom-right. The corner slot (bottom = --tw-fab-edge)
+   * is kept free for a future chat widget; back-to-top sits one slot above it.
+   */
+  --tw-fab-edge: 24px;
+  --tw-fab-size: 48px;
+  --tw-fab-gap: 14px;
+  --tw-navy: #0b1033;
+  --tw-blue: #2563eb;
+  --tw-violet: #7c3aed;
+  --tw-violet-light: #c4b5fd;
+
+  /* Legacy names kept so existing classes keep working. */
+  --dc-blue: var(--tw-blue);
   --dc-blue-deep: #1d4ed8;
-  --dc-blue-hover: #2563eb;
-  --dc-blue-var: #1769ff;
-  --dc-accent: #ffb400;
-  --dc-text: #1b1b1b;
+  --dc-blue-hover: #3b82f6;
+  --dc-blue-var: var(--tw-blue);
+  --dc-accent: var(--tw-violet);
+  --dc-text: #111633;
   --dc-muted: #6b7280;
-  --dc-section: #f7f8fc;
-  --dc-section-alt: #f5f6fb;
-  --dc-pill-track: #e4e7f5;
-  --dc-footer-link-hover: #2f6bff;
+  --dc-section: #f6f6fd;
+  --dc-section-alt: #f3f2fc;
+  --dc-pill-track: #e8e6f8;
+  --dc-footer-link-hover: #8b5cf6;
   --dc-radius-card: 1.4rem;
 
+  --tw-gradient-brand: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
   --dc-gradient-deep: radial-gradient(
     circle at top left,
-    #3a8dff 0,
-    #0340b3 45%,
-    #02142e 100%
+    #4338ca 0,
+    #1e1b5e 45%,
+    #0b1033 100%
   );
-  --dc-gradient-card: radial-gradient(
-    circle at top left,
-    #3a8dff 0,
-    #0340b3 45%,
-    #2e83ff 100%
-  );
+  --dc-gradient-card: var(--tw-gradient-brand);
   --dc-gradient-contact: radial-gradient(
     circle at top left,
-    #1e40af 0,
-    #020617 55%,
-    #000 100%
+    #312e81 0,
+    #0b1033 55%,
+    #05071a 100%
   );
   --dc-gradient-shell: radial-gradient(
     circle at top left,
-    rgba(37, 99, 235, 0.25),
-    rgba(15, 23, 42, 0.96)
+    rgba(124, 58, 237, 0.22),
+    rgba(11, 16, 51, 0.96)
   );
-  --dc-gradient-submit: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  --dc-gradient-submit-hover: linear-gradient(135deg, #60a5fa, #2563eb);
+  --dc-gradient-submit: var(--tw-gradient-brand);
+  --dc-gradient-submit-hover: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
 
   /* ---- shadcn tokens, remapped onto the brand ---- */
   --background: #ffffff;
@@ -137,11 +149,11 @@
   --border: rgba(15, 23, 42, 0.08);
   --input: #e5e7eb;
   --ring: #3b82f6;
-  --chart-1: #3a8dff;
-  --chart-2: #196bff;
-  --chart-3: #1d4ed8;
-  --chart-4: #0340b3;
-  --chart-5: #02142e;
+  --chart-1: #2563eb;
+  --chart-2: #4f46e5;
+  --chart-3: #7c3aed;
+  --chart-4: #1e1b5e;
+  --chart-5: #0b1033;
   --radius: 0.625rem;
   --sidebar: #ffffff;
   --sidebar-foreground: var(--dc-text);
@@ -161,6 +173,11 @@
     @apply bg-background text-foreground;
     font-size: 1rem;
     line-height: 1.5;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
   }
   html {
     @apply font-sans;
@@ -216,19 +233,22 @@
     font-size: 0.8rem;
     color: var(--dc-blue-var);
     font-weight: 600;
-    background: #a7c6ff36;
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    letter-spacing: 0.08em;
     width: fit-content;
     margin: 0 auto 0.725rem;
     padding: 0.32rem 0.825rem 0.22rem;
     border-radius: 1rem;
-    box-shadow: 0 0 3px 0 #8f8f8f;
   }
   .dc-eyebrow-left {
     margin-right: auto;
     margin-left: 0;
   }
   .dc-section-title {
-    font-weight: 600;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.01em;
     font-size: 2.8rem;
     margin-bottom: 0.4rem;
     line-height: 1.15;
@@ -253,7 +273,7 @@
   }
   .dc-check-list > li::before {
     content: "";
-    background: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 18a1 1 0 0 1-.71-.29l-5-5a1 1 0 0 1 1.42-1.42l4.29 4.3 8.29-8.3a1 1 0 1 1 1.42 1.42l-9 9A1 1 0 0 1 10 18' fill='%23196BFF'/%3E%3C/svg%3E") center / contain no-repeat;
+    background: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 18a1 1 0 0 1-.71-.29l-5-5a1 1 0 0 1 1.42-1.42l4.29 4.3 8.29-8.3a1 1 0 1 1 1.42 1.42l-9 9A1 1 0 0 1 10 18' fill='%232563EB'/%3E%3C/svg%3E") center / contain no-repeat;
     position: absolute;
     top: 0;
     left: -1.5rem;
@@ -309,6 +329,8 @@
 
   /* Gradient CTA used by both the About and Contact sections. */
   .dc-submit-btn {
+    position: relative;
+    isolation: isolate;
     display: inline-block;
     border-radius: 999px;
     border: none;
@@ -320,14 +342,165 @@
     background: var(--dc-gradient-submit);
     color: #f9fafb;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: transform 0.45s var(--tw-ease-out);
+  }
+  /* Gradients can't be transitioned, so the hover gradient fades in on a layer. */
+  .dc-submit-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--dc-gradient-submit-hover);
+    opacity: 0;
+    transition: opacity 0.45s var(--tw-ease-out);
   }
   .dc-submit-btn:hover {
-    background: var(--dc-gradient-submit-hover);
     color: #ffffff;
+  }
+  .dc-submit-btn:hover::before {
+    opacity: 1;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .dc-submit-btn:hover {
+      transform: translate3d(0, -2px, 0);
+    }
+  }
+  .dc-submit-btn:active {
+    transform: translate3d(0, 0, 0);
+    transition-duration: 0.1s;
   }
   .dc-submit-btn:disabled {
     opacity: 0.65;
     cursor: not-allowed;
+  }
+
+  /*
+   * Card hover: a slow, decelerating lift. Only transform and opacity animate
+   * (GPU-composited, no repaint per frame) — the hover shadow lives on ::after
+   * and fades in instead of animating box-shadow. Cards set their own shadow
+   * with --tw-lift-shadow and lift distance with --tw-lift-y.
+   */
+  .tw-lift {
+    position: relative;
+    transition:
+      transform 0.55s var(--tw-ease-out),
+      border-color 0.4s var(--tw-ease-out);
+  }
+  .tw-lift::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: var(--tw-lift-shadow, 0 30px 60px -18px rgba(37, 99, 235, 0.3));
+    opacity: 0;
+    transition: opacity 0.55s var(--tw-ease-out);
+  }
+  /* Only on real pointers — avoids "stuck" hover states after a tap. */
+  @media (hover: hover) and (pointer: fine) {
+    .tw-lift:hover {
+      transform: translate3d(0, var(--tw-lift-y, -6px), 0);
+    }
+    .tw-lift:hover::after {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tw-lift,
+    .tw-lift::after,
+    .dc-submit-btn,
+    .dc-submit-btn::before {
+      transition-duration: 0.01ms;
+    }
+    .tw-lift:hover,
+    .dc-submit-btn:hover {
+      transform: none;
+    }
+  }
+
+
+  /*
+   * Scroll reveal (added by <ScrollReveal/> to below-the-fold blocks only).
+   * Opacity + transform only; --tw-reveal-delay staggers cards in a grid.
+   */
+  .tw-reveal {
+    /* `translate` (not `transform`) so it composes with the .tw-lift hover. */
+    opacity: 0;
+    translate: 0 24px;
+    transition:
+      opacity 0.8s var(--tw-ease-out) var(--tw-reveal-delay, 0ms),
+      translate 0.8s var(--tw-ease-out) var(--tw-reveal-delay, 0ms);
+  }
+  .tw-reveal.is-visible {
+    opacity: 1;
+    translate: none;
+  }
+  /* Cards that both reveal and lift need both sets of transitions. */
+  .tw-reveal.tw-lift {
+    transition:
+      opacity 0.8s var(--tw-ease-out) var(--tw-reveal-delay, 0ms),
+      translate 0.8s var(--tw-ease-out) var(--tw-reveal-delay, 0ms),
+      transform 0.55s var(--tw-ease-out),
+      border-color 0.4s var(--tw-ease-out);
+  }
+
+
+  /* Back-to-top button (see <ScrollToTop/>): fades/slides in, opacity + transform only. */
+  .tw-fab {
+    right: var(--tw-fab-edge);
+    bottom: calc(var(--tw-fab-edge) + var(--tw-fab-size) + var(--tw-fab-gap));
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.9);
+    transition:
+      opacity 0.4s var(--tw-ease-out),
+      transform 0.45s var(--tw-ease-out);
+  }
+  .tw-fab.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .tw-fab.is-visible:hover {
+      transform: translate3d(0, -3px, 0);
+    }
+  }
+  .tw-fab.is-visible:active {
+    transform: scale(0.94);
+    transition-duration: 0.1s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tw-fab,
+    .tw-fab.is-visible:hover {
+      transition-duration: 0.01ms;
+      transform: none;
+    }
+  }
+
+}
+
+@layer utilities {
+  /* Blue→violet brand text, e.g. highlighted words in headlines. */
+  .tw-gradient-text {
+    background: var(--tw-gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* Lighter variant for dark backgrounds. */
+  .tw-gradient-text-light {
+    background: linear-gradient(135deg, #93c5fd 0%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Floating-button spacing on phones (unlayered so it overrides the :root tokens). */
+@media (max-width: 576px) {
+  :root {
+    --tw-fab-edge: 16px;
+    --tw-fab-size: 44px;
+    --tw-fab-gap: 12px;
   }
 }

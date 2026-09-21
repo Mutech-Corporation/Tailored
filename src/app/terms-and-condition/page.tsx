@@ -13,7 +13,7 @@ import {
 } from "@/components/legal/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Design Centura – Logo, Branding & Web",
+  title: "Terms and Conditions",
   description:
     "These terms explain how we provide our design and digital services, how payments and deliveries work, and in which cases refunds may be considered.",
 };
@@ -245,7 +245,7 @@ export default function TermsAndConditionPage() {
 
           <LegalSubheading>Your Acceptance</LegalSubheading>
           <LegalText>
-            By placing an order, making a payment, or using any Design Centura
+            By placing an order, making a payment, or using any Tailored Web Designers
             services, you confirm that you have read, understood, and agreed to
             these Terms &amp; Conditions.
           </LegalText>

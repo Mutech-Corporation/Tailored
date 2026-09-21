@@ -6,9 +6,9 @@ import { PortfolioSection } from "@/components/PortfolioSection";
 import { PORTFOLIO_ITEMS_FULL } from "@/data/portfolio";
 
 export const metadata: Metadata = {
-  title: "Design Centura – Logo, Branding & Web",
+  title: "Our Work",
   description:
-    "A curated selection of logos, branding and website projects created by DesignCentura.",
+    "A curated selection of logos, branding and website projects created by our team.",
 };
 
 export default function PortfolioPage() {
@@ -20,10 +20,10 @@ export default function PortfolioPage() {
           eyebrow="Portfolio"
           title={
             <>
-              Custom Logo Design, <span>Branding &amp; Website</span> Solutions.
+              Our <span>Work</span>
             </>
           }
-          lead="Witness our team’s unconventional creativity for yourself. We set the bar so high that you won’t be satisfied with any service but ours."
+          lead="Logos, brand identities, websites and motion, crafted to help businesses look sharp and grow."
         />
         <PortfolioSection items={PORTFOLIO_ITEMS_FULL} />
       </main>

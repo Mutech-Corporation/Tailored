@@ -4,14 +4,13 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { InnerHero } from "@/components/InnerHero";
 import { ServicesSection } from "@/components/ServicesSection";
-import { ReviewsMasonry } from "@/components/ReviewsMasonry";
 
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Design Centura – Logo, Branding & Web",
+  title: "About Us",
   description:
-    "Read real customer reviews of Design Centura. Explore testimonials from Trustpilot, Google, Facebook and more.",
+    "Tailored Web Designers is one creative team for branding, websites, AI automation, video, SEO and digital marketing.",
 };
 
 export default function AboutPage() {
@@ -23,10 +22,10 @@ export default function AboutPage() {
           eyebrow="About Us"
           title={
             <>
-              Custom Logo Design, <span>Branding &amp; Website</span> Solutions.
+              One Creative Team. <span>Every Part</span> of Your Brand.
             </>
           }
-          lead="Design Centura is essentially an institution where simple ideas are converted into brilliant and passionate products."
+          lead="Branding, websites, AI automation, video, SEO and digital marketing, designed and built together so everything works as one."
         />
 
         {/*
@@ -39,8 +38,8 @@ export default function AboutPage() {
               <div>
                 <p className="dc-eyebrow dc-eyebrow-left">About the studio</p>
                 <h2 className="dc-section-title">
-                  We Bring <span className="text-[#196bff]">Brands</span> into the{" "}
-                  <span className="text-[#196bff]">Digital World</span>.
+                  We Bring <span className="text-[#2563eb]">Brands</span> into the{" "}
+                  <span className="text-[#2563eb]">Digital World</span>.
                 </h2>
                 <p className="mb-3">
                   We help startups and established businesses build strong visual
@@ -65,13 +64,18 @@ export default function AboutPage() {
                 </Link>
               </div>
 
-              <div className="text-center lg:text-right">
+              {/* Brand panel — same full logo as the homepage About section. */}
+              <div className="relative overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] p-10 shadow-[0_30px_80px_rgba(11,16,51,0.35)] max-[576px]:p-7">
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:36px_36px]"
+                />
                 <Image
-                  src="/images/about-side-2.webp"
-                  alt="Brand identity mockup"
-                  width={720}
-                  height={540}
-                  className="inline-block h-auto max-w-full"
+                  src="/brand/logo-full-light.png"
+                  alt="Tailored Web Designers — Websites, Logos, Marketing, Animation. Design, Develop, Grow."
+                  width={870}
+                  height={784}
+                  className="relative mx-auto h-auto w-full max-w-[460px]"
                 />
               </div>
             </div>
@@ -79,22 +83,6 @@ export default function AboutPage() {
         </section>
 
         <ServicesSection />
-
-        <section className="mt-12 py-12">
-          <div className="dc-container">
-            <div className="mb-6 text-center">
-              <p className="dc-eyebrow">What we offer</p>
-              {/* "Testimonails" is the target's own typo — preserved. */}
-              <h2 className="dc-section-title">Client Testimonails</h2>
-              <p className="dc-section-subtitle">
-                Inspired by agencies like DesignCentura, we cover everything from
-                concept sketches to launch-ready digital assets, keeping your
-                brand design under one roof.
-              </p>
-            </div>
-            <ReviewsMasonry />
-          </div>
-        </section>
       </main>
       <SiteFooter />
     </>

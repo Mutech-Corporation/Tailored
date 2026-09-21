@@ -18,14 +18,14 @@ interface LegalPageProps {
 export function LegalPage({ eyebrow, title, intro, children }: LegalPageProps) {
   return (
     <>
-      <section className="mt-[58px] border-b border-[#e5e7eb] bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] py-14 max-[767.98px]:pt-10 max-[767.98px]:pb-[2.7rem]">
+      <section className="mt-[58px] border-b border-[#e5e7eb] bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] py-14 max-[767.98px]:pt-10 max-[767.98px]:pb-[2.7rem]">
         <div className="dc-container">
           {/*
             Both colours below look under-contrasted on the dark gradient, but
             they are what the target ships: the eyebrow is var(--primary-blue)
             and the intro is var(--text-muted).
           */}
-          <p className="mb-[0.4rem] text-[0.78rem] font-semibold tracking-[0.18em] text-[#1769ff] uppercase">
+          <p className="mb-[0.4rem] text-[0.78rem] font-semibold tracking-[0.18em] text-[#2563eb] uppercase">
             {eyebrow}
           </p>
           <h1 className="mb-[0.4rem] text-[2rem] font-extrabold text-white">
@@ -54,7 +54,7 @@ export function LegalHeading({ children }: { children: ReactNode }) {
 /** `.tc-subheading` / `.pp-subheading` */
 export function LegalSubheading({ children }: { children: ReactNode }) {
   return (
-    <h3 className="mt-[1.8rem] mb-[0.6rem] text-base font-semibold text-[#1769ff]">
+    <h3 className="mt-[1.8rem] mb-[0.6rem] text-base font-semibold text-[#2563eb]">
       {children}
     </h3>
   );

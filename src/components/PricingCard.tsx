@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import type { PricingPlan } from "@/types";
 
@@ -18,12 +19,12 @@ export function PricingCard({ plan }: PricingCardProps) {
   return (
     <div
       className={cn(
-        "relative flex flex-col overflow-hidden rounded-[20px] border border-[rgba(37,99,235,0.3)] bg-white px-[1.7rem] py-[2.1rem]",
-        "shadow-[0_16px_40px_rgba(15,23,42,0.12)] transition-[transform,box-shadow,border-color] duration-[180ms] ease-in-out",
-        "hover:-translate-y-1.5 hover:border-2 hover:border-[#1d4ed8] hover:shadow-[0_22px_60px_rgba(15,23,42,0.18)]",
+        // Border colour changes on hover (not width), so nothing shifts.
+        "tw-lift flex flex-col rounded-[20px] border border-[rgba(37,99,235,0.3)] bg-white px-[1.7rem] py-[2.1rem]",
+        "shadow-[0_16px_40px_rgba(15,23,42,0.12)] hover:border-[#1d4ed8]",
         "max-[767.98px]:px-[1.4rem] max-[767.98px]:py-[1.8rem]",
         plan.featured &&
-          "!overflow-visible !border-2 !border-[#1d4ed8] -translate-y-1.5 hover:-translate-y-2.5",
+          "!border-2 !border-[#1d4ed8] -translate-y-1.5",
       )}
     >
       {plan.featured && (
@@ -32,7 +33,7 @@ export function PricingCard({ plan }: PricingCardProps) {
         </span>
       )}
 
-      <p className="mb-[0.1rem] text-[0.92rem] font-bold tracking-[0.16em] text-[#ffb400] uppercase">
+      <p className="mb-[0.1rem] text-[0.92rem] font-bold tracking-[0.16em] text-[#7c3aed] uppercase">
         {plan.name}
       </p>
       <p className="mb-[0.8rem] text-[1.7rem] font-semibold text-[#1d4ed8]">
@@ -62,14 +63,13 @@ export function PricingCard({ plan }: PricingCardProps) {
         ))}
       </ul>
 
-      {/* The target POSTs to a CRM checkout endpoint — out of scope, so inert. */}
-      <button
-        type="button"
+      <Link
+        href="/contact?plan=custom"
         data-package={plan.packageId}
-        className="mt-auto w-full rounded-full border border-[#1d4ed8] bg-[#1d4ed8] px-[1.3rem] py-[0.7rem] text-[0.82rem] font-semibold tracking-[0.12em] text-white uppercase transition-colors duration-150 ease-in-out hover:border-[#2563eb] hover:bg-[#2563eb]"
+        className="mt-auto block w-full rounded-full border border-[#1d4ed8] bg-[#1d4ed8] px-[1.3rem] py-[0.7rem] text-center text-[0.82rem] font-semibold tracking-[0.12em] text-white uppercase transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#7c3aed] hover:bg-[#7c3aed]"
       >
-        Buy Now
-      </button>
+        Get Started
+      </Link>
     </div>
   );
 }

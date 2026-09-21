@@ -15,7 +15,7 @@ interface InnerHeroProps {
  *
  *   min-height: unset !important;
  *   padding: 8rem 0 6rem;
- *   background: radial-gradient(circle at top left,#3a8dff 0,#0340b3 45%,#02142e 100%);
+ *   background: radial-gradient(circle at top left,#4338ca 0,#1e1b5e 45%,#0b1033 100%);
  *
  * terms-and-condition and privacy-policy use `.tc-hero` / `.pp-hero` instead,
  * but render the identical eyebrow + heading + lead shape.
@@ -24,7 +24,7 @@ export function InnerHero({ eyebrow, title, lead }: InnerHeroProps) {
   return (
     <section
       id="home"
-      className="flex items-center bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] pt-32 pb-24 text-white max-[767.98px]:pt-[7.2rem] max-[767.98px]:pb-12"
+      className="flex items-center bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] pt-32 pb-24 text-white max-[767.98px]:pt-[7.2rem] max-[767.98px]:pb-12"
     >
       <div className="dc-container">
         <div className="flex justify-center text-center">
@@ -32,7 +32,7 @@ export function InnerHero({ eyebrow, title, lead }: InnerHeroProps) {
             <p className="mx-auto mb-3 flex w-fit items-center gap-2 rounded-full border border-[rgba(148,163,184,0.6)] bg-white/12 px-[0.9rem] py-[0.3rem] text-[0.75rem] font-medium text-[#e5e7eb]">
               {eyebrow}
             </p>
-            <h1 className="mb-4 text-[clamp(2.4rem,3.2vw,2.8rem)] leading-[1.1] font-semibold [&_span]:text-[#ffb400] max-[767.98px]:text-[2.1rem]">
+            <h1 className="mb-4 text-[clamp(2.4rem,3.2vw,2.8rem)] leading-[1.1] font-semibold [&_span]:text-[#c4b5fd] max-[767.98px]:text-[2.1rem]">
               {title}
             </h1>
             {lead ? (

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "@/components/Image";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Design Centura – Logo, Branding & Web",
+  title: "Thank You",
   description:
-    "Thank you — choose how you'd like to proceed with your Design Centura project.",
+    "Thank you — choose how you'd like to proceed with your project.",
 };
 
 interface ProceedCard {
@@ -56,7 +57,7 @@ export default function ThankYouPage() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-1 bg-[linear-gradient(135deg,#1e3a8a_0%,#3b82f6_50%,#1e40af_100%)] px-20 py-28 max-[768px]:px-0 max-[768px]:pt-24 max-[768px]:pb-16">
+      <main className="flex-1 bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] px-20 py-28 max-[768px]:px-0 max-[768px]:pt-24 max-[768px]:pb-16">
         <div className="dc-container">
           <h1 className="mb-[50px] text-center text-[2.5rem] font-bold text-white max-[768px]:mb-[30px] max-[768px]:p-5 max-[768px]:text-[1.5rem]">
             Thank You, How Would You Like To Proceed?
@@ -66,15 +67,15 @@ export default function ThankYouPage() {
             {CARDS.map((card) => (
               <article
                 key={card.title}
-                className="group flex h-full flex-col overflow-hidden rounded-[15px] border-none bg-white shadow-[0_10px_30px_rgba(0,0,0,0.15)] transition-[transform,box-shadow] duration-300 hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
+                className="tw-lift group flex h-full flex-col rounded-[15px] border-none bg-white shadow-[0_10px_30px_rgba(0,0,0,0.15)] [--tw-lift-shadow:0_30px_60px_-15px_rgba(0,0,0,0.35)] [--tw-lift-y:-8px]"
               >
-                <div className="w-full overflow-hidden">
+                <div className="w-full overflow-hidden rounded-t-[15px]">
                   <Image
                     src={card.image}
                     alt={card.title}
                     width={600}
                     height={400}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                   />
                 </div>
                 <div className="flex flex-grow flex-col p-[25px]">
@@ -82,12 +83,12 @@ export default function ThankYouPage() {
                   <p className="mb-[25px] flex-grow text-[0.95rem] leading-[1.6] text-[#6b7280]">
                     {card.description}
                   </p>
-                  <a
+                  <Link
                     href={card.href}
-                    className="block w-full rounded-full border-none bg-[linear-gradient(135deg,#3b82f6_0%,#1e40af_100%)] px-[30px] py-[15px] text-center text-base font-semibold text-white no-underline transition-all duration-300"
+                    className="block w-full rounded-full border-none bg-[linear-gradient(135deg,#2563eb_0%,#7c3aed_100%)] px-[30px] py-[15px] text-center text-base font-semibold text-white no-underline transition-all duration-300"
                   >
                     {card.cta}
-                  </a>
+                  </Link>
                 </div>
               </article>
             ))}

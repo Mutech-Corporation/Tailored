@@ -13,58 +13,58 @@ import type { FaqItem } from "@/types";
 const FAQS: FaqItem[] = [
   {
     id: "one",
-    question: "How long does a logo design project take?",
+    question: "What services does Tailored Web Designers offer?",
     answer: (
       <>
-        Most initial logo concepts are delivered within{" "}
-        <strong>3&ndash;5 business days</strong>. Revision timelines depend on
-        your feedback speed. A complete branding package typically takes{" "}
-        <strong>7&ndash;10 business days</strong>.
+        We cover four areas: <strong>Creative</strong> (brand identity, logos,
+        motion, social design), <strong>Digital</strong> (websites, e-commerce,
+        UI/UX, landing pages), <strong>Growth</strong> (SEO, PPC, social media
+        marketing, conversion optimization) and <strong>AI</strong> (chatbots,
+        customer support, automation and custom tools).
       </>
     ),
   },
   {
     id: "two",
-    question: "Do you provide multiple logo concepts?",
+    question: "How much does a project cost?",
     answer: (
       <>
-        Yes. Every project includes{" "}
-        <strong>multiple custom-made logo concepts</strong>, giving you several
-        creative directions to choose from before we refine your selected style.
+        Every business is different, so we prepare a{" "}
+        <strong>tailored quote</strong> based on your goals and scope. Choose a
+        package as a starting point or ask us to build a custom one.
       </>
     ),
   },
   {
     id: "three",
-    question: "Will I receive all final files after the project?",
+    question: "How long does a project take?",
     answer: (
       <>
-        Absolutely. You&rsquo;ll receive a complete set of final deliverables
-        including <strong>AI, PDF, EPS, SVG, PNG, and JPG</strong> &ndash; ready
-        for printing, digital use, and all branding needs.
+        Timelines depend on scope. A brand identity usually takes a couple of
+        weeks, while a full website or AI solution can take longer. You&rsquo;ll
+        get a <strong>clear timeline</strong> with your proposal.
       </>
     ),
   },
   {
     id: "four",
-    question: "Do you design websites?",
+    question: "Can you work with my existing brand or website?",
     answer: (
       <>
-        Yes. We create{" "}
-        <strong>modern, mobile-responsive, SEO-ready websites</strong> tailored
-        to your business&mdash; including landing pages, corporate sites,
-        eCommerce layouts, and WordPress development.
+        Yes. Whether you need a <strong>brand refresh</strong>, a{" "}
+        <strong>website redesign</strong> or AI added to your current tools, we
+        build on what you already have.
       </>
     ),
   },
   {
     id: "five",
-    question: "Can you work with my existing brand or improve it?",
+    question: "Will I own the final files?",
     answer: (
       <>
-        Yes, we can. Whether you need a <strong>logo refresh</strong>, a complete
-        brand upgrade, or a <strong>website redesign</strong>, we enhance your
-        existing identity while keeping its core essence intact.
+        Yes. Once the project is complete you receive all{" "}
+        <strong>final source files</strong> and full ownership of the work we
+        create for you.
       </>
     ),
   },
@@ -86,11 +86,10 @@ export function FaqSection({ items = FAQS }: FaqSectionProps = {}) {
           <div className="w-full text-center lg:w-3/4">
             <p className="dc-eyebrow">FAQs</p>
             <h2 className="dc-section-title">
-              Frequently Asked <span className="text-[#196bff]">Questions</span>
+              Frequently Asked <span className="tw-gradient-text">Questions</span>
             </h2>
             <p className="dc-section-subtitle">
-              Here are some common questions clients ask before starting their
-              design project with us.
+              Common questions clients ask before starting a project with us.
             </p>
           </div>
         </div>
@@ -115,7 +114,7 @@ export function FaqSection({ items = FAQS }: FaqSectionProps = {}) {
                         onClick={() => setOpenId(isOpen ? null : faq.id)}
                         className={`flex w-full items-center justify-between gap-3 px-5 py-4 text-left text-base transition-colors ${
                           isOpen
-                            ? "bg-[radial-gradient(circle_at_top_left,#3a8dff_0,#0340b3_45%,#02142e_100%)] text-white"
+                            ? "bg-[radial-gradient(circle_at_top_left,#4338ca_0,#1e1b5e_45%,#0b1033_100%)] text-white"
                             : "bg-white text-[#212529]"
                         }`}
                       >
