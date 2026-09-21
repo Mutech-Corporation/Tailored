@@ -1,7 +1,9 @@
 /**
  * Cuts the site's logo PNGs straight from the high-resolution brand sheet.
  *
- *   node scripts/make-logos.mjs
+ *   node scripts/make-logos.mjs [--force]
+ *
+ * Existing files in public/brand are never overwritten without --force.
  *
  * Source: "../docs and logos/1.png" (kept outside the repo) (2048×2048, artwork on plain white). The white
  * is turned into transparency; every artwork pixel keeps its original colour and
@@ -9,7 +11,7 @@
  *
  * Output: public/brand/*.png, public/brand/icons/*.png, src/app/icon.png.
  */
-import { mkdir } from "node:fs/promises";
+import { access, mkdir } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
@@ -286,6 +288,37 @@ if (bands.length !== 6) throw new Error(`expected 6 bands on the sheet, found ${
 const [markBand, wordBand, subBand, glyphBand, labelBand, taglineBand] = bands;
 
 await mkdir(path.join(OUT, "icons"), { recursive: true });
+
+/**
+ * Refuse to clobber logos that are already there. They may have been edited or
+ * replaced by hand, and regenerating would silently destroy that work.
+ * Pass --force to overwrite deliberately.
+ */
+const FORCE = process.argv.includes("--force");
+if (!FORCE) {
+  const existing = [];
+  for (const name of ["logo-mark", "logo-wordmark", "logo-stacked", "logo-full", "logo-horizontal"]) {
+    for (const variant of ["", "-light"]) {
+      const file = path.join(OUT, `${name}${variant}.png`);
+      try {
+        await access(file);
+        existing.push(path.basename(file));
+      } catch {
+        /* not there yet — fine */
+      }
+    }
+  }
+  if (existing.length) {
+    console.error(
+      `Refusing to overwrite ${existing.length} existing logo file(s) in public/brand.
+` +
+        `If you really want to regenerate them, re-run with --force:
+` +
+        `  node scripts/make-logos.mjs --force`,
+    );
+    process.exit(1);
+  }
+}
 
 const regions = {
   "logo-mark": crop(sheet, markBand),
